@@ -43,7 +43,7 @@ const SidebarMenuMain = () => {
         title='Recycler'
         fontIcon='bi-layers'
       />
-      <SidebarMenuItem to='/apps/rider' icon='abstract-28' title='Rider' fontIcon='bi-layers' />
+      {/* <SidebarMenuItem to='/apps/rider' icon='abstract-28' title='Rider' fontIcon='bi-layers' /> */}
       <SidebarMenuItem
         to='/apps/collect-orders'
         icon='element-11'
