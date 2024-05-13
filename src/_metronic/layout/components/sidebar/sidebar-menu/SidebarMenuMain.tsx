@@ -30,11 +30,16 @@ const SidebarMenuMain = () => {
         title='Franchise '
         fontIcon='bi-layers'
       />
-      <SidebarMenuItem to='/apps/depositer' icon='switch' title='Depositor' fontIcon='bi-layers' />
+      <SidebarMenuItem
+        to='/apps/depositer'
+        icon='switch'
+        title='Collection Agents'
+        fontIcon='bi-layers'
+      />
       <SidebarMenuItem
         to='/apps/collection-point'
         icon='row-horizontal'
-        title='Collection Point'
+        title='Aggregator'
         fontIcon='bi-layers'
       />
       <SidebarMenuItem
