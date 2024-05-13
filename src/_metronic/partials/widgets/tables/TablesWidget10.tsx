@@ -40,12 +40,13 @@ const TablesWidget10: React.FC<Props> = ({className, data = []}) => {
             {/* begin::Table head */}
             <thead>
               <tr className='fw-bold text-muted'>
-                <th className='min-w-150px'>Collection Point</th>
-                <th className='min-w-140px'>Location</th>
-                <th className='min-w-120px'>Depositer</th>
+                <th className='min-w-150px'>Aggregator</th>
+                <th className='min-w-140px'>Address</th>
+                <th className='min-w-120px'>Collection Agent</th>
                 <th className='min-w-120px'>Item</th>
                 <th className='min-w-120px'>Quantity</th>
                 <th className='min-w-100px'>Images</th>
+                <th className='min-w-100px'>Payment</th>
               </tr>
             </thead>
             {/* end::Table head */}
@@ -120,6 +121,16 @@ const TablesWidget10: React.FC<Props> = ({className, data = []}) => {
                             click to view
                           </span>
                         </div>
+                      </td>
+                      <td>
+                        <a href='#' className='badge badge-light-primary fs-8'>
+                          {eachData.orderDetails[0]?.items.map(
+                            (x, len) =>
+                              `${x.quantity} ${
+                                eachData.orderDetails[0]?.items?.length - 1 === len ? '' : ' , '
+                              }`
+                          )}
+                        </a>
                       </td>
                     </tr>
                   )

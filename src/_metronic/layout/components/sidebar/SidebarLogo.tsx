@@ -60,22 +60,22 @@ const SidebarLogo = (props: PropsType) => {
         {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'
-            style={{height: '100px', width: '133px'}}
-            src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+            style={{height: '70px', width: '250px'}}
+            src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
             className=' app-sidebar-logo-default'
           />
         ) : (
           <>
             <img
               alt='Logo'
-              style={{height: '100px', width: '133px'}}
-              src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+              style={{height: '70px', width: '250px'}}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
               className=' app-sidebar-logo-default theme-light-show'
             />
             <img
               alt='Logo'
-              style={{height: '100px', width: '133px'}}
-              src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+              style={{height: '70px', width: '250px'}}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
               className=' app-sidebar-logo-default theme-dark-show'
             />
           </>
@@ -83,7 +83,7 @@ const SidebarLogo = (props: PropsType) => {
 
         {/*  <img
           alt='Logo'
-          src={toAbsoluteUrl('/media/logos/default-small.png')}
+          src={toAbsoluteUrl('/media/logos/default-small.jpeg')}
           className=' app-sidebar-logo-minimize'
         /> */}
       </Link>

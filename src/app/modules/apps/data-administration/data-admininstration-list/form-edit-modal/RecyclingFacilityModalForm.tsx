@@ -195,15 +195,15 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
         <div className='row'>
+          <h2 className='fw-bolder d-flex align-items- mb-5 mt-5 flex-center text-dark'>
+            Company Information
+          </h2>
           <div
             className='col-6 card btn-outline btn-outline-dashed '
             style={{padding: '10px 41px'}}
           >
-            <h2 className='fw-bolder d-flex align-items- mb-5 mt-5 flex-center text-dark'>
-              Company Information
-            </h2>
             <div className='fv-row mb-7'>
-              <label className='required fw-bold fs-6 mb-2'>Franchise</label>
+              <label className='required fw-bold fs-6 mb-2'>Representative Name</label>
               {makeSelectDropDown('format', formatDropDown)}
             </div>
             <div className='fv-row mb-7'>
@@ -235,7 +235,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             <div className='fv-row mb-7'>
               <label className='required fw-bold fs-6 mb-2'>Mobile No</label>
               <input
-                placeholder='Enter mobile number (9XX XXX XXXX)'
+                placeholder='Enter mobile number (+60 XX XXX XXXX)'
                 {...formik.getFieldProps('phone')}
                 type='number'
                 format='phone'
@@ -283,47 +283,12 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
                 </div>
               )}
             </div>
-            <div className='fv-row mb-7'>
-              <label className='required fw-bold fs-6 mb-2'>Register Address</label>
-              <input
-                placeholder='Enter Register Address'
-                {...formik.getFieldProps('address')}
-                type='text'
-                // readOnly={user.id || false}
-                format='address'
-                className={clsx(
-                  'form-control form-control-solid mb-3 mb-lg-0',
-                  {'is-invalid': formik.touched.address && formik.errors.address},
-                  {
-                    'is-valid': formik.touched.address && !formik.errors.address,
-                  }
-                )}
-                autoComplete='off'
-                disabled={formik.isSubmitting || isUserLoading}
-              />
-              {formik.touched.address && formik.errors.address && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block'>
-                    <span role='alert'>{formik.errors.address}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <CountryDropDown
-              showState
-              showCity
-              name='country'
-              formik={formik}
-              showNameOnly
-              isReadOnly={user.id || false}
-            />
           </div>
           <div
             className='col-6 card btn-outline btn-outline-dashed '
             style={{padding: '10px 41px'}}
           >
-            <h2 className='fw-bolder d-flex align-items- mb-5 mt-5 flex-center text-dark'>
+            {/*  <h2 className='fw-bolder d-flex align-items- mb-5 mt-5 flex-center text-dark'>
               Representative Information
             </h2>
             <div className='fv-row mb-7'>
@@ -404,7 +369,6 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             <div className='fv-row mb-7'>
               <label className='required fw-bold fs-6 mb-2'>Address</label>
               <input
-                // readOnly={user.id || false}
                 placeholder='Enter Address'
                 {...formik.getFieldProps('companyAddress')}
                 type='text'
@@ -426,10 +390,44 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
                   </div>
                 </div>
               )}
+            </div> */}
+            <div className='fv-row mb-7'>
+              <label className='required fw-bold fs-6 mb-2'>Register Address</label>
+              <input
+                placeholder='Enter Register Address'
+                {...formik.getFieldProps('address')}
+                type='text'
+                // readOnly={user.id || false}
+                format='address'
+                className={clsx(
+                  'form-control form-control-solid mb-3 mb-lg-0',
+                  {'is-invalid': formik.touched.address && formik.errors.address},
+                  {
+                    'is-valid': formik.touched.address && !formik.errors.address,
+                  }
+                )}
+                autoComplete='off'
+                disabled={formik.isSubmitting || isUserLoading}
+              />
+              {formik.touched.address && formik.errors.address && (
+                <div className='fv-plugins-message-container'>
+                  <div className='fv-help-block'>
+                    <span role='alert'>{formik.errors.address}</span>
+                  </div>
+                </div>
+              )}
             </div>
+            <CountryDropDown
+              showState
+              showCity
+              name='country'
+              formik={formik}
+              showNameOnly
+              isReadOnly={user.id || false}
+            />
             <div className='flex flex-wrap'>
-              <UploadImage name='profileImage' formik={formik} label='Upload SEC/DTI' />
-              <UploadImage name='bussinessImage' formik={formik} label='Upload Agreement' />
+              <UploadImage name='profileImage' formik={formik} label='Upload SSM' />
+              {/* <UploadImage name='bussinessImage' formik={formik} label='Upload Agreement' /> */}
             </div>
           </div>
           <div className='text-center pt-5'>

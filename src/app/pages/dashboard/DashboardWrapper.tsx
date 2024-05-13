@@ -140,12 +140,12 @@ const DashboardPage: FC = () => {
     {value: 'stock', name: 'Stock', icon: 'Stock', color: '#5F77C3'},
     {
       value: 'collectionPoints',
-      name: 'Collection Points',
+      name: 'Aggregators',
       icon: 'Collection Point',
       color: '#5F77C3',
     },
-    {value: 'wasteDiverters', name: 'Waste Diverters', icon: 'Waste Diverters', color: '#405DB8'},
-    {value: 'lifeImpacted', name: 'Life Impacted', icon: 'Life impacted', color: '#1034A6'},
+    {value: 'wasteDiverters', name: 'Recyclers', icon: 'Waste Diverters', color: '#405DB8'},
+    {value: 'lifeImpacted', name: 'Collection Agents', icon: 'Life impacted', color: '#1034A6'},
     {
       value: 'co2Footprint',
       name: 'CO2 footprint avoided*',

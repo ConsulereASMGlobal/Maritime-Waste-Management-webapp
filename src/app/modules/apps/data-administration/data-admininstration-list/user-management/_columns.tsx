@@ -4,35 +4,44 @@ import {columnGenerators} from '../../../../../../_metronic/helpers'
 const header = [
   {label: 'S.N', value: 'id'},
   {
-    label: 'Name/ Company Name',
+    label: 'Name',
     value: 'name',
   },
-  /* {
-    label: 'Birthday',
+  {
+    label: 'Aggregator',
     value: 'birthday',
   },
   {
-    label: 'Gender',
+    label: 'Mobile Number/ Email',
     value: 'gender',
-  }, */
+  },
   /* {
     label: 'Email Address',
     value: 'email',
   }, */
   {
-    label: 'Address',
+    label: 'Address City',
     value: 'fullAddress',
   },
   {
-    label: 'Mobile Number',
-    value: 'mobile',
+    label: 'Bank Name',
+    value: 'fullAddress',
   },
   {
-    label: 'Membership Number',
-    value: 'code',
+    label: 'Ac Number',
+    value: 'fullAddress',
   },
   {
-    label: 'Type',
+    label: 'ID PIC',
+    value: 'fullAddress',
+  },
+  {
+    label: 'Profile Pic',
+    value: 'fullAddress',
+  },
+
+  {
+    label: 'Total Payment',
     value: 'customerType',
   },
   /*  {

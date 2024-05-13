@@ -129,12 +129,13 @@ const TablesWidget13: React.FC<Props> = ({className, data = []}) => {
             {/* begin::Table head */}
             <thead>
               <tr className='fw-bold text-muted'>
-                <th className='min-w-120px'>Order Id</th>
-                <th className='min-w-120px'>Facility Name</th>
-                <th className='min-w-120px'>Date</th>
-                <th className='min-w-120px'>Customer</th>
-                <th className='min-w-120px'>Material</th>
+                <th className='min-w-120px'>Aggregator</th>
+                <th className='min-w-120px'>Address</th>
+                <th className='min-w-120px'>Recycler</th>
+                <th className='min-w-120px'>Item</th>
                 <th className='min-w-120px'>Quantity</th>
+                <th className='min-w-120px'>Images</th>
+                <th className='min-w-120px'>Status</th>
               </tr>
             </thead>
             {/* end::Table head */}
@@ -191,6 +192,11 @@ const TablesWidget13: React.FC<Props> = ({className, data = []}) => {
                             // </span>
                           )
                         }) || '-'}
+                      </td>
+                      <td>
+                        <a href='#' className='text-dark  text-hover-primary fs-6'>
+                          {eachData.createdAt}
+                        </a>
                       </td>
                     </tr>
                   )

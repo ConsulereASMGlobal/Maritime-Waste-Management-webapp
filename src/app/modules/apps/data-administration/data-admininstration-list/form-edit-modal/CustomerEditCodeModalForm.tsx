@@ -177,9 +177,9 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             )}
           </div>
           <div className='fv-row mb-7'>
-            <label className='required fw-bold fs-6 mb-2'>Phone</label>
+            <label className='required fw-bold fs-6 mb-2'>Mobile Number</label>
             <input
-              placeholder='Enter Phone'
+              placeholder='Enter mobile number (+60 XX XXX XXXX)'
               readOnly={formik?.values?.id || false}
               {...formik.getFieldProps('phone')}
               type='number'
@@ -204,6 +204,8 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           </div>
           <div className='fv-row mb-7'>
             <label className='required fw-bold fs-6 mb-2'>Password</label>
+            &nbsp;
+            <small>(This password can be used for app login)</small>
             <input
               placeholder='Enter Password'
               type={showPassword ? 'text' : 'password'}
@@ -286,7 +288,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             )}
           </div>
           <div className='fv-row mb-7'>
-            <label className='required fw-bold fs-6 mb-2'>Business Permit Number </label>
+            <label className='required fw-bold fs-6 mb-2'>SSM Number </label>
             <input
               placeholder='Enter Business Permit Number'
               {...formik.getFieldProps('permitNumber')}
@@ -311,7 +313,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             )}
           </div>
           <div className='fv-row mb-7'>
-            <label className='d-block fw-bold fs-6 mb-5'>Upload Business Permit</label>
+            <label className='d-block fw-bold fs-6 mb-5'>Upload SSM</label>
             <div
               className='image-input image-input-outline'
               data-kt-image-input='true'
