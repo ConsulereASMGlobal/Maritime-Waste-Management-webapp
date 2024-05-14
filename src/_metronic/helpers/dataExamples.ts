@@ -350,6 +350,10 @@ const currencyList = [
     label: 'PHP',
     value: 'PHP',
   },
+  {
+    label: 'RM',
+    value: 'RM',
+  },
 ]
 
 export {

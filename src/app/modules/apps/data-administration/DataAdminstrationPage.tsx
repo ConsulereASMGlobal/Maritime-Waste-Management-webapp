@@ -91,7 +91,7 @@ const UsersPage = () => {
           path='collection-point'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Collection Point</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Aggregator</PageTitle>
               <ShellGasStationWrapper />
             </>
           }

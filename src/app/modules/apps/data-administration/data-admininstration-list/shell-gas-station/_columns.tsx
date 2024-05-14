@@ -4,15 +4,15 @@ import {columnGenerators} from '../../../../../../_metronic/helpers'
 const header = [
   {label: 'S.N', value: 'id'},
   {
-    label: 'Name',
+    label: 'Business Name',
     value: 'name',
   },
   {
-    label: 'Contact Info',
+    label: 'Contact',
     value: 'personalDetail',
   },
   {
-    label: 'Address',
+    label: 'Street',
     value: 'street',
   },
   // {
@@ -24,29 +24,30 @@ const header = [
     value: 'geoLocation',
   },
   {
-    label: 'PPRS',
+    label: 'Zip Code',
     value: '-',
   },
   {
-    label: 'ISO 9001',
+    label: 'SSM',
     value: '-',
   },
   {
-    label: 'Establishment',
+    label: 'Bank',
+    value: '-',
+  },
+  {
+    label: 'Account No',
+    value: '-',
+  },
+  {
+    label: 'A/C Holder',
+    value: '-',
+  },
+  {
+    label: 'SSM',
     value: 'bussinessImage',
   },
-  {
-    label: 'Identity',
-    value: 'personalImage',
-  },
-  {
-    label: 'Facility',
-    value: 'personalImage',
-  },
-  // {
-  //   label: 'Popular',
-  //   value: 'popular',
-  // },
+
   {
     action: ['edit', 'toggle'],
   },

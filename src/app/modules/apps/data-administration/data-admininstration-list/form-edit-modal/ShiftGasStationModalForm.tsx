@@ -34,20 +34,20 @@ const editUserSchema = (isEdit = false) =>
       .min(7, 'Minimum 7 symbols')
       .max(50, 'Maximum 50 symbols')
       .required('Phone number is required'),
-    email: Yup.string()
-      .email('Wrong email format')
-      .min(3, 'Minimum 3 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('Emailis required'),
+    // email: Yup.string()
+    //   .email('Wrong email format')
+    //   .min(3, 'Minimum 3 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('Emailis required'),
     address: Yup.string().required('Address is required'),
-    latitute: Yup.string()
+    bankName: Yup.string()
       .min(3, 'Minimum 3 symbols')
       .max(50, 'Maximum 50 symbols')
-      .required('latitute is required'),
-    longitute: Yup.string()
+      .required('bankName is required'),
+    accountName: Yup.string()
       .min(3, 'Minimum 3 symbols')
       .max(50, 'Maximum 50 symbols')
-      .required('longitute is required'),
+      .required('accountName is required'),
     // proofEstablishment: Yup.mixed().required('Icon is required'),
     ...((!isEdit && {
       countryCode: Yup.string().required('Country Code is required'),
@@ -65,8 +65,8 @@ const editUserSchema = (isEdit = false) =>
     }) ||
       {}),
     proofEstablishment: Yup.mixed().required('Image is required'),
-    proofOfIdentity: Yup.mixed().required('Image is required'),
-    proofOfFacility: Yup.mixed().required('Image is required'),
+    // proofOfIdentity: Yup.mixed().required('Image is required'),
+    // proofOfFacility: Yup.mixed().required('Image is required'),
   })
 const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
@@ -82,8 +82,8 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     city: user.address?.city || '',
     address: user.address?.street || '',
     companyName: user.companyName || '',
-    latitute: user.address?.latitute || '',
-    longitute: user.address?.longitute || '',
+    bankName: user.address?.bankName || '',
+    accountName: user.address?.accountName || '',
     countryCode: 'Philippine',
     centerId: user.centerId || '',
     proofEstablishment: user.personalDetails?.proofEstablishment || '',
@@ -137,8 +137,8 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         const {
           name,
           phone,
-          latitute,
-          longitute,
+          bankName,
+          accountName,
           password,
           email,
           country,
@@ -155,8 +155,8 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           address: {
             city,
             country,
-            latitute,
-            longitute,
+            bankName,
+            accountName,
             state,
             street: address,
             zipCode: '',
@@ -239,7 +239,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           {makeSelectDropDown('centerId', assignHubPlastic)}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Collection Point Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Business Name</label>
           <input
             placeholder='Enter Collection Point Name'
             {...formik.getFieldProps('name')}
@@ -263,7 +263,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-        {(!isEdit && (
+        {/* {(!isEdit && (
           <div className='fv-row mb-7'>
             <label className='required fw-bold fs-6 mb-2'>User Name</label>
             <input
@@ -290,7 +290,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             )}
           </div>
         )) ||
-          null}
+          null} */}
 
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Country Code</label>
@@ -328,7 +328,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         )) ||
           null}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Email</label>
+          <label className='fw-bold fs-6 mb-2'>Email</label>
           <input
             placeholder='Enter Email'
             {...formik.getFieldProps('email')}
@@ -354,12 +354,12 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         {(!isEdit && (
           <>
-            <CountryDropDown showState showCity name='country' formik={formik} showNameOnly />
+            <CountryDropDown name='country' formik={formik} showNameOnly />
           </>
         )) ||
           false}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Address'} </label>
+          <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
           <input
             placeholder='Enter Address'
             {...formik.getFieldProps('address')}
@@ -385,56 +385,82 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
 
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Latitude</label>
+          <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
           <input
             placeholder='Enter latitude'
-            {...formik.getFieldProps('latitute')}
-            type='number'
-            name='latitute'
+            {...formik.getFieldProps('bankName')}
+            type='text'
+            name='bankName'
             className={clsx(
               'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.latitute && formik.errors.latitute},
+              {'is-invalid': formik.touched.bankName && formik.errors.bankName},
               {
-                'is-valid': formik.touched.latitute && !formik.errors.latitute,
+                'is-valid': formik.touched.bankName && !formik.errors.bankName,
               }
             )}
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
-          {formik.touched.latitute && formik.errors.latitute && (
+          {formik.touched.bankName && formik.errors.bankName && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.latitute}</span>
+                <span role='alert'>{formik.errors.bankName}</span>
               </div>
             </div>
           )}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Longitude</label>
+          <label className='required fw-bold fs-6 mb-2'>Account Name</label>
           <input
             placeholder='Enter Longitude'
-            {...formik.getFieldProps('longitute')}
-            type='number'
-            name='longitute'
+            {...formik.getFieldProps('accountName')}
+            type='text'
+            name='accountName'
             className={clsx(
               'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.longitute && formik.errors.longitute},
+              {'is-invalid': formik.touched.accountName && formik.errors.accountName},
               {
-                'is-valid': formik.touched.longitute && !formik.errors.longitute,
+                'is-valid': formik.touched.accountName && !formik.errors.accountName,
               }
             )}
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
-          {formik.touched.longitute && formik.errors.longitute && (
+          {formik.touched.accountName && formik.errors.accountName && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.longitute}</span>
+                <span role='alert'>{formik.errors.accountName}</span>
               </div>
             </div>
           )}
         </div>
-        <div className='mb-7 row'>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>A/C Holder Name</label>
+          <input
+            placeholder='Enter Longitude'
+            {...formik.getFieldProps('accountHolderName')}
+            type='text'
+            name='accountHolderName'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.accountHolderName && formik.errors.accountHolderName},
+              {
+                'is-valid': formik.touched.accountHolderName && !formik.errors.accountHolderName,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.accountHolderName && formik.errors.accountHolderName && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.accountHolderName}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* <div className='mb-7 row'>
           <label className='fw-bold fs-6 mb-2'>Certifications available</label>
           <div className='d-flex col-6 gap-4'>
             <div className='form-check form-check-custom form-check-solid'>
@@ -468,11 +494,11 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               <div className='separator separator-dashed my-5'></div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className='flex flex-wrap'>
-          <UploadImage name='proofEstablishment' formik={formik} label='Proof of Establishment' />
-          <UploadImage name='proofOfIdentity' formik={formik} label='Proof of Identity' />
-          <UploadImage name='proofOfFacility' formik={formik} label='Proof of Facility' />
+          <UploadImage name='proofEstablishment' formik={formik} label='Upload SSM' />
+          {/* <UploadImage name='proofOfIdentity' formik={formik} label='Proof of Identity' /> */}
+          {/* <UploadImage name='proofOfFacility' formik={formik} label='Proof of Facility' /> */}
         </div>
 
         <div className='text-center pt-5'>
