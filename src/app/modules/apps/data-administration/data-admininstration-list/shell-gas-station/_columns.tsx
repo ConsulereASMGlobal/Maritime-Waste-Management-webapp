@@ -19,18 +19,15 @@ const header = [
   //   label: 'City, Province',
   //   value: 'cityProvince',
   // },
-  {
+  /*   {
     label: 'Geo Location',
     value: 'geoLocation',
-  },
+  }, */
   {
     label: 'Zip Code',
     value: '-',
   },
-  {
-    label: 'SSM',
-    value: '-',
-  },
+
   {
     label: 'Bank',
     value: '-',

@@ -84,7 +84,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     companyName: user.companyName || '',
     bankName: user.address?.bankName || '',
     accountName: user.address?.accountName || '',
-    countryCode: 'Philippine',
+    countryCode: 'Malaysia',
     centerId: user.centerId || '',
     proofEstablishment: user.personalDetails?.proofEstablishment || '',
     proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
@@ -387,7 +387,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
           <input
-            placeholder='Enter latitude'
+            placeholder='Enter Bank Name'
             {...formik.getFieldProps('bankName')}
             type='text'
             name='bankName'
@@ -412,7 +412,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Account Name</label>
           <input
-            placeholder='Enter Longitude'
+            placeholder='Enter Account Name'
             {...formik.getFieldProps('accountName')}
             type='text'
             name='accountName'
@@ -437,7 +437,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>A/C Holder Name</label>
           <input
-            placeholder='Enter Longitude'
+            placeholder='Enter A/C Holder Name'
             {...formik.getFieldProps('accountHolderName')}
             type='text'
             name='accountHolderName'

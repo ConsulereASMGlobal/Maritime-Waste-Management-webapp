@@ -319,7 +319,7 @@ const cityList = [
   {value: 'Marilao', label: 'Marilao'},
 ]
 
-const countryList = [{value: 'Philippine', label: 'Philippines (+63)'}]
+const countryList = [{value: 'Malaysia', label: 'Malaysia (+60)'}]
 
 const stateList = [
   {value: 'Abra', label: 'Abra'},
