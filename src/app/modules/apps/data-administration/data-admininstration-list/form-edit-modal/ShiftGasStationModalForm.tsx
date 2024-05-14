@@ -296,6 +296,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           <label className='required fw-bold fs-6 mb-2'>Country Code</label>
           {makeSelectDropDown('countryCode', countryList)}
         </div>
+
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Mobile No</label>
           <small className=''> (will be used for App Login)</small>
@@ -384,6 +385,31 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           )}
         </div>
 
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Zip Code</label>
+          <input
+            placeholder='Enter Zip Code'
+            {...formik.getFieldProps('zipCode')}
+            type='text'
+            name='zipCode'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.zipCode && formik.errors.zipCode},
+              {
+                'is-valid': formik.touched.zipCode && !formik.errors.zipCode,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.zipCode && formik.errors.zipCode && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.zipCode}</span>
+              </div>
+            </div>
+          )}
+        </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
           <input
