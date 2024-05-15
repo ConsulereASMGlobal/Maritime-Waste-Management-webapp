@@ -15,6 +15,10 @@ const header = [
     label: 'Street',
     value: 'street',
   },
+  {
+    label: 'City',
+    value: 'street',
+  },
   // {
   //   label: 'City, Province',
   //   value: 'cityProvince',
@@ -27,7 +31,10 @@ const header = [
     label: 'Zip Code',
     value: '-',
   },
-
+  {
+    label: 'SSM',
+    value: 'bussinessImage',
+  },
   {
     label: 'Bank',
     value: '-',
@@ -39,10 +46,6 @@ const header = [
   {
     label: 'A/C Holder',
     value: '-',
-  },
-  {
-    label: 'SSM',
-    value: 'bussinessImage',
   },
 
   {

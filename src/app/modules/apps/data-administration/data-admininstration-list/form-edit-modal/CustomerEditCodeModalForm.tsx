@@ -384,7 +384,31 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>City</label>
+          <input
+            placeholder='Enter Bank Name'
+            {...formik.getFieldProps('city')}
+            type='text'
+            name='city'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.city && formik.errors.city},
+              {
+                'is-valid': formik.touched.city && !formik.errors.city,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.city && formik.errors.city && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.city}</span>
+              </div>
+            </div>
+          )}
+        </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Zip Code</label>
           <input

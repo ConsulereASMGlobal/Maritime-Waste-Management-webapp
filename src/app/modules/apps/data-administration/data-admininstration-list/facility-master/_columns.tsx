@@ -2,42 +2,52 @@ import {Column} from 'react-table'
 import {columnGenerators} from '../../../../../../_metronic/helpers'
 
 const header = [
+  {label: 'S.N', value: 'id'},
   {
-    label: 'S.N',
-    value: 'id',
+    label: 'Business Name',
+    value: 'name',
   },
   {
-    label: 'Format',
-    value: 'facilityType',
-  },
-  {
-    label: 'Company Name',
-    value: 'companyDetails[name]',
-  },
-  {
-    label: 'Registerd Address',
-    value: 'companyDetails[address]',
-  },
-  {
-    label: 'Contact Info',
-    value: 'contactDetail',
-  },
-  {
-    label: 'Manager',
-    value: 'personalDetails[name]',
-  },
-  {
-    label: 'Contact Info',
+    label: 'Contact',
     value: 'personalDetail',
   },
   {
-    label: 'SEC/ DTI',
+    label: 'Street',
+    value: 'street',
+  },
+  {
+    label: 'City',
+    value: 'street',
+  },
+  // {
+  //   label: 'City, Province',
+  //   value: 'cityProvince',
+  // },
+  /*   {
+    label: 'Geo Location',
+    value: 'geoLocation',
+  }, */
+  {
+    label: 'Zip Code',
+    value: '-',
+  },
+  {
+    label: 'SSM',
     value: 'bussinessImage',
   },
   {
-    label: 'Agreement',
-    value: 'personalImage',
+    label: 'Bank',
+    value: '-',
   },
+  {
+    label: 'Account No',
+    value: '-',
+  },
+  {
+    label: 'A/C Holder',
+    value: '-',
+  },
+
   {
     action: ['edit', 'toggle'],
   },
