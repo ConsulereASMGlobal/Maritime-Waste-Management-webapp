@@ -29,42 +29,42 @@ type Props = {
 
 const editUserSchema = (isEdit = false) =>
   Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    phone: Yup.string()
-      .min(7, 'Minimum 7 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('Phone number is required'),
+    // name: Yup.string().required('Name is required'),
+    // phone: Yup.string()
+    //   .min(7, 'Minimum 7 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('Phone number is required'),
     // email: Yup.string()
     //   .email('Wrong email format')
     //   .min(3, 'Minimum 3 symbols')
     //   .max(50, 'Maximum 50 symbols')
     //   .required('Emailis required'),
-    address: Yup.string().required('Address is required'),
-    bankName: Yup.string()
-      .min(3, 'Minimum 3 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('bankName is required'),
-    accountName: Yup.string()
-      .min(3, 'Minimum 3 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('accountName is required'),
+    // address: Yup.string().required('Address is required'),
+    // bankName: Yup.string()
+    //   .min(3, 'Minimum 3 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('bankName is required'),
+    // accountName: Yup.string()
+    //   .min(3, 'Minimum 3 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('accountName is required'),
     // proofEstablishment: Yup.mixed().required('Icon is required'),
-    ...((!isEdit && {
-      countryCode: Yup.string().required('Country Code is required'),
-      country: Yup.string().required('Country  is required'),
-      state: Yup.string().required('State is required'),
-      city: Yup.string().required('City  is required'),
-      password: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
-        .required('Password is required'),
-      companyName: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
-        .required('Company Name is required'),
-    }) ||
-      {}),
-    proofEstablishment: Yup.mixed().required('Image is required'),
+    // ...((!isEdit && {
+    //   countryCode: Yup.string().required('Country Code is required'),
+    //   country: Yup.string().required('Country  is required'),
+    //   state: Yup.string().required('State is required'),
+    //   city: Yup.string().required('City  is required'),
+    //   password: Yup.string()
+    //     .min(3, 'Minimum 3 symbols')
+    //     .max(50, 'Maximum 50 symbols')
+    //     .required('Password is required'),
+    //   companyName: Yup.string()
+    //     .min(3, 'Minimum 3 symbols')
+    //     .max(50, 'Maximum 50 symbols')
+    //     .required('Company Name is required'),
+    // }) ||
+    //   {}),
+    // proofEstablishment: Yup.mixed().required('Image is required'),
     // proofOfIdentity: Yup.mixed().required('Image is required'),
     // proofOfFacility: Yup.mixed().required('Image is required'),
   })
@@ -91,35 +91,35 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
   })
 
-  const [assignHubPlastic, setAssignHubPlastic] = useState([])
-  const [isEnabled, setIsEnabled] = useState(true)
+  // const [assignHubPlastic, setAssignHubPlastic] = useState([])
+  // const [isEnabled, setIsEnabled] = useState(true)
 
-  const {data: response} = useQuery(
-    'process',
-    () => getUserById(null, 'users?page=1&size=10&type=SMART_CENTRE'),
-    {
-      cacheTime: 0,
-      onError: (err) => {
-        setItemIdForUpdate(undefined)
-        console.error(err)
-      },
-      enabled: isEnabled, // Set this to true to run the query once
-    }
-  )
+  // const {data: response} = useQuery(
+  //   'process',
+  //   () => getUserById(null, 'users?page=1&size=10&type=SMART_CENTRE'),
+  //   {
+  //     cacheTime: 0,
+  //     onError: (err) => {
+  //       setItemIdForUpdate(undefined)
+  //       console.error(err)
+  //     },
+  //     enabled: isEnabled, // Set this to true to run the query once
+  //   }
+  // )
 
-  useEffect(() => {
-    if (response?.length) {
-      setIsEnabled(false)
-      console.log({user, response})
-      const tempAllCategories = response.map((eachRes) => {
-        return {
-          label: eachRes?.companyDetails?.name || '',
-          value: eachRes.id,
-        }
-      })
-      setAssignHubPlastic(tempAllCategories)
-    }
-  }, [response])
+  // useEffect(() => {
+  //   if (response?.length) {
+  //     setIsEnabled(false)
+  //     console.log({user, response})
+  //     const tempAllCategories = response.map((eachRes) => {
+  //       return {
+  //         label: eachRes?.companyDetails?.name || '',
+  //         value: eachRes.id,
+  //       }
+  //     })
+  //     setAssignHubPlastic(tempAllCategories)
+  //   }
+  // }, [response])
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
@@ -163,14 +163,14 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           },
           companyDetails: {
             companyId: '',
-            name: companyName,
+            name: name,
           },
           email,
           firstName: name,
           password,
           lastName: '',
           mobile: phone,
-          userType: 'PICKUP_POINT',
+          userType: 'FRANCHISE',
           proofEstablishment,
           centerId,
           PPRS,
@@ -234,14 +234,14 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   return (
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
-        <div className='fv-row mb-7'>
+        {/*      <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Franchise</label>
           {makeSelectDropDown('centerId', assignHubPlastic)}
-        </div>
+        </div> */}
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Business Name</label>
           <input
-            placeholder='Enter Collection Point Name'
+            placeholder='Enter Business Name'
             {...formik.getFieldProps('name')}
             type='text'
             name='name'
@@ -360,34 +360,9 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         )) ||
           false}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
-          <input
-            placeholder='Enter Address'
-            {...formik.getFieldProps('address')}
-            type='text'
-            name='address'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.address && formik.errors.address},
-              {
-                'is-valid': formik.touched.address && !formik.errors.address,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.address && formik.errors.address && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.address}</span>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>City</label>
           <input
-            placeholder='Enter Bank Name'
+            placeholder='Enter City'
             {...formik.getFieldProps('city')}
             type='text'
             name='city'
@@ -401,6 +376,32 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
+          <div className='fv-row mb-7'>
+            <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
+            <input
+              placeholder='Enter Address'
+              {...formik.getFieldProps('address')}
+              type='text'
+              name='address'
+              className={clsx(
+                'form-control form-control-solid mb-3 mb-lg-0',
+                {'is-invalid': formik.touched.address && formik.errors.address},
+                {
+                  'is-valid': formik.touched.address && !formik.errors.address,
+                }
+              )}
+              autoComplete='off'
+              disabled={formik.isSubmitting || isUserLoading}
+            />
+            {formik.touched.address && formik.errors.address && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block'>
+                  <span role='alert'>{formik.errors.address}</span>
+                </div>
+              </div>
+            )}
+          </div>
+
           {formik.touched.city && formik.errors.city && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
@@ -461,9 +462,9 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           )}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Account Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Account Number</label>
           <input
-            placeholder='Enter Account Name'
+            placeholder='Enter Account Number'
             {...formik.getFieldProps('accountName')}
             type='text'
             name='accountName'

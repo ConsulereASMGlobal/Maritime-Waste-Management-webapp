@@ -100,7 +100,7 @@ const Step2: FC = () => {
       </div>
 
       <div className='mb-10 fv-row'>
-        <label className='form-label mb-3'>Team Account Name</label>
+        <label className='form-label mb-3'>Team Account Number</label>
 
         <Field
           type='text'

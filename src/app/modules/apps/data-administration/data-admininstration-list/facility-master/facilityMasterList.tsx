@@ -19,7 +19,7 @@ const DropOffPointList = () => {
 }
 
 const FacilityMasterWrapper = () => (
-  <QueryRequestProvider initialValue={{type: 'SMART_CENTRE'}}>
+  <QueryRequestProvider initialValue={{type: 'FRANCHISE'}}>
     <QueryResponseProvider>
       <ListViewProvider>
         <DropOffPointList />

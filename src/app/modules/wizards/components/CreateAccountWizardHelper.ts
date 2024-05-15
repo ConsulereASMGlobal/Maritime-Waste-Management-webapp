@@ -23,7 +23,7 @@ const createAccountSchemas = [
     accountType: Yup.string().required().label('Account Type'),
   }),
   Yup.object({
-    accountName: Yup.string().required().label('Account Name'),
+    accountName: Yup.string().required().label('Account Number'),
   }),
   Yup.object({
     businessName: Yup.string().required().label('Business Name'),

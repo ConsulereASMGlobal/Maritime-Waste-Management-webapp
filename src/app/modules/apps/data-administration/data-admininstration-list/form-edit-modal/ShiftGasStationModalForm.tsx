@@ -21,6 +21,7 @@ import {getUserById} from '../core/_requests'
 import {errorToast, successToast} from '../../../../../../_metronic/helpers/components/Toaster'
 import PasswordFormField from '../../../../accounts/components/settings/cards/PasswordFiledForm'
 import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
+import {useAuth} from '../../../../auth'
 
 type Props = {
   isUserLoading: boolean
@@ -29,47 +30,50 @@ type Props = {
 
 const editUserSchema = (isEdit = false) =>
   Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    phone: Yup.string()
-      .min(7, 'Minimum 7 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('Phone number is required'),
+    // name: Yup.string().required('Name is required'),
+    // phone: Yup.string()
+    //   .min(7, 'Minimum 7 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('Phone number is required'),
     // email: Yup.string()
     //   .email('Wrong email format')
     //   .min(3, 'Minimum 3 symbols')
     //   .max(50, 'Maximum 50 symbols')
     //   .required('Emailis required'),
-    address: Yup.string().required('Address is required'),
-    bankName: Yup.string()
-      .min(3, 'Minimum 3 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('bankName is required'),
-    accountName: Yup.string()
-      .min(3, 'Minimum 3 symbols')
-      .max(50, 'Maximum 50 symbols')
-      .required('accountName is required'),
+    // address: Yup.string().required('Address is required'),
+    // bankName: Yup.string()
+    //   .min(3, 'Minimum 3 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('bankName is required'),
+    // accountName: Yup.string()
+    //   .min(3, 'Minimum 3 symbols')
+    //   .max(50, 'Maximum 50 symbols')
+    //   .required('accountName is required'),
     // proofEstablishment: Yup.mixed().required('Icon is required'),
-    ...((!isEdit && {
-      countryCode: Yup.string().required('Country Code is required'),
-      country: Yup.string().required('Country  is required'),
-      state: Yup.string().required('State is required'),
-      city: Yup.string().required('City  is required'),
-      password: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
-        .required('Password is required'),
-      companyName: Yup.string()
-        .min(3, 'Minimum 3 symbols')
-        .max(50, 'Maximum 50 symbols')
-        .required('Company Name is required'),
-    }) ||
-      {}),
-    proofEstablishment: Yup.mixed().required('Image is required'),
+    // ...((!isEdit && {
+    //   countryCode: Yup.string().required('Country Code is required'),
+    //   country: Yup.string().required('Country  is required'),
+    //   state: Yup.string().required('State is required'),
+    //   city: Yup.string().required('City  is required'),
+    //   password: Yup.string()
+    //     .min(3, 'Minimum 3 symbols')
+    //     .max(50, 'Maximum 50 symbols')
+    //     .required('Password is required'),
+    //   companyName: Yup.string()
+    //     .min(3, 'Minimum 3 symbols')
+    //     .max(50, 'Maximum 50 symbols')
+    //     .required('Company Name is required'),
+    // }) ||
+    //   {}),
+    // proofEstablishment: Yup.mixed().required('Image is required'),
     // proofOfIdentity: Yup.mixed().required('Image is required'),
     // proofOfFacility: Yup.mixed().required('Image is required'),
   })
 const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
+
+  const {auth} = useAuth()
+  const hideDropdown = auth?.data?.userType === 'SMART_CENTRE' || false
   const {refetch} = useQueryResponse()
   const [userForEdit] = useState<any>({
     ...user,
@@ -96,7 +100,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
   const {data: response} = useQuery(
     'process',
-    () => getUserById(null, 'users?page=1&size=10&type=SMART_CENTRE'),
+    () => getUserById(null, 'users?page=1&size=10&type=FRANCHISE'),
     {
       cacheTime: 0,
       onError: (err) => {
@@ -163,10 +167,10 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           },
           companyDetails: {
             companyId: '',
-            name: companyName,
+            name: name,
           },
           email,
-          firstName: name,
+          // firstName: name,
           password,
           lastName: '',
           mobile: phone,
@@ -175,6 +179,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           centerId,
           PPRS,
           ISO9001,
+          franchiseId: !hideDropdown ? auth?.data?.userId : centerId,
         }
         if (isNotEmpty(values.id)) {
           await updateUser(payload, 'users/' + user.id + '/update')
@@ -234,10 +239,13 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   return (
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Franchise</label>
-          {makeSelectDropDown('centerId', assignHubPlastic)}
-        </div>
+        {(hideDropdown && (
+          <div className='fv-row mb-7'>
+            <label className='fw-bold fs-6 mb-2'>Franchise</label>
+            {makeSelectDropDown('centerId', assignHubPlastic)}
+          </div>
+        )) ||
+          null}
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Business Name</label>
           <input
@@ -360,6 +368,31 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         )) ||
           false}
         <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>City</label>
+          <input
+            placeholder='Enter City'
+            {...formik.getFieldProps('city')}
+            type='text'
+            name='city'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.city && formik.errors.city},
+              {
+                'is-valid': formik.touched.city && !formik.errors.city,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.city && formik.errors.city && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.city}</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
           <input
             placeholder='Enter Address'
@@ -384,31 +417,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>City</label>
-          <input
-            placeholder='Enter Bank Name'
-            {...formik.getFieldProps('city')}
-            type='text'
-            name='city'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.city && formik.errors.city},
-              {
-                'is-valid': formik.touched.city && !formik.errors.city,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.city && formik.errors.city && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.city}</span>
-              </div>
-            </div>
-          )}
-        </div>
+
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Zip Code</label>
           <input
@@ -461,9 +470,9 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           )}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Account Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Account Number</label>
           <input
-            placeholder='Enter Account Name'
+            placeholder='Enter Account Number'
             {...formik.getFieldProps('accountName')}
             type='text'
             name='accountName'
