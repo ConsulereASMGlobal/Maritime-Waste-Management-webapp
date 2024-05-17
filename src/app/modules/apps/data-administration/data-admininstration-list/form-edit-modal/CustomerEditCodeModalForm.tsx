@@ -150,6 +150,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           centerId,
           PPRS,
           ISO9001,
+          zipCode,
         } = values
         const payload = {
           address: {
@@ -159,18 +160,25 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             accountName,
             state,
             street: address,
-            zipCode: '',
+            zipCode: zipCode,
           },
           companyDetails: {
             companyId: '',
             name: name,
           },
           email,
+          firstName: '',
           password,
           lastName: '',
           mobile: phone,
           userType: 'RECYCLER',
-          proofEstablishment,
+          kycDocument: [
+            {
+              docType: 'POE',
+              docUrl: proofEstablishment,
+              docNumber: '',
+            },
+          ],
           centerId,
           PPRS,
           ISO9001,

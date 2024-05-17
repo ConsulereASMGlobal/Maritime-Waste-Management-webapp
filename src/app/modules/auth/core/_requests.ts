@@ -9,11 +9,11 @@ export const REGISTER_URL = `${API_URL}/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
 // Server should return AuthModel
-export function login(mobile: string, password: string) {
+export function login(mobile: string, password: string, userType: string) {
   return axios.post<AuthModel>(LOGIN_URL, {
     mobile,
     password,
-    userType: 'SMART_CENTRE',
+    userType,
   })
 }
 

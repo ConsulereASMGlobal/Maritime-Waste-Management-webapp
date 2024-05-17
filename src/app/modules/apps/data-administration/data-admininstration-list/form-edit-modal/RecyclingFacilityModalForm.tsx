@@ -149,6 +149,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           proofEstablishment,
           centerId,
           PPRS,
+          zipCode,
           ISO9001,
         } = values
         const payload = {
@@ -159,19 +160,25 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             accountName,
             state,
             street: address,
-            zipCode: '',
+            zipCode: zipCode,
           },
           companyDetails: {
             companyId: '',
             name: name,
           },
           email,
-          firstName: name,
+          firstName: '',
           password,
           lastName: '',
           mobile: phone,
           userType: 'FRANCHISE',
-          proofEstablishment,
+          kycDocument: [
+            {
+              docType: 'POE',
+              docUrl: proofEstablishment,
+              docNumber: '',
+            },
+          ],
           centerId,
           PPRS,
           ISO9001,

@@ -35,6 +35,8 @@ export function Login() {
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
 
+  const [lastLogin, setLastLogin] = useState<string>('SMART_CENTRE')
+
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
@@ -42,7 +44,7 @@ export function Login() {
       setLoading(true)
       try {
         setStatus('')
-        const {data: auth} = await login(values.mobile, values.password)
+        const {data: auth} = await login(values.mobile, values.password, lastLogin)
         saveAuth(auth)
         const {data: user} = await getUserByToken(auth.data.userId)
         setCurrentUser(user)
@@ -75,7 +77,22 @@ export function Login() {
         </div>
       )) ||
         null}
-      {/* begin::Form group */}
+      <div className='fv-row mb-8'>
+        <label className='form-label fs-6 fw-bolder text-white'>User Type</label>
+        <select
+          className='form-select form-select-solid fw-bolder'
+          data-kt-select2='true'
+          data-placeholder='Select option'
+          data-allow-clear='true'
+          data-kt-user-table-filter='two-step'
+          data-hide-search='true'
+          onChange={(e) => setLastLogin(e.target.value)}
+          value={lastLogin}
+        >
+          <option value='SMART_CENTRE'>SMART_CENTRE</option>
+          <option value='FRANCHISE'>FRANCHISE</option>
+        </select>
+      </div>
       <div className='fv-row mb-8'>
         <label className='form-label fs-6 fw-bolder text-white'>Login</label>
         <input
