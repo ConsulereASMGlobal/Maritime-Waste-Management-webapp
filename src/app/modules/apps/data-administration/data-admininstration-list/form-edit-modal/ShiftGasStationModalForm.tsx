@@ -77,7 +77,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {refetch} = useQueryResponse()
   const [userForEdit] = useState<any>({
     ...user,
-    name: user.companyDetails?.name || '',
+    name: user.personalDetails?.name || '',
     phone: user.personalDetails?.mobile || '',
     password: user.password || '',
     email: user.personalDetails?.email || '',
@@ -89,7 +89,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     bankName: user.address?.bankName || '',
     accountName: user.address?.accountName || '',
     countryCode: 'Malaysia',
-    centerId: user.centerId || '',
+    centerId: user.franchiseId || '',
     zipCode: user.address?.zipCode || '',
     proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
     proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
@@ -156,46 +156,35 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           ISO9001,
           zipCode,
           accountHolderName,
+          countryCode,
         } = values
         const payload = {
-          address: {
-            city,
-            country,
-            bankName,
-            accountName,
-            state,
-            street: address,
-            zipCode: zipCode,
-          },
-          bankDetails: {
-            bankName,
-            accountNo: accountName,
-            upiId: '',
-            ifscCode: '',
-            accountName: accountHolderName,
-          },
-          companyDetails: {
-            companyId: '',
-            name: name,
-          },
-          email,
-          firstName: '',
-          password,
+          firstName: name,
           lastName: '',
+          email: email,
           mobile: phone,
           userType: 'PICKUP_POINT',
-
+          countryCode: country,
+          address: {
+            street: address,
+            city,
+            country: country,
+            latitute: 37.785834,
+            longitute: -122.406417,
+            zipCode: zipCode,
+            countryCode: country,
+          },
+          password: password,
+          status: 'ACTIVE',
+          franchiseId: !hideDropdown ? auth?.data?.userId : centerId,
+          franchiseName: 'Trash for Cash',
           kycDocument: [
             {
-              docType: 'POE',
               docUrl: proofEstablishment,
               docNumber: '',
+              docType: 'POE',
             },
           ],
-          centerId,
-          PPRS,
-          ISO9001,
-          franchiseId: !hideDropdown ? auth?.data?.userId : centerId,
         }
         if (isNotEmpty(values.id)) {
           await updateUser(payload, 'users/' + user.id + '/update')

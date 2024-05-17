@@ -27,6 +27,19 @@ const header = [
     label: 'SSM',
     value: 'bussinessImage',
   },
+
+  {
+    label: 'Bank',
+    value: '-',
+  },
+  {
+    label: 'Account No',
+    value: '-',
+  },
+  {
+    label: 'A/C Holder',
+    value: '-',
+  },
   {
     action: ['edit', 'toggle'],
   },
