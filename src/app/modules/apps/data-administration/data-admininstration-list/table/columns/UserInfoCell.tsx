@@ -96,7 +96,11 @@ const UserInfoCell: FC<Props> = ({
           <div className='symbol symbol-circle swymbol-50px overflow-hidden me-3'>
             <div className='symbol-label'>
               <img
-                src={`${user?.documents?.[mapData === 'bussinessImage' ? 0 : 1] || ''}`}
+                src={`${
+                  user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1]?.docUrl ||
+                  user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1] ||
+                  ''
+                }`}
                 alt={user.name}
                 className='w-100'
               />

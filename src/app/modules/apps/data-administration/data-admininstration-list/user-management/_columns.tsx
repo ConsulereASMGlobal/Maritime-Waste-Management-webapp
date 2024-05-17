@@ -12,16 +12,24 @@ const header = [
     value: 'birthday',
   },
   {
-    label: 'Mobile Number/ Email',
-    value: 'gender',
+    label: 'Contact',
+    value: 'personalDetail',
   },
   /* {
     label: 'Email Address',
     value: 'email',
   }, */
   {
-    label: 'Address City',
-    value: 'fullAddress',
+    label: 'Street',
+    value: 'street',
+  },
+  {
+    label: 'City',
+    value: 'address[city]',
+  },
+  {
+    label: 'Zip Code',
+    value: 'address[zipCode]',
   },
   {
     label: 'Bank Name',

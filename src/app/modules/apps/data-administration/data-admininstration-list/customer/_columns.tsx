@@ -19,22 +19,13 @@ const header = [
     label: 'City',
     value: 'address[city]',
   },
-
-  {
-    label: 'Province',
-    value: 'address[state]',
-  },
   {
     label: 'Zip Code',
     value: 'address[zipCode]',
   },
   {
-    label: 'Business Permit',
-    value: 'kycDocument[docNumber]',
-  },
-  {
-    label: 'Document',
-    value: 'avatar',
+    label: 'SSM',
+    value: 'bussinessImage',
   },
   {
     action: ['edit', 'toggle'],

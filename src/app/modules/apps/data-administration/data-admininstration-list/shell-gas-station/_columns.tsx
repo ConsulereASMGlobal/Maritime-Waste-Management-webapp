@@ -5,7 +5,7 @@ const header = [
   {label: 'S.N', value: 'id'},
   {
     label: 'Business Name',
-    value: 'name',
+    value: 'companyDetails[name]',
   },
   {
     label: 'Contact',
@@ -17,7 +17,7 @@ const header = [
   },
   {
     label: 'City',
-    value: 'street',
+    value: 'address[city]',
   },
   // {
   //   label: 'City, Province',
@@ -29,7 +29,7 @@ const header = [
   }, */
   {
     label: 'Zip Code',
-    value: '-',
+    value: 'address[zipCode]',
   },
   {
     label: 'SSM',

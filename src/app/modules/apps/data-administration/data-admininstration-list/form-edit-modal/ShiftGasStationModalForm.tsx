@@ -77,7 +77,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {refetch} = useQueryResponse()
   const [userForEdit] = useState<any>({
     ...user,
-    name: user.personalDetails?.name || '',
+    name: user.companyDetails?.name || '',
     phone: user.personalDetails?.mobile || '',
     password: user.password || '',
     email: user.personalDetails?.email || '',
@@ -90,7 +90,8 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     accountName: user.address?.accountName || '',
     countryCode: 'Malaysia',
     centerId: user.centerId || '',
-    proofEstablishment: user.personalDetails?.proofEstablishment || '',
+    zipCode: user.address?.zipCode || '',
+    proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
     proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
   })
@@ -149,12 +150,12 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           state,
           city,
           address,
-          companyName,
           proofEstablishment,
           centerId,
           PPRS,
           ISO9001,
           zipCode,
+          accountHolderName,
         } = values
         const payload = {
           address: {
@@ -165,6 +166,13 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             state,
             street: address,
             zipCode: zipCode,
+          },
+          bankDetails: {
+            bankName,
+            accountNo: accountName,
+            upiId: '',
+            ifscCode: '',
+            accountName: accountHolderName,
           },
           companyDetails: {
             companyId: '',
