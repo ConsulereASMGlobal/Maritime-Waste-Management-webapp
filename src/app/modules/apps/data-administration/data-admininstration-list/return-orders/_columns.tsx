@@ -19,7 +19,7 @@ const header = [
     value: 'pickupDate',
   },
   {
-    label: 'Supplier',
+    label: 'Aggregator',
     value: 'pickupInfo[name]',
   },
   {
@@ -31,7 +31,7 @@ const header = [
     value: 'categoryName',
   },
   {
-    label: 'Item',
+    label: 'Type',
     value: 'pickup_quantity_item',
   },
   {

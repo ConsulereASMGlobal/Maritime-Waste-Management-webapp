@@ -8,7 +8,7 @@ const header = [
     value: 'createdAt',
   },
   {
-    label: 'Facility Name',
+    label: 'Aggregator',
     value: 'hubName',
   },
   {

@@ -15,11 +15,11 @@ const header = [
     value: 'createdAt',
   },
   {
-    label: 'Collection Point',
+    label: 'Aggregator',
     value: 'centreInfo[name]',
   },
   {
-    label: 'Category Name',
+    label: 'Plastic Type',
     value: 'categoryName',
   },
   {
@@ -35,12 +35,16 @@ const header = [
     value: 'paymentMode',
   }, */
   {
-    label: 'Depositer',
+    label: 'Collection Agent',
     value: 'customerInfo[name]',
   },
   {
     label: 'Mobile Number',
     value: 'customerInfo[mobile]',
+  },
+  {
+    label: 'Amount Paid',
+    value: 'customerInfo[name]',
   },
   {
     action: ['view', 'id', 'certificate', 'qr'],
