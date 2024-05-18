@@ -5,7 +5,7 @@ const header = [
   {label: 'S.N', value: 'id'},
   {
     label: 'Business Name',
-    value: 'companyDetails[name]',
+    value: 'personalDetails[name]',
   },
   {
     label: 'Contact',
