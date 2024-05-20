@@ -219,12 +219,12 @@ const DashboardPage: FC = () => {
           </div>
         ))} */}
       </div>
-      {(mapLocation.length && (
+      {/* {(mapLocation.length && (
         <div>
           <MapComponent data={mapLocation || []} />
         </div>
       )) ||
-        null}
+        null} */}
 
       <TablesWidget10 data={cleanUpData} className='mb-5 mb-xl-8' />
 

@@ -1,18 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
-import {FC} from 'react'
+import {FC, useRef, useState} from 'react'
 import {
   generateAddress,
   configCategoryMap,
   toAbsoluteUrl,
 } from '../../../../../../../_metronic/helpers'
 import {User} from '../../core/_models'
+import {ViewImageModal} from '../../../../../../../app/modules/apps/data-administration/data-admininstration-list/table/columns/ViewImageModal'
+import ImageLightBox from '../../../../../../../_metronic/helpers/components/ImageLightBox'
 
 type Props = {
   user: any
   showImage?: boolean
   mapData?: string
   showImageOnly?: boolean
+  ref?: any
+  itemIdForUpdate?: any
 }
 
 const UserInfoCell: FC<Props> = ({
@@ -20,13 +24,41 @@ const UserInfoCell: FC<Props> = ({
   showImageOnly = false,
   showImage = false,
   mapData = '',
+  ref,
+  itemIdForUpdate,
 }) => {
+  const lightBoxRef = useRef<any>(null)
+  const [showImageModal, setshowImageModal] = useState({
+    show: false,
+    clicked: '',
+  })
+
   const accessNestedProperty = (obj, path) => {
     return path.split('[').reduce((acc, key) => {
       return acc && acc[key.replace(']', '')]
     }, obj)
   }
   const configMapData = configCategoryMap
+  const handleClick = (image) => {
+    console.log({image, lightBoxRef})
+    lightBoxRef?.current?.open(image, itemIdForUpdate)
+  }
+
+  if (showImageModal.show) {
+    return (
+      <ViewImageModal
+        close={() => setshowImageModal({show: false, clicked: ''})}
+        images={
+          showImageModal.clicked === 'vehicleImages'
+            ? user?.pickupInfo?.vehicleDetails?.vehicleImages
+            : showImageModal.clicked === 'debrisImagePathList'
+            ? user.debrisImagePathList
+            : user.images
+        }
+        name={showImageModal.clicked}
+      />
+    )
+  }
   const returnData = () => {
     if (mapData.includes('[')) return clipText(accessNestedProperty(user, mapData), 30)
     switch (mapData) {
@@ -96,6 +128,14 @@ const UserInfoCell: FC<Props> = ({
           <div className='symbol symbol-circle swymbol-50px overflow-hidden me-3'>
             <div className='symbol-label'>
               <img
+                onClick={() =>
+                  handleClick(
+                    user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1]?.docUrl ||
+                      user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1] ||
+                      '' ||
+                      toAbsoluteUrl(`/media/avatars/blank.png`)
+                  )
+                }
                 src={`${
                   user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1]?.docUrl ||
                   user?.kycDocument?.[mapData === 'bussinessImage' ? 0 : 1] ||
@@ -207,6 +247,7 @@ const UserInfoCell: FC<Props> = ({
   }
   return (
     <div className='align-items-center'>
+      {user.id && mapData && <ImageLightBox ref={lightBoxRef} />}
       {showImageOnly && (
         <div className='symbol symbol-circle swymbol-50px overflow-hidden me-3'>
           <div className='symbol-label'>

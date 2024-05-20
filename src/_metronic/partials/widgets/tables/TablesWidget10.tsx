@@ -39,7 +39,7 @@ const TablesWidget10: React.FC<Props> = ({className, data = []}) => {
           <table className='table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4'>
             {/* begin::Table head */}
             <thead>
-              <tr className='fw-bold text-muted'>
+              <tr className='fw-bold text-muted text-left'>
                 <th className='min-w-150px'>Aggregator</th>
                 <th className='min-w-140px'>Address</th>
                 <th className='min-w-120px'>Collection Agent</th>
@@ -55,7 +55,7 @@ const TablesWidget10: React.FC<Props> = ({className, data = []}) => {
               {data?.length &&
                 data?.slice(0, 10).map((eachData, eachIndex) => {
                   return (
-                    <tr key={eachIndex + 1}>
+                    <tr key={eachIndex + 1} className='text-left'>
                       <td>
                         <div className='d-flex align-items-center'>
                           {/* <div className='symbol symbol-45px me-5'>

@@ -86,7 +86,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     accountName: user.address?.accountName || '',
     countryCode: 'Malaysia',
     centerId: user.centerId || '',
-    zipCode: user.address.zipCode || '',
+    zipCode: user.address?.zipCode || '',
     proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
     proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
     proofOfFacility: user.personalDetails?.proofOfFacility || '',

@@ -11,6 +11,10 @@ const header = [
     value: 'companyDetails[name]',
   },
   {
+    label: 'Contact',
+    value: 'personalDetails[mobile]',
+  },
+  {
     label: 'Stret Address',
     value: 'address',
   },

@@ -89,7 +89,7 @@ export function Login() {
           onChange={(e) => setLastLogin(e.target.value)}
           value={lastLogin}
         >
-          <option value='SMART_CENTRE'>SMART_CENTRE</option>
+          <option value='SMART_CENTRE'>MAREA ADMIN</option>
           <option value='FRANCHISE'>FRANCHISE</option>
         </select>
       </div>

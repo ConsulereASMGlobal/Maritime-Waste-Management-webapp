@@ -27,12 +27,15 @@ const AuthLayout = () => {
         <div className='d-flex  '>
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+            src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
             style={{
-              marginLeft: '-50px',
-              marginTop: '-32px',
+              height: '50px !important',
+              width: '200px',
+              // width: '50px',
+              marginLeft: '-35px',
+              marginTop: '-2px',
             }}
-            className='h-100px'
+            // className='h-100px'
           />
         </div>
 
