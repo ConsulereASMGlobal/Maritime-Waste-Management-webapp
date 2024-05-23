@@ -16,7 +16,8 @@ import {useQueryResponse} from '../core/QueryResponseProvider'
 import {useQuery} from 'react-query'
 import {getUserById} from '../core/_requests'
 import {errorToast, successToast} from '../../../../../../_metronic/helpers/components/Toaster'
-
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 type Props = {
   isUserLoading: boolean
   user?: any
@@ -42,6 +43,8 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     categoryId: user.categoryId || '',
     itemId: user.itemId || '',
     unit: user.unit || '',
+    date: user.date || '',
+    incentive: user.incentive || '',
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -68,18 +71,22 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       setSubmitting(true)
       try {
         if (isNotEmpty(values.id)) {
-          await updateUser(values, `prices/${values.id}`)
+          await updateUser(
+            {...values, date: new Date(values.date).toLocaleDateString()},
+            `prices/${values.id}`
+          )
           successToast('Modified')
+          cancel(true)
         } else {
-          await createUser(values, 'price')
+          await createUser({...values, date: new Date(values.date).toLocaleDateString()}, 'price')
           successToast('Added')
+          cancel(true)
         }
       } catch (ex) {
         console.error(ex)
         errorToast('Something Went Wrong')
       } finally {
         setSubmitting(true)
-        cancel(true)
       }
     },
   })
@@ -185,7 +192,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           )}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Price</label>
+          <label className='required fw-bold fs-6 mb-2'>Based Price</label>
           <input
             placeholder='Add Price'
             {...formik.getFieldProps('price')}
@@ -209,6 +216,42 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>{' '}
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Incentive</label>
+          <input
+            placeholder='Add Incentive'
+            {...formik.getFieldProps('incentive')}
+            type='number'
+            name='incentive'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.incentive && formik.errors.incentive},
+              {
+                'is-valid': formik.touched.incentive && !formik.errors.incentive,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.incentive && formik.errors.incentive && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.incentive}</span>
+              </div>
+            </div>
+          )}
+        </div>{' '}
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Valid Till</label>
+          <br />
+          <DatePicker
+            placeholderText={`Select Date`}
+            className='form-control form-control-solid '
+            selected={(formik?.values?.date && new Date(formik?.values?.date || null)) || null}
+            // onChange={(date) => handleChange(eachSearch.name, new Date(date).toLocaleDateString())}
+            onChange={(date) => formik.setFieldValue('date', new Date(date))}
+          />
+        </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Currency</label>
           {makeSelectDropDown('currency', currencyList)}

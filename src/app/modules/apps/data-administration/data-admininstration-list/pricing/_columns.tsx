@@ -23,6 +23,14 @@ const header = [
     value: 'price',
   },
   {
+    label: 'Incentive',
+    value: 'incentive',
+  },
+  {
+    label: 'Validity',
+    value: 'date',
+  },
+  {
     label: 'Currency',
     value: 'currency',
   },
