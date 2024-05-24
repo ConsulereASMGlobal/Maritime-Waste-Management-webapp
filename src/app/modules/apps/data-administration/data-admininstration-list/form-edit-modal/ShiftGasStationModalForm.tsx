@@ -174,6 +174,13 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             zipCode: zipCode,
             countryCode: country,
           },
+          bankDetails: {
+            bankName,
+            accountNo: accountName,
+            upiId: '',
+            ifscCode: '',
+            accountName: accountHolderName,
+          },
           password: password,
           status: 'ACTIVE',
           franchiseId: !hideDropdown ? auth?.data?.userId : centerId,
