@@ -27,7 +27,7 @@ const header = [
     value: 'categoryIcon',
   },
   {
-    label: 'Quantity (kg)',
+    label: 'Quantity',
     value: 'quantityDeposit',
   },
   /* {
@@ -39,12 +39,20 @@ const header = [
     value: 'customerInfo[name]',
   },
   {
-    label: 'Mobile Number',
+    label: 'Contact',
     value: 'customerInfo[mobile]',
   },
   {
     label: 'Amount Paid',
     value: 'customerInfo[name]',
+  },
+  {
+    label: 'Mode',
+    value: 'paymentMode',
+  },
+  {
+    label: 'Status',
+    value: 'status',
   },
   {
     action: ['view', 'id', 'certificate', 'qr'],

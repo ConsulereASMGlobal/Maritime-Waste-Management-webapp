@@ -111,7 +111,7 @@ const UserInfoCell: FC<Props> = ({
           user?.orderDetails?.[0]?.items?.reduce((acc, curr) => {
             return acc + curr.quantity
           }, 0) || 0
-        return <span className='text-primary fs-7 fw-bold'>{totalQuantity?.toFixed(2)}</span>
+        return <span className='text-primary fs-7 fw-bold'>{totalQuantity?.toFixed(2)} kg</span>
       case 'pickup_quantity':
       case 'pickup_quantity_item':
         return user?.orderDetails?.[0].items?.map((x: any, ind: number) => (
