@@ -201,6 +201,8 @@ const UserInfoCell: FC<Props> = ({
         return user['productionItemDetails']?.map((x: any, ind: number) => (
           <div key={ind + 1 + ''}>{x.quantity}</div>
         ))
+      case 'totalAmount':
+        return 'RM ' + user.totalAmount
       case 'cityProvince':
         return user.address.city + ' , ' + user.address.state
       case 'inMaterials':

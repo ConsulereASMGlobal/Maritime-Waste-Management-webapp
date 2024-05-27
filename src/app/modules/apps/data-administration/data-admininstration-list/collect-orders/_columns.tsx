@@ -19,7 +19,7 @@ const header = [
     value: 'centreInfo[name]',
   },
   {
-    label: 'Plastic Type',
+    label: 'Plastic',
     value: 'categoryName',
   },
   {
@@ -43,8 +43,8 @@ const header = [
     value: 'customerInfo[mobile]',
   },
   {
-    label: 'Amount Paid',
-    value: 'customerInfo[name]',
+    label: 'Amount',
+    value: 'totalAmount',
   },
   {
     label: 'Mode',
