@@ -8,7 +8,7 @@ const header = [
   },
   {
     label: 'Company Name',
-    value: 'companyDetails[name]',
+    value: 'personalDetails[name]',
   },
   {
     label: 'Contact',

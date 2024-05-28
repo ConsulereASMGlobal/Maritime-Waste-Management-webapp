@@ -37,15 +37,15 @@ const header = [
   },
   {
     label: 'Bank',
-    value: '-',
+    value: 'bankDetails[bankName]',
   },
   {
     label: 'Account No',
-    value: '-',
+    value: 'bankDetails[accountNo]',
   },
   {
     label: 'A/C Holder',
-    value: '-',
+    value: 'bankDetails[accountName]',
   },
 
   {

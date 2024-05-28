@@ -33,19 +33,19 @@ const header = [
   },
   {
     label: 'Bank Name',
-    value: 'fullAddress',
+    value: 'bankDetails[bankName]',
   },
   {
     label: 'Ac Number',
-    value: 'fullAddress',
+    value: 'bankDetails[accountNo]',
   },
   {
     label: 'ID PIC',
-    value: 'fullAddress',
+    value: 'proofOfIdentity',
   },
   {
     label: 'Profile Pic',
-    value: 'fullAddress',
+    value: 'proofEstablishment',
   },
 
   {
