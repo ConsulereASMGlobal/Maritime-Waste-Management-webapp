@@ -35,7 +35,7 @@ const header = [
     value: 'paymentMode',
   }, */
   {
-    label: 'Collection Agent',
+    label: 'C. Agent',
     value: 'customerInfo[name]',
   },
   {
