@@ -16,7 +16,13 @@ const SidebarMenuMain = () => {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
-      <SidebarMenuItem to='/apps/stock' icon='parcel' title='Leaderboard' fontIcon='bi-layers' />
+      <SidebarMenuItem to='/apps/stock' icon='parcel' title='Lifecycle' fontIcon='bi-layers' />
+      <SidebarMenuItem
+        to='/apps/mass-balance'
+        icon='parcel'
+        title='Mass Balance'
+        fontIcon='bi-layers'
+      />
 
       <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
@@ -77,6 +83,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/apps/settings/category' title='Category' hasBullet={true} />
         <SidebarMenuItem to='/apps/settings/sub-category' title='Sub Category' hasBullet={true} />
         <SidebarMenuItem to='/apps/settings/pricing' title='Pricing' hasBullet={true} />
+        <SidebarMenuItem to='/apps/settings/incentive' title='Incentive' hasBullet={true} />
         <SidebarMenuItem
           to='/apps/settings/processing-routes'
           title='Processing Routes'

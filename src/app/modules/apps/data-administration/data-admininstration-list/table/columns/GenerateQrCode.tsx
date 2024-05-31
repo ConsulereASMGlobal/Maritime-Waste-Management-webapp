@@ -6,7 +6,11 @@ import html2canvas from 'html2canvas'
 
 const GenerateQrCode = ({data, close}) => {
   const staticData = {
-    id: data?.id || data,
+    name: data?.personalDetails?.name || '',
+    address: generateAddress(data?.address || '') || '',
+    mobile: data?.personalDetails?.mobile || '',
+    userType: 'PICKUP_POINT',
+    id: data?.id || '',
   }
   const downloadQRCode = () => {
     const element = document.getElementById('kt_modal_add_user')
@@ -72,11 +76,16 @@ const GenerateQrCode = ({data, close}) => {
               </div>
             </div>
             <div id='kt_modal_add_user' className='modal-body scroll-y mx-5 mx-xl-15 my-7'>
-              <div className='text-center'>
+              <div className='text-center flex justify-center'>
                 <QRCode value={JSON.stringify(staticData)} />
               </div>
               <div style={{textAlign: 'center'}}>
-                <div>Order Id: {(data.id && data.id) || data}</div>
+                <div>{data?.address?.street}</div>
+                <div>
+                  {data?.address?.city}
+                  {', '}
+                  {data?.address?.country}
+                </div>
               </div>
             </div>
             <div className='modal-footer'>

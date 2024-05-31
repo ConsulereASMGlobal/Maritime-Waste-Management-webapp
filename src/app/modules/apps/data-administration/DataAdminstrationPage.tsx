@@ -16,10 +16,12 @@ import {BrandWrapper} from './data-admininstration-list/brand/brandList'
 import {DeliveryWrapper} from './data-admininstration-list/delivery-terms/deliveryTermsList'
 import {UserManagementWrapper} from './data-admininstration-list/user-management/userManagementList'
 import {FacilityMasterWrapper} from './data-admininstration-list/facility-master/facilityMasterList'
-import {StockWrapper} from './data-admininstration-list/stock/sstockList'
 import {ProcessingRecordList} from './data-admininstration-list/processing-record/processingRecodList'
 import {ProcessingRoutesWrapper} from './data-admininstration-list/processing-routes/processingRouteList'
 import {CustomerListWrapper} from './data-admininstration-list/customer/customerList'
+import {MassBalanceWrapper} from './data-admininstration-list/mass-balance'
+import {StockWrapper} from './data-admininstration-list/stock/sstockList'
+import {IncentiveList} from './data-admininstration-list/incentive/incentiveList'
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
@@ -45,9 +47,19 @@ const UsersPage = () => {
           path='stock'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Leaderboard</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Lifecycle</PageTitle>
               {/* <DataAdmininstrationMenu /> */}
               <StockWrapper />
+            </>
+          }
+        />
+        <Route
+          path='mass-balance'
+          element={
+            <>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Mass Balance</PageTitle>
+              {/* <DataAdmininstrationMenu /> */}
+              <MassBalanceWrapper />
             </>
           }
         />
@@ -166,6 +178,15 @@ const UsersPage = () => {
             <>
               <PageTitle breadcrumbs={usersBreadcrumbs}>Pricing</PageTitle>
               <PricingWrapper />
+            </>
+          }
+        />
+        <Route
+          path='settings/incentive'
+          element={
+            <>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Incentive</PageTitle>
+              <IncentiveList />
             </>
           }
         />

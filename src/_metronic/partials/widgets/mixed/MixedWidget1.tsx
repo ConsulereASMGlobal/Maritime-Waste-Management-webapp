@@ -43,13 +43,13 @@ const MixedWidget1: React.FC<Props> = ({data, className, color, bg_color}) => {
             </h4>
           </div>
           <div className='d-flex text-center flex-column text-white pt-2'>
-            <small className='fw-semibold fs-7'>Current Stock</small>
+            {/* <small className='fw-semibold fs-7'>Current Stock</small> */}
             <span className='fw-bold fs-4 pt-1'>{data?.stock?.toFixed(2) || '0'} kg</span>
           </div>
         </div>
         <div
           className='shadow-xs card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1 bg-body'
-          style={{marginTop: '-145px'}}
+          style={{marginTop: '-165px'}}
         >
           <div className='d-flex align-items-center mb-6'>
             <div className='d-flex align-items-center flex-wrap w-100'>
@@ -76,7 +76,7 @@ const MixedWidget1: React.FC<Props> = ({data, className, color, bg_color}) => {
             <div className='d-flex align-items-center flex-wrap w-100'>
               <div className='mb-1 pe-3 flex-grow-1'>
                 <a href='#' className='fs-5 text-gray-800 text-hover-primary fw-bold'>
-                  Dispatched
+                  Supplied
                 </a>
               </div>
               {returnData(data?.supplied)}

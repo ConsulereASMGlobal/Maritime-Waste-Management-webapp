@@ -43,7 +43,7 @@ const ChartsWidget2: React.FC<Props> = ({className, x_axis, y_axis}) => {
       {/* begin::Header */}
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Leaderboard</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Lifecycle</span>
 
           {/* <span className='text-muted fw-semibold fs-7'>More than 500 new orders</span> */}
         </h3>

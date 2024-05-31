@@ -28,8 +28,19 @@ const StatisticsWidget5: React.FC<Props> = ({
   return (
     <a href='#' className={`card  hoverable ${className}`} style={{backgroundColor: color || ''}}>
       <div className='card-body'>
-        {(!img && <KTIcon iconName={svgIcon} className={`text-${iconColor} fs-3x ms-n1`} />) ||
-          null}
+        {/*  {(!img && <KTIcon iconName={svgIcon} className={`text-${iconColor} fs-3x ms-n1`} />) ||
+          null} */}
+        {!img && (
+          <img
+            width={35}
+            height={35}
+            // src={`/media/svg/dashboard/${img}.png`}
+            src={svgIcon}
+            alt='images'
+            className={`text-${iconColor} fs-3x ms-n1`}
+          />
+        )}
+
         {(img && (
           <img
             width={35}

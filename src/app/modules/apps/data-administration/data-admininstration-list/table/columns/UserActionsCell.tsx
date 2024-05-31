@@ -186,7 +186,9 @@ const UserActionsCell: FC<Props> = ({id, allData, action = ['edit']}) => {
         )) ||
           false}
         {(action.includes('qr') &&
-          (id.status === 'Accepted' || pathname.includes('collect-orders')) && (
+          (id.status === 'Accepted' ||
+            pathname.includes('collect-orders') ||
+            pathname.includes('collection-point')) && (
             <a
               onClick={() => setShowQrCode(true)}
               className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'

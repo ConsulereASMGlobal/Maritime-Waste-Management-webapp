@@ -1,17 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect, useState} from 'react'
 import {useIntl} from 'react-intl'
-import {PageTitle} from '../../../_metronic/layout/core'
-import {
-  ChartsWidget1,
-  ChartsWidget2,
-  StatisticsWidget5,
-  TablesWidget10,
-  TablesWidget13,
-} from '../../../_metronic/partials/widgets'
-import MapComponent from '../../modules/apps/data-administration/data-admininstration-list/Map'
 import {useQuery} from 'react-query'
-import {getUserById} from '../../modules/apps/data-administration/data-admininstration-list/core/_requests'
+import {PageTitle} from '../../../../../../_metronic/layout/core'
+import {StatisticsWidget5} from '../../../../../../_metronic/partials/widgets'
+import {getUserById} from '../core/_requests'
 
 const DashboardPage: FC = () => {
   const {data = {}} = useQuery(`admin/dashboard`, () => getUserById('', 'admin/dashboard'), {
@@ -134,35 +127,28 @@ const DashboardPage: FC = () => {
   }, [suppliedTrend])
 
   const numberItems = [
-    {value: 'collected', name: 'Collected', icon: 'Collected', color: '#0F2F97'},
-    {value: 'processed', name: 'Processed', icon: 'Processed', color: '#1034A6'},
-    {value: 'supplied', name: 'Supplied', icon: 'Supplied', color: '#405DB8'},
-    {value: 'stock', name: 'Stock', icon: 'Stock', color: '#5F77C3'},
+    {value: 'collected', name: 'PET', icon: 'Collected', color: '#0F2F97'},
+    {value: 'processed', name: 'PP', icon: 'Processed', color: '#1034A6'},
+    {value: 'supplied', name: 'HDPE', icon: 'Supplied', color: '#405DB8'},
+    {value: 'stock', name: 'LDPE', icon: 'Stock', color: '#5F77C3'},
     {
       value: 'collectionPoints',
-      name: 'Aggregators',
+      name: 'UBC',
       icon: 'Collection Point',
       color: '#5F77C3',
-    },
-    {value: 'wasteDiverters', name: 'Recyclers', icon: 'Waste Diverters', color: '#405DB8'},
-    {value: 'lifeImpacted', name: 'Collection Agents', icon: 'Life impacted', color: '#1034A6'},
-    {
-      value: 'co2Footprint',
-      name: 'CO2 footprint avoided*',
-      icon: 'emission avoided',
-      color: '#0F2F97',
     },
   ]
 
   return (
     <>
       <div className='row g-xl-4' style={{marginBottom: '20px'}}>
+        <div className='font-bold text-lg'>Collected</div>
         {numberItems.map((eachitems, eachIndex) => (
-          <div key={eachIndex + 1 + ''} className='col-xl-3'>
+          <div key={eachIndex + 1 + ''} className='col'>
             <StatisticsWidget5
               className='card-xl-stretch mb-xl-8'
-              // svgIcon={`/media/svg/dashboard/co2.png`}
-              img={eachitems.icon}
+              svgIcon={`/media/location/marker.png`}
+              //   img={eachitems.icon}
               color={eachitems.color || 'warning'}
               iconColor='primary'
               // title={eachitems.value}
@@ -186,95 +172,51 @@ const DashboardPage: FC = () => {
             />
           </div>
         ))}
-        {/* {numberItems.map((eachitems, eachIndex) => (
-          <div key={eachIndex + 1 + ''} className='bgi-no-repeat col col-lg-3'>
-            <div
-              className='d-flex align-items-center rounded p-7 mb-1'
-              style={{
-                backgroundColor: eachitems.color,
-              }}
-            >
-              <span className=' text-success me-5'>
-                <img
-                  src={`/media/svg/dashboard/${eachitems.icon}.png`}
-                  alt=''
-                  width={50}
-                  height={50}
-                />
-              </span>
-              <div className='flex-grow-1 me-2 text-white'>
-                {eachitems.name}
-                <span style={{fontSize: '22px'}} className='text-white fw-semibold d-block'>
-                  {data[eachitems.value]?.toFixed(
-                    ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                      ? 0
-                      : 2
-                  ) || ''}{' '}
-                  {['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                    ? ''
-                    : ' kg'}
-                </span>
-              </div>
-            </div>
+      </div>
+      <div className='row g-xl-4' style={{marginBottom: '20px'}}>
+        <div className='font-bold text-lg'>Supplied</div>
+        {numberItems.map((eachitems, eachIndex) => (
+          <div key={eachIndex + 1 + ''} className='col'>
+            <StatisticsWidget5
+              className='card-xl-stretch mb-xl-8'
+              svgIcon={`/media/location/marker.png`}
+              //   img={eachitems.icon}
+              color={eachitems.color || 'warning'}
+              iconColor='primary'
+              // title={eachitems.value}
+              title={`
+             ${
+               data[eachitems.value]?.toFixed(
+                 ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
+                   ? 0
+                   : 2
+               ) || ''
+             }
+             ${
+               ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
+                 ? ''
+                 : ' kg'
+             }
+           `}
+              // titleColor='primary'
+              description={eachitems.name}
+              // descriptionColor='primary'
+            />
           </div>
-        ))} */}
-      </div>
-      {(mapLocation.length && (
-        <div>
-          <MapComponent data={mapLocation || []} />
-        </div>
-      )) ||
-        null}
-
-      <TablesWidget10 data={cleanUpData} className='mb-5 mb-xl-8' />
-
-      <br />
-      <TablesWidget13 data={dispatchData} className='mb-5 mb-xl-8' />
-
-      <div className='row g-2 g-xl-8'>
-        <div>
-          <ChartsWidget2
-            className='card-xl-stretch mb-xl-8 mt-8'
-            x_axis={leaderBoardXaxisData}
-            y_axis={leaderBoardYaxisData}
-          />
-        </div>
-        <div className=''>
-          <ChartsWidget1
-            data={collectedGraphData?.monthValue}
-            title='Monthly Trend - Collected (Tons)'
-            className='card-xl-stretch mb-xl-8'
-            // subTitle='Highest daily avg Fisherman collector'
-          />
-        </div>
-        <div className=''>
-          <ChartsWidget1
-            title='Monthly Trend - Processed (Tons)'
-            className='card-xl-stretch mb-xl-8'
-            // subTitle='Highest daily avg community collector'
-          />
-        </div>
-      </div>
-      <div className=''>
-        <ChartsWidget1
-          data={suppliedGraphData?.monthValue}
-          title='Monthly Trend - Supplied (Tons)'
-          className='card-xl-stretch mb-xl-8'
-          // subTitle='Highest daily avg community collector'
-        />
+        ))}
       </div>
     </>
   )
 }
 
-const DashboardWrapper: FC = () => {
+const MassBalanceWrapper: FC = () => {
   const intl = useIntl()
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
+      <PageTitle breadcrumbs={[]}>Mass Balance</PageTitle>
       <DashboardPage />
     </>
   )
 }
 
-export {DashboardWrapper}
+export {MassBalanceWrapper}

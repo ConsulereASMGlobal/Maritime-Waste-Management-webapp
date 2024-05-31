@@ -49,7 +49,7 @@ const header = [
   },
 
   {
-    action: ['edit', 'toggle'],
+    action: ['edit', 'toggle', 'qr'],
   },
 ]
 
