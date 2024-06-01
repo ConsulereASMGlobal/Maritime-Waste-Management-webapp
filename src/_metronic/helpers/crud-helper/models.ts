@@ -8,6 +8,7 @@ export type PaginationState = {
   size: any
   // perPage: 10 | 30 | 50 | 100
   type?: string
+  category?: string
   initialApi?: string
   enabled?: boolean
   totalPages?: any

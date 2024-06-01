@@ -11,7 +11,6 @@ type Props = {
 }
 
 const MixedWidget1: React.FC<Props> = ({data, className, color, bg_color}) => {
-  console.log({bg_color})
   const returnData = (amount) => {
     return (
       <div className='d-flex align-items-center'>

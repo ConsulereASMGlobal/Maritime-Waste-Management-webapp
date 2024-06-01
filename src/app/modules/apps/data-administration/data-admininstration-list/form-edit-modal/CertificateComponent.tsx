@@ -219,12 +219,12 @@ const CertificateComponent = ({data, passRef}) => {
               <span className='fw-bolder  text-dark'>{displayData.id || ''}</span>
             </div>
           </div>
-          <div className='col-3' style={{marginTop: '-20px'}}>
+          <div className='col-3' style={{marginTop: '10px'}}>
             <img
               width={180}
               height={100}
               style={{backgroundColor: '#FFFFFF'}}
-              src={toAbsoluteUrl('/media/logos/certificate.png')}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
               alt='main-logo'
             />
           </div>

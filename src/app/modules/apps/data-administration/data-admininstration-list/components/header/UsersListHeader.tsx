@@ -8,6 +8,7 @@ interface userProps {
   placeholder?: string
   searchElements?: any
   showResetButton?: boolean
+  removePadding?: boolean
 }
 
 const UsersListHeader = ({
@@ -15,9 +16,10 @@ const UsersListHeader = ({
   showResetButton = false,
   placeholder,
   searchElements = [],
+  removePadding = false,
 }: userProps) => {
   return (
-    <div className='card-header border-0 pt-6'>
+    <div className={`card-header border-0  ${removePadding ? '' : 'pt-6'}`}>
       <UsersListSearchComponent
         showResetButton={showResetButton}
         searchElements={searchElements}

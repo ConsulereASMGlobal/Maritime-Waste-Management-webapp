@@ -5,17 +5,16 @@ import {useQuery} from 'react-query'
 import {PageTitle} from '../../../../../../_metronic/layout/core'
 import {StatisticsWidget5} from '../../../../../../_metronic/partials/widgets'
 import {getUserById} from '../core/_requests'
+import {QueryRequestProvider, useQueryRequest} from '../core/QueryRequestProvider'
+import {initialQueryState} from '../../../../../../_metronic/helpers'
+import {UsersListHeader} from '../components/header/UsersListHeader'
+import {QueryResponseProvider} from '../core/QueryResponseProvider'
+import {ListViewProvider} from '../core/ListViewProvider'
 
 const DashboardPage: FC = () => {
-  const {data = {}} = useQuery(`admin/dashboard`, () => getUserById('', 'admin/dashboard'), {
-    cacheTime: 0,
-    onError: (err) => {
-      console.warn(err)
-    },
-  })
-  const {data: analyticsData = {}} = useQuery(
-    `admin/pickupPoints/analytics`,
-    () => getUserById('', 'admin/pickupPoints/analytics'),
+  const {data = {}} = useQuery(
+    `aggregator`,
+    () => getUserById('', 'users?page=1&size=10&type=PICKUP_POINT'),
     {
       cacheTime: 0,
       onError: (err) => {
@@ -23,108 +22,23 @@ const DashboardPage: FC = () => {
       },
     }
   )
+  const {updateState} = useQueryRequest()
 
-  const {data: cleanUpData = {}} = useQuery(
-    `collect/orders?page=1&size=10`,
-    () => getUserById('', 'collect/orders?page=1&size=10'),
-    {
-      cacheTime: 0,
-      onError: (err) => {
-        console.warn(err)
-      },
-    }
-  )
-
-  const {data: dispatchData = {}} = useQuery(
-    `return/orders?page=1&size=10`,
-    () => getUserById('', 'return/orders?page=1&size=10'),
-    {
-      cacheTime: 0,
-      onError: (err) => {
-        console.warn(err)
-      },
-    }
-  )
-
-  const [leaderBoardXaxisData, setleaderBoardXaxisData] = useState([])
-  const [leaderBoardYaxisData, setleaderBoardYaxisData] = useState([])
-
+  const [categoriesList, setCategoriesList] = useState([{label: 'Select One', value: ''}])
   useEffect(() => {
-    if (analyticsData.length) {
-      const transformedData: any = []
-
-      const properties = Object.keys(analyticsData[0]).filter(
-        (key) =>
-          key !== 'pickupPointId' && key !== 'pickupPointName' && key !== 'pickupPointAddress'
-      )
-
-      properties.forEach((property) => {
-        const dataValues = analyticsData.map((obj) => parseFloat(obj[property].toFixed(2)))
-        transformedData.push({
-          name: property,
-          data: dataValues,
-        })
+    if (data && data.length) {
+      let dropdownData: any = []
+      data.map((eachData) => {
+        return dropdownData.push({label: eachData?.personalDetails?.name, value: eachData.id})
       })
-      const collectionPointName = analyticsData.map((obj) => obj.pickupPointName)
-      setleaderBoardXaxisData(collectionPointName)
-      setleaderBoardYaxisData(transformedData)
-    }
-  }, [analyticsData])
-
-  const [mapLocation, setMapLocation] = useState([])
-
-  const {pickupPoints, collectTrend, suppliedTrend} = data
-
-  useEffect(() => {
-    if (pickupPoints) {
-      const modifyData = pickupPoints.map((x) => {
-        return {
-          position: {
-            lat: x.latitude,
-            lng: x.longitude,
-          },
-          name: x.name,
-        }
+      setCategoriesList(dropdownData)
+      updateState({
+        enabled: true,
+        initialApi: `stock?category=${dropdownData[0].value}`,
+        ...initialQueryState,
       })
-      setMapLocation(modifyData)
     }
-  }, [pickupPoints])
-
-  const mapDate = [
-    `${new Date().getFullYear()}-01`,
-    `${new Date().getFullYear()}-02`,
-    `${new Date().getFullYear()}-03`,
-    `${new Date().getFullYear()}-04`,
-    `${new Date().getFullYear()}-05`,
-    `${new Date().getFullYear()}-06`,
-    `${new Date().getFullYear()}-07`,
-    `${new Date().getFullYear()}-08`,
-    `${new Date().getFullYear()}-09`,
-    `${new Date().getFullYear()}-10`,
-    `${new Date().getFullYear()}-11`,
-    `${new Date().getFullYear()}-12`,
-  ]
-  const [collectedGraphData, setCollectedGraphData] = useState<any>({})
-  const [suppliedGraphData, setSuppliedGraphData] = useState<any>({})
-
-  const updateGraphData = (trendData, setGraphData, graphData) => {
-    if (trendData && Object.keys(trendData)?.length > 0) {
-      const test = mapDate.map(
-        (x) => (trendData[x] && (trendData?.[x] / 1000)?.toFixed(2)) || '0.00'
-      )
-      setGraphData({...graphData, monthValue: test})
-    }
-  }
-
-  useEffect(() => {
-    updateGraphData(collectTrend, setCollectedGraphData, collectedGraphData)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collectTrend])
-
-  useEffect(() => {
-    updateGraphData(suppliedTrend, setSuppliedGraphData, suppliedGraphData)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [suppliedTrend])
+  }, [data])
 
   const numberItems = [
     {value: 'collected', name: 'PET', icon: 'Collected', color: '#0F2F97'},
@@ -138,11 +52,29 @@ const DashboardPage: FC = () => {
       color: '#5F77C3',
     },
   ]
-
+  const searchElements = [
+    {
+      /*   type: 'select',
+      value: 'select',
+      options: categoriesList, */
+      type: 'select',
+      // value: 'select',
+      options: categoriesList,
+      name: 'status',
+    },
+  ]
   return (
     <>
-      <div className='row g-xl-4' style={{marginBottom: '20px'}}>
+      <div className='row g-xl-4'>
         <div className='font-bold text-lg'>Collected</div>
+        <div>
+          <UsersListHeader
+            removePadding={true}
+            searchElements={searchElements}
+            placeholder='Search Brand'
+            label=''
+          />
+        </div>
         {numberItems.map((eachitems, eachIndex) => (
           <div key={eachIndex + 1 + ''} className='col'>
             <StatisticsWidget5
@@ -214,6 +146,14 @@ const MassBalanceWrapper: FC = () => {
   return (
     <>
       <PageTitle breadcrumbs={[]}>Mass Balance</PageTitle>
+      {/* < */}
+      <QueryRequestProvider initialValue={{enabled: false}}>
+        <QueryResponseProvider>
+          <ListViewProvider>
+            <DashboardPage />
+          </ListViewProvider>
+        </QueryResponseProvider>
+      </QueryRequestProvider>
       <DashboardPage />
     </>
   )

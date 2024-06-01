@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {Button} from 'react-bootstrap'
 import {UsersListToolbar} from './UserListToolbar'
+import {useLocation} from 'react-router-dom'
 
 const UsersListSearchComponent = ({
   placeholder = 'Search user',
@@ -28,7 +29,6 @@ const UsersListSearchComponent = ({
   // )
 
   const handleChange = (name: string, value: string) => {
-    console.log({name, value})
     setSearchQueryData({...searchQueryData, [name]: value})
   }
 
@@ -40,13 +40,11 @@ const UsersListSearchComponent = ({
   }
 
   const handleSearchFilter = () => {
-    console.log('presses', searchQueryData.status)
     updateState({
       ...initialQueryState,
       ...searchQueryData,
     })
   }
-
   const renderSearch = () => {
     return searchElements.map((eachSearch: any, eachIndex: number) => {
       switch (eachSearch.type) {
@@ -92,17 +90,18 @@ const UsersListSearchComponent = ({
                   showResetButton
                     ? handleChange(eachSearch.name, e.target.value)
                     : updateState({
-                        type: e.target.value,
-                        initialApi: `categories/${e.target.value}/${
-                          eachSearch?.queryType || 'items'
-                        }`,
+                        [location.pathname.includes('mass-balance') ? 'category' : 'type']:
+                          e.target.value,
+                        initialApi: location.pathname.includes('mass-balance')
+                          ? `stock`
+                          : `categories/${e.target.value}/${eachSearch?.queryType || 'items'}`,
                         ...initialQueryState,
                       })
                 }
                 value={
                   showResetButton
-                    ? searchQueryData[eachSearch.name] || ''
-                    : '63f77b6c7dc37d521ee98400'
+                    ? searchQueryData[eachSearch.name]
+                    : searchQueryData[eachSearch.name]
                 }
               >
                 {eachSearch.options.map((eachOption, eachInd) => (
@@ -118,9 +117,15 @@ const UsersListSearchComponent = ({
       }
     })
   }
+  const location = useLocation()
+
   return (
     <>
-      <div className='grid grid-cols-4 gap-3 my-2'>
+      <div
+        className={`grid grid-cols-4 gap-3 ${
+          location.pathname.includes('mass-balance') ? '-mt-4' : 'my-2'
+        }`}
+      >
         {(searchElements.length > 0 && (
           <>
             {renderSearch()}
