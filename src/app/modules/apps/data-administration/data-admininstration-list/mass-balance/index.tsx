@@ -105,38 +105,6 @@ const DashboardPage: FC = () => {
           </div>
         ))}
       </div>
-      <div className='row g-xl-4' style={{marginBottom: '20px'}}>
-        <div className='font-bold text-lg'>Supplied</div>
-        {numberItems.map((eachitems, eachIndex) => (
-          <div key={eachIndex + 1 + ''} className='col'>
-            <StatisticsWidget5
-              className='card-xl-stretch mb-xl-8'
-              svgIcon={`/media/location/marker.png`}
-              //   img={eachitems.icon}
-              color={eachitems.color || 'warning'}
-              iconColor='primary'
-              // title={eachitems.value}
-              title={`
-             ${
-               data[eachitems.value]?.toFixed(
-                 ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                   ? 0
-                   : 2
-               ) || ''
-             }
-             ${
-               ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                 ? ''
-                 : ' kg'
-             }
-           `}
-              // titleColor='primary'
-              description={eachitems.name}
-              // descriptionColor='primary'
-            />
-          </div>
-        ))}
-      </div>
     </>
   )
 }
@@ -154,7 +122,6 @@ const MassBalanceWrapper: FC = () => {
           </ListViewProvider>
         </QueryResponseProvider>
       </QueryRequestProvider>
-      <DashboardPage />
     </>
   )
 }

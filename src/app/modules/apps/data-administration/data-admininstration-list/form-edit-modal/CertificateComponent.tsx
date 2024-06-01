@@ -143,15 +143,14 @@ const CertificateComponent = ({data, passRef}) => {
   ]
 
   const lastSection = [
-    {label: 'Company Name', value: 'Evergreen Labs Philippines Consulting Inc'},
+    {label: 'Company Name', value: 'Malaysian Recycling Alliance Berhad (MAREA)'},
     {
       label: 'Regd Address',
-      value:
-        '6th Floor, One Ayala Avenue, Tower 2, Ayala Avenue, Ayala Center, San Lorenzo, City of Makati, Fourth District, National Capital Region (NCR), Philippines, 1223',
+      value: '1, Jln PJU 7/3, Mutiara Damansara, 47820 Petaling Jaya, Selangor, Malaysia',
     },
     // {label: 'Contact', value: '+63 (44) 761-8085'},
-    {label: 'Email', value: 'erica@evergreenlabs.com'},
-    {label: 'Website', value: 'www.extendresources.network'},
+    {label: 'Email', value: 'info@marea.com.my'},
+    {label: 'Website', value: 'https://www.marea.com.my'},
     // {label: 'VAT Registration Number', value: '-'},
     // {label: 'SEC Number', value: '-'},
   ]
@@ -166,13 +165,17 @@ const CertificateComponent = ({data, passRef}) => {
   }
   const collectorDetails = [
     {
-      label: 'Collection Point',
+      label: 'Business Name',
       value: displayData?.dropOffPointInfo?.name || '',
     },
-    /* {
+    {
       label: 'Address',
       value: addressArray.join() || '',
-    }, */
+    },
+    {
+      label: 'Payment Mode',
+      value: displayData.paymentMode || '',
+    },
     // {label: 'Payment Mode', value: displayData.paymentMode},
     // {
     //   label: 'Total Payment in word',
@@ -256,7 +259,7 @@ const CertificateComponent = ({data, passRef}) => {
               // padding: '10px',
             }}
           >
-            {isReturnOrdersPage ? 'Suppliers Details' : ' Depositor Details'}
+            {isReturnOrdersPage ? 'Suppliers Details' : ' Collection Agent'}
           </div>
           <div className='row'>
             <div className='col-9'>
@@ -451,7 +454,7 @@ const CertificateComponent = ({data, passRef}) => {
                     }}
                   >
                     {' '}
-                    Collector Details
+                    Aggregator Details
                   </div>
                   <div className='row'>
                     <div className='col-11'>
@@ -468,10 +471,10 @@ const CertificateComponent = ({data, passRef}) => {
                     </div>
                   </div>
 
-                  <div>
+                  {/* <div>
                     <div style={{fontSize: '18px', fontWeight: 'bold'}}>Signature</div>
                     <img width={100} height={100} src={displayData.sign} alt='images' />
-                  </div>
+                  </div> */}
                 </div>
                 <div className='col-3'>
                   {(displayData.images?.length && (
@@ -539,10 +542,7 @@ const CertificateComponent = ({data, passRef}) => {
             </div>
             <div className='text-center'>
               <div>This is not a tax invoice.</div>
-              <div>
-                This is computer generated document, no signature is required. The material type
-                information is as per RA 11898
-              </div>
+              <div>This is computer generated document, no signature is required.</div>
               <div></div>
               {/* This is a computer-generated document. No signature is required */}
             </div>
