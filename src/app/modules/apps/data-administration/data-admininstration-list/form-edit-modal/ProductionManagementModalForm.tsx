@@ -75,8 +75,9 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             <img
               width={'34%'}
               alt='images'
-              className='absolute z-[1] pl-2 '
-              src='/media/logos/sidebar-logo.svg'
+              className='absolute z-[1] pl-6 mt-6'
+              // src='/media/logos/sidebar-logo.svg'
+              src='/media/logos/sidebar-logo.jpeg'
             />
             <img
               alt='images'
@@ -152,7 +153,7 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           </div>
         </div>
 
-        <div className='my-3 px-[32px]'>
+        {/*  <div className='my-3 px-[32px]'>
           <table>
             <tr className='bg-black text-white'>
               <th className='px-3 py-2 rounded-tl-md'>KPI</th>
@@ -176,7 +177,7 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               <td className='px-3 py-[10px]'>{data.inputQuantity / data.operatingHours || 0}</td>
             </tr>
           </table>
-        </div>
+        </div> */}
 
         <footer className="mt-8 min-h-[60px] bg-[url('/media/books/footer_bg.png')] bg-no-repeat bg-auto relative h-full">
           <img alt='images' src='/media/books/logo_2nd.png' className='pl-[32px] pt-8' />
