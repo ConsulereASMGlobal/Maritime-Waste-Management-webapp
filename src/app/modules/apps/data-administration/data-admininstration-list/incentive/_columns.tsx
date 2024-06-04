@@ -31,12 +31,12 @@ const header = [
     label: 'End Date',
     value: '-',
   },
-  {
+  /*  {
     action: ['view_certificate'],
+  }, */
+  {
+    action: ['edit'],
   },
-  // {
-  //   action: ['edit', 'toggle'],
-  // },
 ]
 
 const roleColumns: ReadonlyArray<Column<any>> = columnGenerators(header)

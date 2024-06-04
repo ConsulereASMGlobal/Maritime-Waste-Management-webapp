@@ -12,52 +12,6 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
   const data = itemIdForUpdate
   console.log({data})
-  const firstForm = [
-    {label: 'Date', value: new Date(+data?.createdAt || new Date()).toLocaleDateString()},
-    {label: 'Shift', value: data.shiftName},
-    {
-      label: 'Address',
-      value:
-        (data?.hubInfo?.address?.city || '') +
-        ((data?.hubInfo?.address?.city && ', ') || '') +
-        (data.hubInfo?.address?.country || ''),
-    } || '',
-    {label: 'Process Name', value: data.processName},
-    {label: 'Plant Name', value: data.hubName},
-    {label: 'Reported By', value: data?.receiverInfo?.name},
-  ]
-
-  const secondForm = [
-    {label: 'Input Material', value: data.inputMaterialName},
-    {label: 'Quantity (KG)', value: data.inputQuantity},
-  ]
-
-  const headerOne = [
-    'KPI',
-    'Team Size',
-    'Operating Hour',
-    'Manpower Productivity',
-    'Sorting Efficiency',
-  ]
-
-  const headerTwo = ['UOM', 'NOS', 'Hrs', 'Kg/ Person', 'Kg/ Hour']
-
-  const commonFunction = (mapData, paddingRight = '') => {
-    return (
-      <div>
-        <table className='table table-hover table-rounded table-striped border  table-bordered'>
-          <tbody>
-            {mapData.map((each, ind) => (
-              <tr key={ind + 1 + ''}>
-                <td className='fw-bold'>{each.label}</td>
-                <td style={{...(paddingRight && {paddingRight})}}>{each.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
 
   return (
     <div>

@@ -28,9 +28,10 @@ const UsersList = () => {
         showResetButton={true}
         searchElements={searchElements}
         placeholder='Search Category'
+        label='Add New'
       />
       <UsersTable columnProps={roleColumns} />
-      <UserEditModal headerName='Report' formName='ProductionManagementModalForm' />
+      <UserEditModal headerName='Report' formName='IncentiveModalForm' />
       {/* <UserEditModal formName='ShiftGasStationModalForm' /> */}
     </KTCard>
   )
