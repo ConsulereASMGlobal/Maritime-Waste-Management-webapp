@@ -19,6 +19,7 @@ import {errorToast, successToast} from '../../../../../../_metronic/helpers/comp
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Select from 'react-select'
+import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
 
 type Props = {
   isUserLoading: boolean
@@ -37,6 +38,10 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
   const [initialQuery, setInitialQuery] = useState<any>('clients/101212/categories')
+  const {responseData} = useFetchCommon({
+    api: 'users?type=PICKUP_POINT',
+    label: ['personalDetails', 'name'],
+  })
 
   const [userForEdit] = useState<any>({
     ...user,
@@ -266,7 +271,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>{' '}
         <div className='fv-row mb-7'>
           <label className='fw-bold fs-6 mb-2'>Aggregator</label>
-          {multiSelect('facilityStaff', [], selectedOutCategoryDropdown)}
+          {multiSelect('facilityStaff', responseData, selectedOutCategoryDropdown)}
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Start Date</label>

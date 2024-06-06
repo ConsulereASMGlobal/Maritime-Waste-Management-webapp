@@ -21,6 +21,7 @@ import {getUserById} from '../core/_requests'
 import {errorToast, successToast} from '../../../../../../_metronic/helpers/components/Toaster'
 import PasswordFormField from '../../../../accounts/components/settings/cards/PasswordFiledForm'
 import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
+import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
 
 type Props = {
   isUserLoading: boolean
@@ -92,35 +93,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
   })
 
-  // const [assignHubPlastic, setAssignHubPlastic] = useState([])
-  // const [isEnabled, setIsEnabled] = useState(true)
-
-  // const {data: response} = useQuery(
-  //   'process',
-  //   () => getUserById(null, 'users?page=1&size=10&type=SMART_CENTRE'),
-  //   {
-  //     cacheTime: 0,
-  //     onError: (err) => {
-  //       setItemIdForUpdate(undefined)
-  //       console.error(err)
-  //     },
-  //     enabled: isEnabled, // Set this to true to run the query once
-  //   }
-  // )
-
-  // useEffect(() => {
-  //   if (response?.length) {
-  //     setIsEnabled(false)
-  //     console.log({user, response})
-  //     const tempAllCategories = response.map((eachRes) => {
-  //       return {
-  //         label: eachRes?.companyDetails?.name || '',
-  //         value: eachRes.id,
-  //       }
-  //     })
-  //     setAssignHubPlastic(tempAllCategories)
-  //   }
-  // }, [response])
+  const {responseData} = useFetchCommon({api: 'banks'})
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
@@ -453,28 +426,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
-          <input
-            placeholder='Enter Bank Name'
-            {...formik.getFieldProps('bankName')}
-            type='text'
-            name='bankName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.bankName && formik.errors.bankName},
-              {
-                'is-valid': formik.touched.bankName && !formik.errors.bankName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.bankName && formik.errors.bankName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.bankName}</span>
-              </div>
-            </div>
-          )}
+          {makeSelectDropDown('bankName', responseData)}
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Account Number</label>

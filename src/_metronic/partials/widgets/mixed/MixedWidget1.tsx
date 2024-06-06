@@ -36,7 +36,7 @@ const MixedWidget1: React.FC<Props> = ({data, className, color, bg_color}) => {
         >
           <div className=''>
             <h4 className='m-0 text-white text-center fw-bold fs-3'>
-              {data?.pickupPointName.length > 35
+              {data?.pickupPointName?.length > 35
                 ? data?.pickupPointName.slice(0, 35) + '...'
                 : data.pickupPointName}
             </h4>

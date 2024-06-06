@@ -213,15 +213,19 @@ const UserInfoCell: FC<Props> = ({
         ))
       case 'status':
         const statusData = user?.[mapData] || user?.personalDetails?.[mapData]
-        switch (statusData) {
-          case 'quantityDeposit':
+        switch (statusData?.toLowerCase()) {
+          case 'quantitydeposit':
             return <span className='text-primary fs-7 fw-bold'>+28%</span>
-          case 'Pickup Completed':
-          case 'Completed':
+          case 'pickup completed':
+          case 'completed':
             return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
-          case 'Accepted':
+          case 'accepted':
             return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
-          case 'Pickup Assigned':
+          case 'created':
+            return <span className='badge badge-light-warning fs-7 fw-bold'>{statusData}</span>
+          case 'rejected':
+            return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
+          case 'pickup assigned':
             return <span className='badge badge-light-primary fs-7 fw-bold'>{statusData}</span>
 
           default:
