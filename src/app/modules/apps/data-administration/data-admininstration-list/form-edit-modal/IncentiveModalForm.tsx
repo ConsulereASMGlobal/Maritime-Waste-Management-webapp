@@ -42,6 +42,10 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     api: 'users?type=PICKUP_POINT',
     label: ['personalDetails', 'name'],
   })
+  const {
+    responseData: {priceList},
+  } = useFetchCommon({api: `categories/6642be5039621936773edc77/price`})
+  console.log({priceList: priceList})
 
   const [userForEdit] = useState<any>({
     ...user,

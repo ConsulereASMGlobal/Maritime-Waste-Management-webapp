@@ -94,7 +94,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   })
 
   const {responseData} = useFetchCommon({api: 'banks'})
-
+  console.log({responseData}, 'recyling')
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
       refetch()

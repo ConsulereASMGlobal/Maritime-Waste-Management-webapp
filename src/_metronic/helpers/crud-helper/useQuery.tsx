@@ -3,7 +3,7 @@ import {useQuery} from 'react-query'
 import {getUserById} from '../../../app/modules/apps/data-administration/data-admininstration-list/core/_requests'
 
 export function useFetchCommon({isEnabled = true, api, isDropDown = true, label}: any) {
-  const campaignListInfo = useQuery('process', () => getUserById(null, api), {
+  const campaignListInfo = useQuery(api, () => getUserById(null, api), {
     cacheTime: 0,
     onError: (err) => {
       // setItemIdForUpdate(undefined)
@@ -11,7 +11,7 @@ export function useFetchCommon({isEnabled = true, api, isDropDown = true, label}
     },
     enabled: isEnabled,
   })
-
+  console.log({campaignListInfo})
   const {responseData} = useMemo(() => {
     let responseData: any = campaignListInfo?.data || []
     if (isDropDown && responseData.length) {

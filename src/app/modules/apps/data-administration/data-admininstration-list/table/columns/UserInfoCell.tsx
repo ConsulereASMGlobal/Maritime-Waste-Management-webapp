@@ -218,9 +218,9 @@ const UserInfoCell: FC<Props> = ({
             return <span className='text-primary fs-7 fw-bold'>+28%</span>
           case 'pickup completed':
           case 'completed':
-            return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
           case 'accepted':
-            return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
+            return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
+          // return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
           case 'created':
             return <span className='badge badge-light-warning fs-7 fw-bold'>{statusData}</span>
           case 'rejected':

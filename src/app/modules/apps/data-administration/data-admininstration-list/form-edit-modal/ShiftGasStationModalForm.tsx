@@ -22,6 +22,7 @@ import {errorToast, successToast} from '../../../../../../_metronic/helpers/comp
 import PasswordFormField from '../../../../accounts/components/settings/cards/PasswordFiledForm'
 import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
 import {useAuth} from '../../../../auth'
+import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
 
 type Props = {
   isUserLoading: boolean
@@ -115,7 +116,6 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   useEffect(() => {
     if (response?.length) {
       setIsEnabled(false)
-      console.log({user, response})
       const tempAllCategories = response.map((eachRes) => {
         return {
           label: eachRes?.companyDetails?.name || '',
@@ -126,6 +126,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     }
   }, [response])
 
+  const {responseData} = useFetchCommon({api: 'banks'})
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
       refetch()
@@ -458,28 +459,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
-          <input
-            placeholder='Enter Bank Name'
-            {...formik.getFieldProps('bankName')}
-            type='text'
-            name='bankName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.bankName && formik.errors.bankName},
-              {
-                'is-valid': formik.touched.bankName && !formik.errors.bankName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.bankName && formik.errors.bankName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.bankName}</span>
-              </div>
-            </div>
-          )}
+          {makeSelectDropDown('bankName', responseData)}
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Account Number</label>

@@ -66,7 +66,7 @@ const TablesWidget13: React.FC<Props> = ({className, data = []}) => {
                           </div> */}
                           <div className='d-flex justify-content-start flex-column'>
                             <a href='#' className='text-dark text-hover-primary fs-6'>
-                              {eachData?.dropOffPointInfo?.name}
+                              {eachData?.pickupInfo?.name}
                             </a>
                             {/* <span className='text-muted fw-semibold text-muted d-block fs-7'>
                               {eachData?.customerInfo?.address?.country}
@@ -76,12 +76,13 @@ const TablesWidget13: React.FC<Props> = ({className, data = []}) => {
                       </td>
                       <td>
                         <a href='#' className='text-success text-hover-primary d-block fs-6'>
-                          {eachData?.dropOffPointInfo?.address?.street}
+                          {eachData?.pickupInfo?.address?.street} ,{' '}
+                          {eachData?.pickupInfo?.address?.city}
                         </a>
                       </td>
                       <td>
                         <a href='#' className='text-dark text-hover-primary d-block fs-6'>
-                          {eachData?.customerInfo?.name}
+                          {eachData?.centreInfo?.name}
                         </a>
                       </td>
                       <td>
