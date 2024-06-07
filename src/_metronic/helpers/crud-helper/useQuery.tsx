@@ -11,13 +11,12 @@ export function useFetchCommon({isEnabled = true, api, isDropDown = true, label}
     },
     enabled: isEnabled,
   })
-  console.log({campaignListInfo})
   const {responseData} = useMemo(() => {
     let responseData: any = campaignListInfo?.data || []
     if (isDropDown && responseData.length) {
       responseData = responseData.map((eachRes) => {
         let labelValue = eachRes
-        if (label) {
+        if (label?.length) {
           label.forEach((property) => {
             if (labelValue && typeof labelValue === 'object') {
               labelValue = labelValue[property]
@@ -27,7 +26,7 @@ export function useFetchCommon({isEnabled = true, api, isDropDown = true, label}
           })
         }
         return {
-          label: (label ? labelValue : eachRes?.name) || '',
+          label: (label.length ? labelValue : eachRes?.name) || '',
           value: eachRes.id,
         }
       })

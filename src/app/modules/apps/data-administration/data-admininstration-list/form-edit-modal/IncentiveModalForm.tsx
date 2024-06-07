@@ -42,10 +42,6 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     api: 'users?type=PICKUP_POINT',
     label: ['personalDetails', 'name'],
   })
-  const {
-    responseData: {priceList},
-  } = useFetchCommon({api: `categories/6642be5039621936773edc77/price`})
-  console.log({priceList: priceList})
 
   const [userForEdit] = useState<any>({
     ...user,
@@ -109,6 +105,22 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     },
   })
 
+  const {responseData: priceList} = useFetchCommon({
+    api: `categories/${formik?.values?.categoryId}/price`,
+    isEnabled: formik?.values?.categoryId ? true : false,
+    // label: ['price'],
+    isDropDown: false,
+  })
+
+  useEffect(() => {
+    if (priceList.length) {
+      const filterData = priceList.filter((x) => x.itemId === formik?.values?.itemId)
+      if (filterData.length) {
+        formik.setFieldValue('unit', filterData[0]?.price)
+      }
+    }
+  }, [priceList, formik?.values?.itemId])
+
   useEffect(() => {
     if (response && initialQuery === 'clients/101212/categories') {
       const tempAllCategories = response.map((eachRes) => {
@@ -136,10 +148,8 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       setItemList(tempAllItems)
     }
   }, [response])
-  // console.log({itemList, categoryList, userForEdit, user})
 
   const handleSelect = (e) => {
-    console.log('handle change', e.target.value, e.target.name)
     formik.setFieldValue('categoryId', e.target.value)
     formik.setFieldValue('itemId', '')
     setInitialQuery(`categories/${e.target.value}/items`)
@@ -239,7 +249,21 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Base Price</label>
-          {makeSelectDropDown('unit', unitListItem)}
+          <input
+            placeholder='Add Incentive'
+            {...formik.getFieldProps('unit')}
+            type='number'
+            name='unit'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.unit && formik.errors.unit},
+              {
+                'is-valid': formik.touched.unit && !formik.errors.unit,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
           {formik.touched.unit && formik.errors.unit && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
