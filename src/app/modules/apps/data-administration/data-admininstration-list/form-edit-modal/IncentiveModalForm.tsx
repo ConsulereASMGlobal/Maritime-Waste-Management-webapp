@@ -25,13 +25,24 @@ type Props = {
   isUserLoading: boolean
   user?: any
 }
+/* 
+ "name": "Deal Name",
+    "itemId": "",
+    "itemName": "",
+    "pickupointId": "",
+    "pickupointName": "",
+    "start": 33333333333,
+    "end": 111111111111,
+    "dealPrice": 20,
+    "status": "ACTIVE"
+*/
 
 const editUserSchema = Yup.object().shape({
-  price: Yup.number().required('Price is required'),
+  /*  price: Yup.number().required('Price is required'),
   currency: Yup.string().required('Currency is required'),
   categoryId: Yup.string().required('Category is required'),
   itemId: Yup.string().required('Item is required'),
-  unit: Yup.string().required('Base Price is required'),
+  unit: Yup.string().required('Base Price is required'), */
 })
 
 const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
@@ -46,13 +57,11 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const [userForEdit] = useState<any>({
     ...user,
     price: user.price || '',
-    currency: user.currency || '',
     categoryId: user.categoryId || '',
     itemId: user.itemId || '',
     unit: user.unit || '',
-    date: user.date || '',
-    start_date: user.start_date || '',
-    end_date: user.end_date || '',
+    start: user.start || '',
+    end: user.end || '',
     incentive: user.incentive || '',
   })
 
@@ -84,15 +93,18 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       try {
+        const payload = {
+          ...values,
+          status: 'ACTIVE',
+          aggregator: selectedOutCategoryDropdown,
+        }
         if (isNotEmpty(values.id)) {
-          await updateUser(
-            {...values, date: new Date(values.date).toLocaleDateString()},
-            `prices/${values.id}`
-          )
+          await updateUser(payload, `deals/${values.id}/update`)
           successToast('Modified')
           cancel(true)
         } else {
-          await createUser({...values, date: new Date(values.date).toLocaleDateString()}, 'price')
+          console.log({payload, selectedOutCategoryDropdown})
+          await createUser(payload, 'deal')
           successToast('Added')
           cancel(true)
         }
@@ -250,6 +262,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Base Price</label>
           <input
+            readOnly
             placeholder='Add Incentive'
             {...formik.getFieldProps('unit')}
             type='number'
@@ -301,31 +314,29 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           <label className='fw-bold fs-6 mb-2'>Aggregator</label>
           {multiSelect('facilityStaff', responseData, selectedOutCategoryDropdown)}
         </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Start Date</label>
-          <br />
-          <DatePicker
-            placeholderText={`Select Date`}
-            className='form-control form-control-solid '
-            selected={
-              (formik?.values?.start_date && new Date(formik?.values?.start_date || null)) || null
-            }
-            // onChange={(date) => handleChange(eachSearch.name, new Date(date).toLocaleDateString())}
-            onChange={(date) => formik.setFieldValue('start_date', new Date(date))}
-          />
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>End Date</label>
-          <br />
-          <DatePicker
-            placeholderText={`Select Date`}
-            className='form-control form-control-solid '
-            selected={
-              (formik?.values?.end_date && new Date(formik?.values?.end_date || null)) || null
-            }
-            // onChange={(date) => handleChange(eachSearch.name, new Date(date).toLocaleDateString())}
-            onChange={(date) => formik.setFieldValue('end_date', new Date(date))}
-          />
+        <div className='grid grid-cols-2 gap-2'>
+          <div>
+            <label className='required fw-bold fs-6 mb-2'>Start Date</label>
+            <br />
+            <DatePicker
+              placeholderText={`Select Date`}
+              className='form-control form-control-solid '
+              selected={(formik?.values?.start && new Date(formik?.values?.start || null)) || null}
+              // onChange={(date) => handleChange(eachSearch.name, new Date(date).toLocaleDateString())}
+              onChange={(date) => formik.setFieldValue('start', new Date(date))}
+            />
+          </div>
+          <div>
+            <label className='required fw-bold fs-6 mb-2'>End Date</label>
+            <br />
+            <DatePicker
+              placeholderText={`Select Date`}
+              className='form-control form-control-solid '
+              selected={(formik?.values?.end && new Date(formik?.values?.end || null)) || null}
+              // onChange={(date) => handleChange(eachSearch.name, new Date(date).toLocaleDateString())}
+              onChange={(date) => formik.setFieldValue('end', new Date(date))}
+            />
+          </div>
         </div>
         <div className='text-center pt-15'>
           <button

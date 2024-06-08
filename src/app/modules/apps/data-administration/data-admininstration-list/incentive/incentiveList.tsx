@@ -38,7 +38,7 @@ const UsersList = () => {
 }
 
 const IncentiveList = () => (
-  <QueryRequestProvider initialValue={{initialApi: 'productions'}}>
+  <QueryRequestProvider initialValue={{initialApi: 'deals'}}>
     <QueryResponseProvider>
       <ListViewProvider>
         <UsersList />

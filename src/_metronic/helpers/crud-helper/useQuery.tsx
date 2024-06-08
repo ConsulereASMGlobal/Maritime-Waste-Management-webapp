@@ -26,7 +26,7 @@ export function useFetchCommon({isEnabled = true, api, isDropDown = true, label}
           })
         }
         return {
-          label: (label.length ? labelValue : eachRes?.name) || '',
+          label: (label?.length ? labelValue : eachRes?.name) || '',
           value: eachRes.id,
         }
       })
