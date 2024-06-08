@@ -96,7 +96,8 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         const payload = {
           ...values,
           status: 'ACTIVE',
-          aggregator: selectedOutCategoryDropdown,
+          pickupointId: selectedOutCategoryDropdown,
+          dealPrice: values.unit,
         }
         if (isNotEmpty(values.id)) {
           await updateUser(payload, `deals/${values.id}/update`)
@@ -237,6 +238,31 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   return (
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Deal Name</label>
+          <input
+            placeholder='Add Deal Name'
+            {...formik.getFieldProps('name')}
+            type='text'
+            name='name'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.name && formik.errors.name},
+              {
+                'is-valid': formik.touched.name && !formik.errors.name,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.name && formik.errors.name && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.name}</span>
+              </div>
+            </div>
+          )}
+        </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Category</label>
           {makeSelectDropDown('categoryId', categoryList, true)}
