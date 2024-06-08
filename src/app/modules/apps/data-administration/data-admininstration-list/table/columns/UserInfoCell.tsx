@@ -192,10 +192,28 @@ const UserInfoCell: FC<Props> = ({
             {user?.[mapData] || user?.personalDetails?.[mapData]}
           </span>
         )
+      case 'pickupointId':
+        return (
+          user?.pickupointId?.map((eachData, len) => (
+            <div>
+              {eachData?.pickupPointName || '-'}
+              {len === user.pickupointId.length - 1 ? (
+                ''
+              ) : (
+                <>
+                  {' '}
+                  , <br />
+                </>
+              )}
+            </div>
+          )) || ''
+        )
       case 'street':
         return clipText(user.address.street)
       case 'createdAt':
-        return new Date(+user?.createdAt || new Date()).toLocaleDateString()
+      case 'start':
+      case 'end':
+        return new Date(+user[mapData] || new Date()).toLocaleDateString()
 
       case 'productionItemDetailsQuantity':
         return user['productionItemDetails']?.map((x: any, ind: number) => (

@@ -56,7 +56,6 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
   const [userForEdit] = useState<any>({
     ...user,
-    price: user.price || '',
     categoryId: user.categoryId || '',
     itemId: user.itemId || '',
     unit: user.unit || '',
@@ -96,8 +95,15 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         const payload = {
           ...values,
           status: 'ACTIVE',
-          pickupointId: selectedOutCategoryDropdown,
+          pickupointId: selectedOutCategoryDropdown.map((eachData) => {
+            return {
+              name: eachData.label,
+              id: eachData.value,
+            }
+          }),
           dealPrice: values.unit,
+          start: new Date(values?.start).getTime(),
+          end: new Date(values?.end).getTime(),
         }
         if (isNotEmpty(values.id)) {
           await updateUser(payload, `deals/${values.id}/update`)
