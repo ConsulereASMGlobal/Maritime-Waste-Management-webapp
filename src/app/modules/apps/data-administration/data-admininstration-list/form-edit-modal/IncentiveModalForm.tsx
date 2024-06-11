@@ -296,31 +296,6 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           <input
             readOnly
             placeholder='Add Incentive'
-            {...formik.getFieldProps('unit')}
-            type='number'
-            name='unit'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.unit && formik.errors.unit},
-              {
-                'is-valid': formik.touched.unit && !formik.errors.unit,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.unit && formik.errors.unit && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.unit}</span>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Incentive</label>
-          <input
-            placeholder='Add Incentive'
             {...formik.getFieldProps('incentive')}
             type='number'
             name='incentive'
@@ -338,6 +313,31 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
                 <span role='alert'>{formik.errors.incentive}</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Incentive</label>
+          <input
+            placeholder='Add Incentive'
+            {...formik.getFieldProps('unit')}
+            type='number'
+            name='unit'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.unit && formik.errors.unit},
+              {
+                'is-valid': formik.touched.unit && !formik.errors.unit,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.unit && formik.errors.unit && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.unit}</span>
               </div>
             </div>
           )}
