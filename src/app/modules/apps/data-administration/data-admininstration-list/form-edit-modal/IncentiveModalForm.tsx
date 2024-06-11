@@ -135,7 +135,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     if (priceList.length) {
       const filterData = priceList.filter((x) => x.itemId === formik?.values?.itemId)
       if (filterData.length) {
-        formik.setFieldValue('unit', filterData[0]?.price)
+        formik.setFieldValue('incentive', filterData[0]?.price)
       }
     }
   }, [priceList, formik?.values?.itemId])

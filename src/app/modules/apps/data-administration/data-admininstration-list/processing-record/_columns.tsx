@@ -43,10 +43,10 @@ const header = [
     label: 'Wroking Hrs',
     value: 'operatingHours',
   },
-  {
+  /* {
     label: 'Receipt',
     value: 'qty',
-  },
+  }, */
   {
     action: ['view_certificate'],
   },

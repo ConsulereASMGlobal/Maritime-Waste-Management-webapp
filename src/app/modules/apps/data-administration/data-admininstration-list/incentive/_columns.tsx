@@ -15,10 +15,10 @@ const header = [
     label: 'Item',
     value: 'itemName',
   },
-  {
+  /*   {
     label: 'Base Price',
     value: 'price',
-  },
+  }, */
   {
     label: 'Incentive',
     value: 'dealPrice',
