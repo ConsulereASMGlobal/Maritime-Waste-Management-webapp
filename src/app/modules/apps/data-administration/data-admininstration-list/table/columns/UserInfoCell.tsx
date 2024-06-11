@@ -192,10 +192,28 @@ const UserInfoCell: FC<Props> = ({
             {user?.[mapData] || user?.personalDetails?.[mapData]}
           </span>
         )
+      case 'pickupointId':
+        return (
+          user?.pickupointId?.map((eachData, len) => (
+            <div>
+              {eachData?.pickupPointName || '-'}
+              {len === user.pickupointId.length - 1 ? (
+                ''
+              ) : (
+                <>
+                  {' '}
+                  , <br />
+                </>
+              )}
+            </div>
+          )) || ''
+        )
       case 'street':
         return clipText(user.address.street)
       case 'createdAt':
-        return new Date(+user?.createdAt || new Date()).toLocaleDateString()
+      case 'start':
+      case 'end':
+        return new Date(+user[mapData] || new Date()).toLocaleDateString()
 
       case 'productionItemDetailsQuantity':
         return user['productionItemDetails']?.map((x: any, ind: number) => (
@@ -213,15 +231,19 @@ const UserInfoCell: FC<Props> = ({
         ))
       case 'status':
         const statusData = user?.[mapData] || user?.personalDetails?.[mapData]
-        switch (statusData) {
-          case 'quantityDeposit':
+        switch (statusData?.toLowerCase()) {
+          case 'quantitydeposit':
             return <span className='text-primary fs-7 fw-bold'>+28%</span>
-          case 'Pickup Completed':
-          case 'Completed':
+          case 'pickup completed':
+          case 'completed':
+          case 'accepted':
             return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
-          case 'Accepted':
+          // return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
+          case 'created':
+            return <span className='badge badge-light-warning fs-7 fw-bold'>{statusData}</span>
+          case 'rejected':
             return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
-          case 'Pickup Assigned':
+          case 'pickup assigned':
             return <span className='badge badge-light-primary fs-7 fw-bold'>{statusData}</span>
 
           default:

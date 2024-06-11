@@ -12,52 +12,6 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
 
   const data = itemIdForUpdate
   console.log({data})
-  const firstForm = [
-    {label: 'Date', value: new Date(+data?.createdAt || new Date()).toLocaleDateString()},
-    {label: 'Shift', value: data.shiftName},
-    {
-      label: 'Address',
-      value:
-        (data?.hubInfo?.address?.city || '') +
-        ((data?.hubInfo?.address?.city && ', ') || '') +
-        (data.hubInfo?.address?.country || ''),
-    } || '',
-    {label: 'Process Name', value: data.processName},
-    {label: 'Plant Name', value: data.hubName},
-    {label: 'Reported By', value: data?.receiverInfo?.name},
-  ]
-
-  const secondForm = [
-    {label: 'Input Material', value: data.inputMaterialName},
-    {label: 'Quantity (KG)', value: data.inputQuantity},
-  ]
-
-  const headerOne = [
-    'KPI',
-    'Team Size',
-    'Operating Hour',
-    'Manpower Productivity',
-    'Sorting Efficiency',
-  ]
-
-  const headerTwo = ['UOM', 'NOS', 'Hrs', 'Kg/ Person', 'Kg/ Hour']
-
-  const commonFunction = (mapData, paddingRight = '') => {
-    return (
-      <div>
-        <table className='table table-hover table-rounded table-striped border  table-bordered'>
-          <tbody>
-            {mapData.map((each, ind) => (
-              <tr key={ind + 1 + ''}>
-                <td className='fw-bold'>{each.label}</td>
-                <td style={{...(paddingRight && {paddingRight})}}>{each.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
 
   return (
     <div>
@@ -75,8 +29,9 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             <img
               width={'34%'}
               alt='images'
-              className='absolute z-[1] pl-2 '
-              src='/media/logos/sidebar-logo.svg'
+              className='absolute z-[1] pl-6 mt-6'
+              // src='/media/logos/sidebar-logo.svg'
+              src='/media/logos/sidebar-logo.jpeg'
             />
             <img
               alt='images'
@@ -152,7 +107,7 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           </div>
         </div>
 
-        <div className='my-3 px-[32px]'>
+        {/*  <div className='my-3 px-[32px]'>
           <table>
             <tr className='bg-black text-white'>
               <th className='px-3 py-2 rounded-tl-md'>KPI</th>
@@ -176,7 +131,7 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               <td className='px-3 py-[10px]'>{data.inputQuantity / data.operatingHours || 0}</td>
             </tr>
           </table>
-        </div>
+        </div> */}
 
         <footer className="mt-8 min-h-[60px] bg-[url('/media/books/footer_bg.png')] bg-no-repeat bg-auto relative h-full">
           <img alt='images' src='/media/books/logo_2nd.png' className='pl-[32px] pt-8' />

@@ -34,7 +34,6 @@ export default function CountryDropDown({
     disabled = false,
     optionValue = ''
   ) => {
-    console.log({options})
     return (
       <select
         disabled={disabled || isReadOnly}

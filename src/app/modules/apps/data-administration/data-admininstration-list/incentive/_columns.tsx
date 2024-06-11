@@ -4,12 +4,16 @@ import {columnGenerators} from '../../../../../../_metronic/helpers'
 const header = [
   {label: 'S.N', value: 'id'},
   {
+    label: 'Deal Name',
+    value: 'name',
+  },
+  {
     label: 'Category',
     value: 'categoryName',
   },
   {
     label: 'Item',
-    value: '-',
+    value: 'itemName',
   },
   {
     label: 'Base Price',
@@ -17,26 +21,26 @@ const header = [
   },
   {
     label: 'Incentive',
-    value: 'incentive',
+    value: 'dealPrice',
   },
   {
     label: 'Aggregator',
-    value: 'hubName',
+    value: 'pickupointId',
   },
   {
     label: 'Start Date',
-    value: '-',
+    value: 'start',
   },
   {
     label: 'End Date',
-    value: '-',
+    value: 'end',
   },
-  {
+  /*  {
     action: ['view_certificate'],
+  }, */
+  {
+    action: ['edit'],
   },
-  // {
-  //   action: ['edit', 'toggle'],
-  // },
 ]
 
 const roleColumns: ReadonlyArray<Column<any>> = columnGenerators(header)
