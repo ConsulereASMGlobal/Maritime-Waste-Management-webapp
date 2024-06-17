@@ -80,7 +80,7 @@ const DashboardPage: FC = () => {
 
   const [mapLocation, setMapLocation] = useState([])
 
-  const {pickupPoints, collectTrend, suppliedTrend} = data
+  const {pickupPoints, collectTrend, suppliedTrend, productionTrend} = data
 
   useEffect(() => {
     if (pickupPoints) {
@@ -113,6 +113,7 @@ const DashboardPage: FC = () => {
   ]
   const [collectedGraphData, setCollectedGraphData] = useState<any>({})
   const [suppliedGraphData, setSuppliedGraphData] = useState<any>({})
+  const [processedGraphData, setProcessedGraphData] = useState<any>({})
 
   const updateGraphData = (trendData, setGraphData, graphData) => {
     if (trendData && Object.keys(trendData)?.length > 0) {
@@ -132,6 +133,10 @@ const DashboardPage: FC = () => {
     updateGraphData(suppliedTrend, setSuppliedGraphData, suppliedGraphData)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [suppliedTrend])
+  useEffect(() => {
+    updateGraphData(processedGraphData, setProcessedGraphData, processedGraphData)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productionTrend])
 
   const numberItems = [
     {value: 'collected', name: 'Collected', icon: 'Collected', color: '#0F2F97'},
@@ -249,6 +254,7 @@ const DashboardPage: FC = () => {
         </div>
         <div className=''>
           <ChartsWidget1
+            data={collectedGraphData?.monthValue}
             title='Monthly Trend - Processed (Tons)'
             className='card-xl-stretch mb-xl-8'
             // subTitle='Highest daily avg community collector'

@@ -9,6 +9,7 @@ export type PaginationState = {
   // perPage: 10 | 30 | 50 | 100
   type?: string
   category?: string
+  pickupPointId?: string
   initialApi?: string
   enabled?: boolean
   totalPages?: any

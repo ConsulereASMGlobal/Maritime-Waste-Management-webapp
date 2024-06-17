@@ -90,7 +90,7 @@ const UsersListSearchComponent = ({
                   showResetButton
                     ? handleChange(eachSearch.name, e.target.value)
                     : updateState({
-                        [location.pathname.includes('mass-balance') ? 'category' : 'type']:
+                        [location.pathname.includes('mass-balance') ? 'pickupPointId' : 'type']:
                           e.target.value,
                         initialApi: location.pathname.includes('mass-balance')
                           ? `stock`

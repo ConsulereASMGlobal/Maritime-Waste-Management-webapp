@@ -8,10 +8,11 @@ import {getUserById} from '../core/_requests'
 import {QueryRequestProvider, useQueryRequest} from '../core/QueryRequestProvider'
 import {initialQueryState} from '../../../../../../_metronic/helpers'
 import {UsersListHeader} from '../components/header/UsersListHeader'
-import {QueryResponseProvider} from '../core/QueryResponseProvider'
+import {QueryResponseProvider, useQueryResponseData} from '../core/QueryResponseProvider'
 import {ListViewProvider} from '../core/ListViewProvider'
 
 const DashboardPage: FC = () => {
+  const users = useQueryResponseData()
   const {data = {}} = useQuery(
     `aggregator`,
     () => getUserById('', 'users?page=1&size=10&type=PICKUP_POINT'),
@@ -32,10 +33,13 @@ const DashboardPage: FC = () => {
         return dropdownData.push({label: eachData?.personalDetails?.name, value: eachData.id})
       })
       setCategoriesList(dropdownData)
+      console.log({initialQueryState})
       updateState({
-        enabled: true,
-        initialApi: `stock?category=${dropdownData[0].value}`,
         ...initialQueryState,
+        enabled: true,
+        pickupPointId: dropdownData[0].value,
+        category: '6642be5039621936773edc77',
+        initialApi: `stock`,
       })
     }
   }, [data])
@@ -75,42 +79,28 @@ const DashboardPage: FC = () => {
             label=''
           />
         </div>
-        {numberItems.map((eachitems, eachIndex) => (
+        {users?.map((eachitems: any, eachIndex) => (
           <div key={eachIndex + 1 + ''} className='col'>
             <StatisticsWidget5
               className='card-xl-stretch mb-xl-8'
               svgIcon={`/media/location/marker.png`}
               //   img={eachitems.icon}
-              color={eachitems.color || 'warning'}
+              color={numberItems[eachIndex]?.color || 'warning'}
               iconColor='primary'
               // title={eachitems.value}
-              title={`
-             ${
-               data[eachitems.value]?.toFixed(
-                 ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                   ? 0
-                   : 2
-               ) || ''
-             }
-             ${
-               ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                 ? ''
-                 : ' kg'
-             }
-           `}
+              title={`${eachitems?.quantity?.toFixed(2) || '0.00'} kg`}
               // titleColor='primary'
-              description={eachitems.name}
+              description={eachitems?.itemName}
               // descriptionColor='primary'
             />
           </div>
-        ))}
+        )) || 'No-Data'}
       </div>
     </>
   )
 }
 
 const MassBalanceWrapper: FC = () => {
-  const intl = useIntl()
   return (
     <>
       <PageTitle breadcrumbs={[]}>Mass Balance</PageTitle>

@@ -13,7 +13,16 @@ function isNotEmpty(obj: unknown) {
 // Example: page=1&size=10&sort=id&order=desc&search=a&filter_name=a&filter_online=false
 function stringifyRequestQuery(state: QueryState): string {
   const pagination = qs.stringify(state, {
-    filter: ['page', 'size', 'type', 'category', 'status', 'start_date', 'end_date'],
+    filter: [
+      'page',
+      'size',
+      'type',
+      'category',
+      'pickupPointId',
+      'status',
+      'start_date',
+      'end_date',
+    ],
     skipNulls: true,
   })
   const sort = qs.stringify(state, {filter: ['sort', 'order'], skipNulls: true})
