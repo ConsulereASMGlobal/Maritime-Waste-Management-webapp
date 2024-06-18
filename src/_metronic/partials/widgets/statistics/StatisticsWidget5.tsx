@@ -12,6 +12,7 @@ type Props = {
   description: string
   descriptionColor?: string
   img?: string
+  iconName?: string
 }
 
 const StatisticsWidget5: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const StatisticsWidget5: React.FC<Props> = ({
   img,
   description,
   descriptionColor,
+  iconName = '',
 }) => {
   return (
     <a href='#' className={`card  hoverable ${className}`} style={{backgroundColor: color || ''}}>
@@ -31,24 +33,29 @@ const StatisticsWidget5: React.FC<Props> = ({
         {/*  {(!img && <KTIcon iconName={svgIcon} className={`text-${iconColor} fs-3x ms-n1`} />) ||
           null} */}
         {!img && (
-          <img
-            width={35}
-            height={35}
-            // src={`/media/svg/dashboard/${img}.png`}
-            src={svgIcon}
-            alt='images'
-            className={`text-${iconColor} fs-3x ms-n1`}
-          />
+          <div className='flex'>
+            <img
+              width={35}
+              height={35}
+              // src={`/media/svg/dashboard/${img}.png`}
+              src={svgIcon}
+              alt='images'
+              className={`text-${iconColor} fs-3x ms-n1`}
+            />
+            <span className='text-white'>{iconName}</span>
+          </div>
         )}
 
         {(img && (
-          <img
-            width={35}
-            height={35}
-            src={`/media/svg/dashboard/${img}.png`}
-            alt='images'
-            className={`text-${iconColor} fs-3x ms-n1`}
-          />
+          <>
+            <img
+              width={35}
+              height={35}
+              src={`/media/svg/dashboard/${img}.png`}
+              alt='images'
+              className={`text-${iconColor} fs-3x ms-n1`}
+            />
+          </>
         )) ||
           null}
 

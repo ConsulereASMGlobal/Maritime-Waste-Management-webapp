@@ -123,14 +123,15 @@ const TablesWidget10: React.FC<Props> = ({className, data = []}) => {
                         </div>
                       </td>
                       <td>
-                        <a href='#' className='badge badge-light-primary fs-8'>
+                        <div className='badge badge-light-primary fs-8'>{eachData.totalAmount}</div>
+                        {/* <a href='#' className='badge badge-light-primary fs-8'>
                           {eachData.orderDetails[0]?.items.map(
                             (x, len) =>
                               `${x.quantity} ${
                                 eachData.orderDetails[0]?.items?.length - 1 === len ? '' : ' , '
                               }`
                           )}
-                        </a>
+                        </a> */}
                       </td>
                     </tr>
                   )

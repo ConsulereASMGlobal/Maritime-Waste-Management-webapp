@@ -83,14 +83,17 @@ const DashboardPage: FC = () => {
           <div key={eachIndex + 1 + ''} className='col'>
             <StatisticsWidget5
               className='card-xl-stretch mb-xl-8'
-              svgIcon={`/media/location/marker.png`}
+              // svgIcon={`/media/location/marker.png`}
+              svgIcon={eachitems.itemImage || `/media/location/marker.png`}
               //   img={eachitems.icon}
               color={numberItems[eachIndex]?.color || 'warning'}
               iconColor='primary'
               // title={eachitems.value}
               title={`${eachitems?.quantity?.toFixed(2) || '0.00'} kg`}
               // titleColor='primary'
-              description={eachitems?.itemName}
+              description={eachitems?.totalPrice?.toFixed(2) || ''}
+              iconName={eachitems?.itemName}
+              // description={eachitems?.itemName}
               // descriptionColor='primary'
             />
           </div>
