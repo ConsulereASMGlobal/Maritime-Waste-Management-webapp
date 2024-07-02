@@ -4,9 +4,12 @@ import {useIntl} from 'react-intl'
 import {KTIcon} from '../../../../helpers'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
 import {SidebarMenuItem} from './SidebarMenuItem'
+import {useAuth} from '../../../../../app/modules/auth'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()
+  const {auth} = useAuth()
+  const hideSideBar = auth?.data?.userType === 'FRANCHISE' || false
 
   return (
     <>
@@ -30,12 +33,14 @@ const SidebarMenuMain = () => {
         </div>
       </div>
 
-      <SidebarMenuItem
-        to='/apps/facility-master'
-        icon='grid-frame'
-        title='Franchise '
-        fontIcon='bi-layers'
-      />
+      {!hideSideBar && (
+        <SidebarMenuItem
+          to='/apps/facility-master'
+          icon='grid-frame'
+          title='Franchise '
+          fontIcon='bi-layers'
+        />
+      )}
       <SidebarMenuItem
         to='/apps/depositer'
         icon='switch'
@@ -73,23 +78,25 @@ const SidebarMenuMain = () => {
         title='Supply Orders'
         fontIcon='bi-layers'
       />
-      <SidebarMenuItemWithSub
-        to='/apps/settings'
-        title='Settings'
-        fontIcon='bi-chat-left'
-        icon='message-text-2'
-      >
-        <SidebarMenuItem to='/apps/settings/content' title='Content' hasBullet={true} />
-        <SidebarMenuItem to='/apps/settings/category' title='Category' hasBullet={true} />
-        <SidebarMenuItem to='/apps/settings/sub-category' title='Sub Category' hasBullet={true} />
-        <SidebarMenuItem to='/apps/settings/pricing' title='Pricing' hasBullet={true} />
-        <SidebarMenuItem to='/apps/settings/incentive' title='Incentive' hasBullet={true} />
-        <SidebarMenuItem
-          to='/apps/settings/processing-routes'
-          title='Processing Routes'
-          hasBullet={true}
-        />
-      </SidebarMenuItemWithSub>
+      {!hideSideBar && (
+        <SidebarMenuItemWithSub
+          to='/apps/settings'
+          title='Settings'
+          fontIcon='bi-chat-left'
+          icon='message-text-2'
+        >
+          <SidebarMenuItem to='/apps/settings/content' title='Content' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/category' title='Category' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/sub-category' title='Sub Category' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/pricing' title='Pricing' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/incentive' title='Incentive' hasBullet={true} />
+          <SidebarMenuItem
+            to='/apps/settings/processing-routes'
+            title='Processing Routes'
+            hasBullet={true}
+          />
+        </SidebarMenuItemWithSub>
+      )}
       {/* <div className='menu-item'>
         <a
           target='_blank'
