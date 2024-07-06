@@ -21,14 +21,22 @@ const CertificateComponent = ({data, passRef}) => {
   }
   const [displayData, setDisplayData] = useState<any>({})
   let addressArray: any = []
-  if (data?.[0]?.pickupInfo?.address?.state || data?.[0]?.dropOffPointInfo?.address?.state) {
-    const responseAddress = data[0]?.pickupInfo?.address || data[0]?.dropOffPointInfo?.address || {}
+  if (
+    data?.[0]?.pickupInfo?.address?.state ||
+    data?.[0]?.dropOffPointInfo?.address?.state ||
+    data?.[0]?.centreInfo.address?.street
+  ) {
+    const responseAddress =
+      data[0]?.pickupInfo?.address ||
+      data[0]?.dropOffPointInfo?.address ||
+      data[0]?.centreInfo?.address ||
+      {}
     const excludedProperties = ['latitute', 'longitute']
     const order = ['street', 'city', 'state', 'country']
     for (const key of order) {
       if (!excludedProperties.includes(key)) {
         const value = responseAddress[key]
-        if (value !== undefined) {
+        if (value !== undefined && value) {
           addressArray.push(value)
         }
       }
@@ -40,6 +48,7 @@ const CertificateComponent = ({data, passRef}) => {
     }
   }, [data])
   const isReturnOrdersPage = pathname.includes('supply-orders')
+  const isCollectOrdersPage = pathname.includes('collect-orders')
   const pickupDate: any = parseInt(displayData?.pickupInfo?.pickupDate || new Date())
 
   function formatDate(date) {
@@ -56,7 +65,12 @@ const CertificateComponent = ({data, passRef}) => {
   const depositerName = [
     {label: 'Depositor Name', value: displayData?.customerInfo?.name},
     {label: 'Mobile Number', value: displayData?.customerInfo?.mobile},
-    {label: 'Source', value: displayData?.source},
+    {
+      label: 'Source',
+      value: isCollectOrdersPage
+        ? displayData?.orderDetails?.[0]?.items?.[0]?.remark
+        : displayData?.source,
+    },
     {
       label: 'Collection Date',
       value: new Date(displayData.collectionDate || new Date()).toLocaleDateString() || '',
@@ -64,7 +78,7 @@ const CertificateComponent = ({data, passRef}) => {
     {label: 'Status', value: displayData?.status},
     {
       label: 'Geo-Cordintes',
-      value: displayData?.latitude + ', ' + displayData?.longitude,
+      value: (displayData?.latitude || '') + ', ' + (displayData?.longitude || ''),
     },
   ]
 
@@ -118,6 +132,7 @@ const CertificateComponent = ({data, passRef}) => {
     } || '',
     {label: 'Vehicle Number', value: displayData?.pickupInfo?.vehicleNo || ''},
   ]
+  console.log({displayData})
   const deliveryDetails = [
     {
       label: 'Recycler Name',
@@ -128,16 +143,18 @@ const CertificateComponent = ({data, passRef}) => {
       label: 'Recycler Address',
       value:
         displayData?.centreInfo?.address?.street ||
-        '' + '' + displayData?.centreInfo?.address?.city ||
-        '' + '' + displayData?.centreInfo?.address?.state ||
+        '' ||
+        '' + '' + (displayData?.centreInfo?.address?.city || '') ||
+        '' + '' + (displayData?.centreInfo?.address?.state || '') ||
         '',
     },
     {
-      label: 'Receiving Date',
-      value:
-        (displayData?.pickupInfo?.pickupCompletedAt &&
-          formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
-        '',
+      label: isReturnOrdersPage ? 'Receiving Chain of Custody' : 'Receiving Date',
+      value: isReturnOrdersPage
+        ? displayData.completedAt
+        : (displayData?.pickupInfo?.pickupCompletedAt &&
+            formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
+          '',
     },
     // {label: 'Email', value: ''},
   ]
@@ -170,7 +187,7 @@ const CertificateComponent = ({data, passRef}) => {
     },
     {
       label: 'Address',
-      value: addressArray.join() || '',
+      value: addressArray.join(' , ') || '',
     },
     {
       label: 'Payment Mode',
@@ -218,7 +235,7 @@ const CertificateComponent = ({data, passRef}) => {
             }}
           >
             <div>
-              Certificate Number :{' '}
+              {isCollectOrdersPage ? 'Receipt Number' : 'Certificate Number'}:{' '}
               <span className='fw-bolder  text-dark'>{displayData.id || ''}</span>
             </div>
           </div>
@@ -306,7 +323,10 @@ const CertificateComponent = ({data, passRef}) => {
                     <th style={{color: '#FFFFFF', maxWidth: '1px'}}>S.N</th>
                     <th style={{color: '#FFFFFF'}}>Category</th>
                     <th style={{color: '#FFFFFF'}}>Type</th>
-                    <th style={{color: '#FFFFFF'}}>Quantity</th>
+                    {isCollectOrdersPage && <th style={{color: '#FFFFFF'}}>Unit Price</th>}
+                    <th style={{color: '#FFFFFF'}}>
+                      {isCollectOrdersPage ? 'Order Value' : 'Quantity'}
+                    </th>
                     {/* {!isReturnOrdersPage && (
                       <>
                         <th style={{color: '#FFFFFF'}}>Unit Rate</th>
@@ -321,8 +341,11 @@ const CertificateComponent = ({data, passRef}) => {
                       <td>{eachInd + 1 + ''}</td>
                       <td>{displayData?.orderDetails?.[0]?.categoryName}</td>
                       <td>{eachData.itemName}</td>
+                      {isCollectOrdersPage && <td>{eachData.price?.toFixed(2)}</td>}
                       <td>
-                        {eachData.quantity?.toFixed(2)} {eachData.unit}
+                        {(isCollectOrdersPage && 'RM') || ''}{' '}
+                        {(eachData.quantity * eachData.price)?.toFixed(2)}{' '}
+                        {(!isCollectOrdersPage && eachData.unit) || ''}
                       </td>
                       {/* {!isReturnOrdersPage && (
                         <>
@@ -335,19 +358,21 @@ const CertificateComponent = ({data, passRef}) => {
                     </tr>
                   ))}
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <td colSpan={3} className='align-end fs-3 fw-bold text-end'>
-                      Certified Weight
-                    </td>
-                    <td className='text-center fw-bold fs-1'>
-                      {subTotal(
-                        displayData?.orderDetails?.[0]?.items,
-                        isReturnOrdersPage ? false : true
-                      )?.toFixed(2)}
-                    </td>
-                  </tr>
-                </tfoot>
+                {!isCollectOrdersPage && (
+                  <tfoot>
+                    <tr>
+                      <td colSpan={3} className='align-end fs-3 fw-bold text-end'>
+                        Certified Weight
+                      </td>
+                      <td className='text-center fw-bold fs-1'>
+                        {subTotal(
+                          displayData?.orderDetails?.[0]?.items,
+                          isReturnOrdersPage ? false : true
+                        )?.toFixed(2)}
+                      </td>
+                    </tr>
+                  </tfoot>
+                )}
               </table>
             )}
             {(isReturnOrdersPage && (
@@ -404,6 +429,39 @@ const CertificateComponent = ({data, passRef}) => {
                         </div>
                       ))}
                     </div>
+                    {isReturnOrdersPage &&
+                      ((
+                        <div className='row flex justify-center'>
+                          <div className='col-3' style={{marginTop: '10px'}}>
+                            <img
+                              width={180}
+                              height={100}
+                              style={{backgroundColor: '#FFFFFF'}}
+                              src={displayData.transportImage || ''}
+                              alt='main-logo'
+                            />
+                          </div>
+                          <div className='col-3' style={{marginTop: '10px'}}>
+                            <img
+                              width={180}
+                              height={100}
+                              style={{backgroundColor: '#FFFFFF'}}
+                              src={displayData.invoiceImg || ''}
+                              alt='main-logo'
+                            />
+                          </div>
+                          <div className='col-3' style={{marginTop: '10px'}}>
+                            <img
+                              width={180}
+                              height={100}
+                              style={{backgroundColor: '#FFFFFF'}}
+                              src={displayData.weightImage || ''}
+                              alt='main-logo'
+                            />
+                          </div>
+                        </div>
+                      ) ||
+                        '')}
                   </div>
                   <div className='col-2'>
                     {(displayData.images?.length && (
