@@ -149,9 +149,11 @@ const CertificateComponent = ({data, passRef}) => {
         '',
     },
     {
-      label: isReturnOrdersPage ? 'Receiving Chain of Custody' : 'Receiving Date',
+      label: isReturnOrdersPage ? 'Receiving date Chain of Custody' : 'Receiving Date',
       value: isReturnOrdersPage
         ? displayData.completedAt
+          ? formatDate(new Date(displayData.completedAt))
+          : ''
         : (displayData?.pickupInfo?.pickupCompletedAt &&
             formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
           '',
@@ -180,6 +182,21 @@ const CertificateComponent = ({data, passRef}) => {
       0
     )
   }
+
+  const chainOfCustody = [
+    {
+      label: 'Methodology',
+      name: 'Batch Traceability',
+    },
+    {
+      label: 'Batch Mgmt',
+      name: 'Mass Balance',
+    },
+    {
+      label: 'Standard',
+      name: 'ISO 22095',
+    },
+  ]
   const collectorDetails = [
     {
       label: 'Business Name',
@@ -416,7 +433,7 @@ const CertificateComponent = ({data, passRef}) => {
                         Recycling Details
                       </div>
                       {deliveryDetails.map((eachData, ind) => (
-                        <div className='row' key={ind + 1 + ''} style={{fontSize: '14px'}}>
+                        <div className='row col-11' key={ind + 1 + ''} style={{fontSize: '14px'}}>
                           <label
                             className='col-lg-4 '
                             style={{color: '#242727', fontWeight: '700'}}
@@ -499,16 +516,9 @@ const CertificateComponent = ({data, passRef}) => {
               <div className='row'>
                 <div className='col-9'>
                   <div
-                    // className='text-center'
                     style={{
-                      // display: 'flex',
-                      // justifyContent: 'center',
                       fontSize: '18px',
                       fontWeight: 'bold',
-                      // background: 'rgba(177, 227, 227, 0.2)',
-                      // width: 'fit-content',
-                      // padding: '10px 10px',
-                      // margin: 'auto',
                     }}
                   >
                     {' '}
@@ -523,6 +533,30 @@ const CertificateComponent = ({data, passRef}) => {
                           </label>
                           <div className='col-lg-8' style={{color: '#4F5152'}}>
                             <span className='fs-6'>: &nbsp;&nbsp;{eachData.value}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <br />
+                  <div
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {' '}
+                    Chain of Custody
+                  </div>
+                  <div className='row'>
+                    <div className='col-11'>
+                      {chainOfCustody.map((eachData, ind) => (
+                        <div className='row' key={ind + 1 + ''} style={{fontSize: '14px'}}>
+                          <label className='col-lg-4' style={{color: '#242727', fontWeight: '700'}}>
+                            {eachData.label}
+                          </label>
+                          <div className='col-lg-8' style={{color: '#4F5152'}}>
+                            <span className='fs-6'>: &nbsp;&nbsp;{eachData.name}</span>
                           </div>
                         </div>
                       ))}
