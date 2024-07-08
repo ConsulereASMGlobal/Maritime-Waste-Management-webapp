@@ -341,6 +341,7 @@ const CertificateComponent = ({data, passRef}) => {
                     <th style={{color: '#FFFFFF'}}>Category</th>
                     <th style={{color: '#FFFFFF'}}>Type</th>
                     {isCollectOrdersPage && <th style={{color: '#FFFFFF'}}>Unit Price</th>}
+                    {!isReturnOrdersPage && <th style={{color: '#FFFFFF'}}>Weight</th>}
                     <th style={{color: '#FFFFFF'}}>
                       {isCollectOrdersPage ? 'Order Value' : 'Quantity'}
                     </th>
@@ -359,11 +360,13 @@ const CertificateComponent = ({data, passRef}) => {
                       <td>{displayData?.orderDetails?.[0]?.categoryName}</td>
                       <td>{eachData.itemName}</td>
                       {isCollectOrdersPage && <td>{eachData.price?.toFixed(2)}</td>}
+                      {!isReturnOrdersPage && <td>{eachData.quantity || ''}</td>}
                       <td>
                         {(isCollectOrdersPage && 'RM') || ''}{' '}
                         {(eachData.quantity * eachData.price)?.toFixed(2)}{' '}
                         {(!isCollectOrdersPage && eachData.unit) || ''}
                       </td>
+
                       {/* {!isReturnOrdersPage && (
                         <>
                           <td>
