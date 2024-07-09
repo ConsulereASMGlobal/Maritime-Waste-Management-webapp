@@ -116,7 +116,7 @@ const UserInfoCell: FC<Props> = ({
       case 'pickup_quantity_item':
         return user?.orderDetails?.[0].items?.map((x: any, ind: number) => (
           <div key={ind + 1 + ''}>
-            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(2)}
+            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(2)} Kg
           </div>
         ))
       case 'proofEstablishment':

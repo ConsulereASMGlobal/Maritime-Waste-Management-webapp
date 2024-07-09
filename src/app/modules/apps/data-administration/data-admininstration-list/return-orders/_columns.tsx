@@ -22,10 +22,10 @@ const header = [
     label: 'Aggregator',
     value: 'pickupInfo[name]',
   },
-  {
+  /*  {
     label: 'Address',
     value: 'pickup_address',
-  },
+  }, */
   {
     label: 'Category',
     value: 'categoryName',
@@ -39,7 +39,7 @@ const header = [
     value: 'categoryIcon',
   },
   {
-    label: 'Quantity (KG)',
+    label: 'Quantity',
     value: 'pickup_quantity',
   },
   {
