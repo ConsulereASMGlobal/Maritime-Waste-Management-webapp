@@ -149,7 +149,7 @@ const CertificateComponent = ({data, passRef}) => {
         '',
     },
     {
-      label: isReturnOrdersPage ? 'Receiving date Chain of Custody' : 'Receiving Date',
+      label: isReturnOrdersPage ? 'Received date' : 'Receiving Date',
       value: isReturnOrdersPage
         ? displayData.completedAt
           ? formatDate(new Date(displayData.completedAt))
@@ -158,7 +158,7 @@ const CertificateComponent = ({data, passRef}) => {
             formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
           '',
     },
-    // {label: 'Email', value: ''},
+    {label: 'Chain of Custody', value: ''},
   ]
 
   const lastSection = [
@@ -397,29 +397,8 @@ const CertificateComponent = ({data, passRef}) => {
             )}
             {(isReturnOrdersPage && (
               <>
-                <div className='row'>
-                  <div className='col-10'>
-                    {/*  <div className=''>
-                      <div
-                        style={{
-                          fontSize: '18px',
-                          fontWeight: 'bold',
-                          width: 'fit-content',
-                        }}
-                      >
-                        Transportation Details
-                      </div>
-                      {logisticsDetails.map((eachData, ind) => (
-                        <div className='row' key={ind + 1 + ''} style={{fontSize: '14px'}}>
-                          <label className='col-lg-5' style={{color: '#242727', fontWeight: '700'}}>
-                            {eachData.label}
-                          </label>
-                          <div className='col-lg-7' style={{color: '#4F5152'}}>
-                            <span className='fs-6'>: &nbsp;&nbsp;{eachData.value}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div> */}
+                <div className=''>
+                  <div className=''>
                     <div className=''>
                       <div
                         className=''
@@ -435,19 +414,27 @@ const CertificateComponent = ({data, passRef}) => {
                         {' '}
                         Recycling Details
                       </div>
-                      {deliveryDetails.map((eachData, ind) => (
-                        <div className='row col-11' key={ind + 1 + ''} style={{fontSize: '14px'}}>
-                          <label
-                            className='col-lg-4 '
-                            style={{color: '#242727', fontWeight: '700'}}
-                          >
-                            {eachData.label}
-                          </label>
-                          <div className='col-lg-8' style={{color: '#4F5152'}}>
-                            <span className='fs-6'>: &nbsp;&nbsp;{eachData.value}</span>
+                      <div className='row'>
+                        <div className='col-9'>
+                          <div className='row'>
+                            <div className='col-11'>
+                              {deliveryDetails.map((eachData, ind) => (
+                                <div className='row' key={ind + 1 + ''} style={{fontSize: '14px'}}>
+                                  <label
+                                    className='col-lg-4 '
+                                    style={{color: '#242727', fontWeight: '700'}}
+                                  >
+                                    {eachData.label}
+                                  </label>
+                                  <div className='col-lg-8' style={{color: '#4F5152'}}>
+                                    <span className='fs-6'>: &nbsp;&nbsp;{eachData.value}</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      ))}
+                      </div>
                     </div>
                     {isReturnOrdersPage &&
                       ((
