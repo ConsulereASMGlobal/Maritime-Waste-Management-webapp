@@ -28,7 +28,7 @@ const UsersList = () => {
         searchElements={searchElements}
         placeholder='Search Category'
       />
-      <UsersTable columnProps={roleColumns} />
+      <UsersTable showPagination={true} columnProps={roleColumns} />
       <UserEditModal showViewPage getByIdApi='collect/orders/' formName='CollectOrdersModalForm' />
     </KTCard>
   )

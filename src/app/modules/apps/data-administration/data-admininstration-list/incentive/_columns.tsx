@@ -39,7 +39,7 @@ const header = [
     action: ['view_certificate'],
   }, */
   {
-    action: ['edit'],
+    action: ['edit', 'toggle'],
   },
 ]
 

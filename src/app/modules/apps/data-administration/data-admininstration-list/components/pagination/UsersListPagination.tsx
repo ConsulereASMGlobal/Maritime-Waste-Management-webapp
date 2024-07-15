@@ -18,10 +18,10 @@ const mappedLabel = (label: string): string => {
   return label
 }
 
-const UsersListPagination = () => {
+const UsersListPagination = ({initialApi}: any) => {
   const pagination = useQueryResponsePagination()
   const isLoading = useQueryResponseLoading()
-  const {updateState} = useQueryRequest()
+  const {updateState, state} = useQueryRequest()
   // const updatePage = (page: number | undefined | null) => {
   //   if (!page || isLoading || pagination.page === page) {
   //     return
@@ -33,10 +33,12 @@ const UsersListPagination = () => {
   const endOffset = itemOffset + itemsPerPage
 
   const handlePagination = (page: number) => {
+    console.log({page})
     if (isLoading) {
       return
     }
-    updateState({page: page - 1})
+    // updateState({page: page - 1, ...((initialApi && {initialApi}) || {})})
+    updateState({page: page, ...((initialApi && {initialApi}) || {})})
   }
   return (
     <div className='row'>

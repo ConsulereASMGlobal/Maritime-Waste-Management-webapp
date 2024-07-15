@@ -19,7 +19,6 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   const {state} = useQueryRequest()
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
-
   useEffect(() => {
     if (query !== updatedQuery) {
       setQuery(updatedQuery)
@@ -61,7 +60,7 @@ const useQueryResponseData = () => {
   // return mockedData.data
 }
 
-const useQueryResponsePagination = () => {
+/* const useQueryResponsePagination = () => {
   const defaultPaginationState: PaginationState = {
     links: [],
     ...initialQueryState,
@@ -73,6 +72,18 @@ const useQueryResponsePagination = () => {
   }
 
   return response.payload.pagination
+} */
+const useQueryResponsePagination = () => {
+  const defaultPaginationState: PaginationState = {
+    links: [],
+    ...initialQueryState,
+  }
+
+  const {response} = useQueryResponse()
+  if (!response || !response.meta) {
+    return defaultPaginationState
+  }
+  return response.meta
 }
 
 const useQueryResponseLoading = (): boolean => {

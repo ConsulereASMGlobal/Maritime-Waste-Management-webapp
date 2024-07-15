@@ -40,7 +40,7 @@ const header = [
     value: 'teamSize',
   },
   {
-    label: 'Wroking Hrs',
+    label: 'Working Hrs',
     value: 'operatingHours',
   },
   /* {

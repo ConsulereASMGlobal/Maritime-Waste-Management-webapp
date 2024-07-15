@@ -13,9 +13,15 @@ interface UserProps {
   columnProps?: any
   mockedData?: any
   showPagination?: boolean
+  initialApi?: any
 }
 
-const UsersTable = ({showPagination = false, columnProps, mockedData = []}: UserProps) => {
+const UsersTable = ({
+  showPagination = false,
+  columnProps,
+  mockedData = [],
+  initialApi,
+}: UserProps) => {
   const users = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => users, [users])
@@ -59,7 +65,9 @@ const UsersTable = ({showPagination = false, columnProps, mockedData = []}: User
           </tbody>
         </table>
       </div>
-      {(showPagination && <UsersListPagination />) || null}
+      {/* {(showPagination && <UsersListPagination />) || null} */}
+      <UsersListPagination initialApi={initialApi} />
+
       {isLoading && <UsersListLoading />}
     </KTCardBody>
   )

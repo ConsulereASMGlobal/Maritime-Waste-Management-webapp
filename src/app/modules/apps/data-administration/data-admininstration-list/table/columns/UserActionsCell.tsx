@@ -70,7 +70,7 @@ const UserActionsCell: FC<Props> = ({id, allData, action = ['edit']}) => {
     () =>
       updateUser(
         {},
-        `user/${id.id}/status?type=${state.type}&status=${
+        `user/${id.id}/status?type=${state.type || 'deals'}&status=${
           id.status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE'
         }`
       ),

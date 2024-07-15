@@ -387,7 +387,7 @@ const CertificateComponent = ({data, passRef}) => {
                       <td className='text-center fw-bold fs-1'>
                         {subTotal(
                           displayData?.orderDetails?.[0]?.items,
-                          isReturnOrdersPage ? false : true
+                          isReturnOrdersPage ? true : true
                         )?.toFixed(2)}
                       </td>
                     </tr>
