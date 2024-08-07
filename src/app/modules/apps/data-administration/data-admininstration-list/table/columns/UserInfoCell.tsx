@@ -99,7 +99,7 @@ const UserInfoCell: FC<Props> = ({
               <img
                 src={`${user?.orderDetails?.[0]?.categoryIcon || ''}`}
                 alt={user.name}
-                className='w-100'
+                className='w-100 bg-[#156467]'
               />
             </div>
           </div>
