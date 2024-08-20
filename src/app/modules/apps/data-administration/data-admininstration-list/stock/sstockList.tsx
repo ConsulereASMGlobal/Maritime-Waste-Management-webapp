@@ -74,9 +74,8 @@ const QualityList = () => {
   return (
     <>
       {/* <UsersListHeader searchElements={searchElements} placeholder='Search' /> */}
-      {/* <UsersTable columnProps={roleColumns} /> */}
-      <div className='row g-5 g-xl-8'>
-        {/* begin::Col */}
+      <UsersTable columnProps={roleColumns} />
+      {/*    <div className='row g-5 g-xl-8'>
         {test.map((eachTest, eachIndex) => (
           <div className='col-xl-3' key={eachIndex + 1 + ''}>
             <MixedWidget1
@@ -87,7 +86,7 @@ const QualityList = () => {
             />
           </div>
         ))}
-      </div>
+      </div> */}
       {/* {<UserEditModal formName='PricingModalForm' />} */}
     </>
   )
