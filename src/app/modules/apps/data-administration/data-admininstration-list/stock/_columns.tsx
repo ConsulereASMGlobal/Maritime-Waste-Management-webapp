@@ -46,29 +46,29 @@ const header = [
   },
   {
     label: 'Facility Name',
-    value: 'name',
+    value: 'pickupPointName',
   },
   {
-    label: 'Country',
-    value: 'name',
+    label: 'City',
+    value: 'pickupPointAddress[city]',
   },
   {
     label: 'Collected',
-    value: 'address[country]',
+    value: 'collected',
   },
   {
     label: 'Received',
-    value: 'customerType',
+    value: 'processed12',
   },
   {
     label: 'Processed',
-    value: 'analytics[totalQtyCollected]',
+    value: 'processed',
   },
   {
     label: 'Supplied',
-    value: 'analytics[plasticCollected]',
+    value: 'supplied',
   },
-  {label: 'Stock', value: 'analytics[totalPayment]'},
+  {label: 'Stock', value: 'stock'},
 ]
 
 const roleColumns: ReadonlyArray<Column<any>> = columnGenerators(header)
