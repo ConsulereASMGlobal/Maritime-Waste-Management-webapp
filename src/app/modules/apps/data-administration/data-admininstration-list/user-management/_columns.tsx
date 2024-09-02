@@ -50,7 +50,7 @@ const header = [
 
   {
     label: 'Total Payment',
-    value: 'customerType',
+    value: 'totalDepositedQuantity',
   },
   /*  {
     label: 'Joining Date',

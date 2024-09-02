@@ -8,11 +8,11 @@ const header = [
   },
   {
     label: 'Company Name',
-    value: 'personalDetails[name]',
+    value: 'companyDetails[name]',
   },
   {
     label: 'Contact',
-    value: 'personalDetails[mobile]',
+    value: 'personalDetail',
   },
   {
     label: 'Stret Address',

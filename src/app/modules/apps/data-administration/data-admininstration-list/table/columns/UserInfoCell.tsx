@@ -72,7 +72,7 @@ const UserInfoCell: FC<Props> = ({
         return (
           <div>
             <div>{user.personalDetails?.mobile}</div>
-            <div className='text-muted fw-semibold text-muted d-block fs-7'>
+            <div className='text-muted fw-bold text-muted d-block fs-7'>
               {user.personalDetails?.email}
             </div>
           </div>

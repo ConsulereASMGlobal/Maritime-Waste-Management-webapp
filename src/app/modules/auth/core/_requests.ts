@@ -7,6 +7,7 @@ export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}users/`
 export const LOGIN_URL = `${API_URL}user/login`
 export const REGISTER_URL = `${API_URL}/register`
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
+export const CHANGE_PASSWORD = `${API_URL}user/changePassword`
 
 // Server should return AuthModel
 export function login(mobile: string, password: string, userType: string) {
@@ -14,6 +15,13 @@ export function login(mobile: string, password: string, userType: string) {
     mobile,
     password,
     userType,
+  })
+}
+
+export function changePassword(oldPassword: string, newPassword: string) {
+  return axios.put<any>(CHANGE_PASSWORD, {
+    oldPassword,
+    newPassword,
   })
 }
 
