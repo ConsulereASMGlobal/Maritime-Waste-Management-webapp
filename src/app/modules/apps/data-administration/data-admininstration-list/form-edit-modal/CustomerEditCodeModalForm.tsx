@@ -83,8 +83,9 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     city: user.address?.city || '',
     address: user.address?.street || '',
     companyName: user.companyName || '',
-    bankName: user.address?.bankName || '',
-    accountName: user.address?.accountName || '',
+    bankName: user?.bankDetails?.bankName || '',
+    accountName: user?.bankDetails?.accountNo || '',
+    accountHolderName: user.bankDetails?.accountName || '',
     countryCode: 'Malaysia',
     zipCode: user.address?.zipCode || '',
     centerId: user.centerId || '',
@@ -123,7 +124,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     }
   }, [response])
 
-  const {responseData} = useFetchCommon({api: 'banks'})
+  const {responseData} = useFetchCommon({api: 'banks', sameLabelId: true})
 
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
