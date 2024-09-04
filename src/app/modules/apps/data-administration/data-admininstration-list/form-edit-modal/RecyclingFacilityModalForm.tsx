@@ -83,8 +83,9 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     city: user.address?.city || '',
     address: user.address?.street || '',
     companyName: user.companyName || '',
-    bankName: user.address?.bankName || '',
-    accountName: user.address?.accountName || '',
+    bankName: user?.bankDetails?.bankName || '',
+    accountName: user?.bankDetails?.accountNo || '',
+    accountHolderName: user.bankDetails?.accountName || '',
     countryCode: 'Malaysia',
     centerId: user.centerId || '',
     zipCode: user.address?.zipCode || '',
@@ -93,7 +94,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
   })
 
-  const {responseData} = useFetchCommon({api: 'banks'})
+  const {responseData} = useFetchCommon({api: 'banks', sameLabelId: true})
   console.log({responseData}, 'recyling')
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
