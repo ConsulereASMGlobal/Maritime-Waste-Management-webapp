@@ -89,7 +89,15 @@ const UserInfoCell: FC<Props> = ({
       case 'icon':
         return (
           <div className='symbol symbol-circle'>
-            {user?.icon ? <img src={user?.icon || ''} alt={user.name} /> : ''}
+            {user?.icon ? (
+              <img
+                onClick={() => handleClick(user?.icon || toAbsoluteUrl(`/media/avatars/blank.png`))}
+                src={user?.icon || ''}
+                alt={user.name}
+              />
+            ) : (
+              ''
+            )}
           </div>
         )
       case 'categoryIcon':
