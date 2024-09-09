@@ -192,7 +192,7 @@ const BrandModlForm: FC<Props> = ({user = {}, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            style={{color: '#1034A6'}}
+            style={{color: '#043e66'}}
             disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
           >
             <span className='indicator-label'>Submit</span>

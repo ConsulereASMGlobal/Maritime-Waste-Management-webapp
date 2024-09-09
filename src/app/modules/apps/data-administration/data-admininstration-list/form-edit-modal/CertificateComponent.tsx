@@ -268,7 +268,7 @@ const CertificateComponent = ({data, passRef}) => {
         </div>
         <div
           style={{
-            color: '#1034A6',
+            color: '#043e66',
             fontSize: '45px',
             fontStyle: 'italic',
             fontWeight: 'bold',
@@ -335,7 +335,7 @@ const CertificateComponent = ({data, passRef}) => {
             </div>
             {displayData?.orderDetails?.[0]?.items?.length && (
               <table className='table table-hover table-rounded table-striped border gy-4 gs-7 table-bordered'>
-                <thead style={{background: '#1034A6'}}>
+                <thead style={{background: '#043e66'}}>
                   <tr className='fw-bold text-gray-800 border-bottom-2 border-gray-200 text-center'>
                     <th style={{color: '#FFFFFF', maxWidth: '1px'}}>S.N</th>
                     <th style={{color: '#FFFFFF'}}>Category</th>

@@ -23,7 +23,7 @@ const UsersListToolbar = ({label = ''}: userListProps) => {
         ((
           <button
             type='button'
-            style={{backgroundColor: '#1034A6'}}
+            style={{backgroundColor: '#043e66'}}
             className='btn btn-primary'
             onClick={openAddUserModal}
           >

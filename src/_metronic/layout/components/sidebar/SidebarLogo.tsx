@@ -60,30 +60,30 @@ const SidebarLogo = (props: PropsType) => {
         {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'
-            style={{height: '70px', width: '250px'}}
-            src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
-            className=' app-sidebar-logo-default'
+            style={{height: '50%', width: '50%'}}
+            src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+            className='ml-16  mt-4 app-sidebar-logo-default'
           />
         ) : (
           <>
             <img
               alt='Logo'
-              style={{height: '70px', width: '250px'}}
-              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
-              className=' app-sidebar-logo-default theme-light-show'
+              style={{height: '50%', width: '50%'}}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+              className='ml-16  mt-4 app-sidebar-logo-default theme-light-show'
             />
             <img
               alt='Logo'
-              style={{height: '70px', width: '250px'}}
-              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
-              className=' app-sidebar-logo-default theme-dark-show'
+              style={{height: '50%', width: '50%'}}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
+              className='ml-16  mt-4 app-sidebar-logo-default theme-dark-show'
             />
           </>
         )}
 
         {/*  <img
           alt='Logo'
-          src={toAbsoluteUrl('/media/logos/default-small.jpeg')}
+          src={toAbsoluteUrl('/media/logos/default-small.png')}
           className=' app-sidebar-logo-minimize'
         /> */}
       </Link>

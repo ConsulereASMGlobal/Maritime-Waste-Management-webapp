@@ -187,7 +187,7 @@ function getChartOptions(height: number, x_axis: any, y_axis): ApexOptions {
         },
       },
     },
-    colors: [baseColor, secondaryColor, labelColor, '#1034A6'],
+    colors: [baseColor, secondaryColor, labelColor, '#043e66'],
     grid: {
       borderColor: borderColor,
       strokeDashArray: 4,

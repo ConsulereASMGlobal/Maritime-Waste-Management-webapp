@@ -37,7 +37,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem
           to='/apps/facility-master'
           icon='grid-frame'
-          title='Franchise '
+          title='Shipping Company'
           fontIcon='bi-layers'
         />
       )}

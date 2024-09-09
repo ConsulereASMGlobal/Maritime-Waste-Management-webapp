@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {
   isNotEmpty,
-  countryList,
+  // countryList,
   stateList,
   cityList,
   toAbsoluteUrl,
@@ -22,6 +22,7 @@ import {errorToast, successToast} from '../../../../../../_metronic/helpers/comp
 import PasswordFormField from '../../../../accounts/components/settings/cards/PasswordFiledForm'
 import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
 import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
+import {countryList} from '../../../../../../_metronic/helpers/allCOuntry'
 
 type Props = {
   isUserLoading: boolean
@@ -228,7 +229,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           {makeSelectDropDown('centerId', assignHubPlastic)}
         </div> */}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Business Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Shipping Company Name</label>
           <input
             placeholder='Enter Business Name'
             {...formik.getFieldProps('name')}
@@ -424,62 +425,6 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
-          {makeSelectDropDown('bankName', responseData)}
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Account Number</label>
-          <input
-            placeholder='Enter Account Number'
-            {...formik.getFieldProps('accountName')}
-            type='text'
-            name='accountName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.accountName && formik.errors.accountName},
-              {
-                'is-valid': formik.touched.accountName && !formik.errors.accountName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.accountName && formik.errors.accountName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.accountName}</span>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>A/C Holder Name</label>
-          <input
-            placeholder='Enter A/C Holder Name'
-            {...formik.getFieldProps('accountHolderName')}
-            type='text'
-            name='accountHolderName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.accountHolderName && formik.errors.accountHolderName},
-              {
-                'is-valid': formik.touched.accountHolderName && !formik.errors.accountHolderName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.accountHolderName && formik.errors.accountHolderName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.accountHolderName}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* <div className='mb-7 row'>
           <label className='fw-bold fs-6 mb-2'>Certifications available</label>
           <div className='d-flex col-6 gap-4'>
@@ -516,7 +461,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           </div>
         </div> */}
         <div className='flex flex-wrap'>
-          <UploadImage name='proofEstablishment' formik={formik} label='Upload SSM' />
+          <UploadImage name='proofEstablishment' formik={formik} label='Incorporation Document' />
           {/* <UploadImage name='proofOfIdentity' formik={formik} label='Proof of Identity' /> */}
           {/* <UploadImage name='proofOfFacility' formik={formik} label='Proof of Facility' /> */}
         </div>
@@ -536,7 +481,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            style={{color: '#1034A6'}}
+            style={{color: '#043e66'}}
             disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
           >
             <span className='indicator-label'>Submit</span>

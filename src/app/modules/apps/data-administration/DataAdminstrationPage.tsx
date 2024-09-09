@@ -76,7 +76,7 @@ const UsersPage = () => {
           path='depositer'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Depositer</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Collection Agents</PageTitle>
               <UserManagementWrapper />
             </>
           }
@@ -94,7 +94,7 @@ const UsersPage = () => {
           path='facility-master'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Franchise </PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Shipping Company</PageTitle>
               <FacilityMasterWrapper />
             </>
           }

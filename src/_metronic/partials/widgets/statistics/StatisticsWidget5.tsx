@@ -42,7 +42,7 @@ const StatisticsWidget5: React.FC<Props> = ({
               alt='images'
               className={`text-${iconColor} fs-3x ms-n1`}
             />
-            <span className='text-white'>{iconName}</span>
+            <span className='text-black'>{iconName}</span>
           </div>
         )}
 
@@ -60,10 +60,10 @@ const StatisticsWidget5: React.FC<Props> = ({
           null}
 
         {/* <div className={`text-${titleColor} fw-bold fs-2 mb-2 mt-5`}>{title}</div> */}
-        <div className={`text-white fw-bold fs-2 mb-2 mt-5`}>{title}</div>
+        <div className={`text-black fw-bold fs-2 mb-2 mt-5`}>{title}</div>
 
         {/* <div className={`fw-semibold text-${descriptionColor}`}>{description}</div> */}
-        <div className={`fw-semibold text-white`}>{description}</div>
+        <div className={`fw-semibold text-black`}>{description}</div>
       </div>
     </a>
   )

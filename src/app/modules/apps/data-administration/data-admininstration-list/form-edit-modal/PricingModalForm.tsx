@@ -216,7 +216,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>{' '}
-       {/*  <div className='fv-row mb-7'>
+        {/*  <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Incentive</label>
           <input
             placeholder='Add Incentive'
@@ -278,7 +278,7 @@ const RemarksModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            style={{color: '#1034A6'}}
+            style={{color: '#043e66'}}
             disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
           >
             <span className='indicator-label'>Submit</span>

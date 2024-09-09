@@ -256,13 +256,13 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
         {(hideDropdown && (
           <div className='fv-row mb-7'>
-            <label className='fw-bold fs-6 mb-2'>Franchise</label>
+            <label className='fw-bold fs-6 mb-2'>Shipping Company</label>
             {makeSelectDropDown('centerId', assignHubPlastic)}
           </div>
         )) ||
           null}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Business Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Vessel No</label>
           <input
             placeholder='Enter Collection Point Name'
             {...formik.getFieldProps('name')}
@@ -378,14 +378,14 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         {(!isEdit && (
           <>
-            <CountryDropDown name='country' formik={formik} showNameOnly />
+            <CountryDropDown name='country' formik={formik} showNameOnly showState />
           </>
         )) ||
           false}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>City</label>
+          <label className='required fw-bold fs-6 mb-2'>Home Port</label>
           <input
-            placeholder='Enter City'
+            placeholder='Enter Home Port'
             {...formik.getFieldProps('city')}
             type='text'
             name='city'
@@ -458,99 +458,9 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Bank Name</label>
-          {makeSelectDropDown('bankName', responseData)}
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Account Number</label>
-          <input
-            placeholder='Enter Account Number'
-            {...formik.getFieldProps('accountName')}
-            type='text'
-            name='accountName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.accountName && formik.errors.accountName},
-              {
-                'is-valid': formik.touched.accountName && !formik.errors.accountName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.accountName && formik.errors.accountName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.accountName}</span>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>A/C Holder Name</label>
-          <input
-            placeholder='Enter A/C Holder Name'
-            {...formik.getFieldProps('accountHolderName')}
-            type='text'
-            name='accountHolderName'
-            className={clsx(
-              'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.accountHolderName && formik.errors.accountHolderName},
-              {
-                'is-valid': formik.touched.accountHolderName && !formik.errors.accountHolderName,
-              }
-            )}
-            autoComplete='off'
-            disabled={formik.isSubmitting || isUserLoading}
-          />
-          {formik.touched.accountHolderName && formik.errors.accountHolderName && (
-            <div className='fv-plugins-message-container'>
-              <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.accountHolderName}</span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* <div className='mb-7 row'>
-          <label className='fw-bold fs-6 mb-2'>Certifications available</label>
-          <div className='d-flex col-6 gap-4'>
-            <div className='form-check form-check-custom form-check-solid'>
-              <input
-                className='form-check-input me-3'
-                {...formik.getFieldProps('role')}
-                name={'PPRS'}
-                type='checkbox'
-                id={'kt_modal_update_role_option_0'}
-                checked={formik.values['PPRS']}
-                disabled={formik.isSubmitting || isUserLoading}
-              />
-              <label className='form-check-label' htmlFor='kt_modal_update_role_option_0'>
-                <div className='fw-bolder text-gray-800'>PPRS</div>
-              </label>
-              <div className='separator separator-dashed my-5'></div>
-            </div>
-            <div className='form-check form-check-custom form-check-solid'>
-              <input
-                className='form-check-input me-3'
-                {...formik.getFieldProps('role')}
-                name={'ISO9001'}
-                type='checkbox'
-                id={'kt_modal_update_role_option_0'}
-                checked={formik.values['ISO9001']}
-                disabled={formik.isSubmitting || isUserLoading}
-              />
-              <label className='form-check-label' htmlFor='kt_modal_update_role_option_0'>
-                <div className='fw-bolder text-gray-800'>ISO 9001</div>
-              </label>
-              <div className='separator separator-dashed my-5'></div>
-            </div>
-          </div>
-        </div> */}
         <div className='flex flex-wrap'>
-          <UploadImage name='proofEstablishment' formik={formik} label='Upload SSM' />
+          <UploadImage name='proofEstablishment' formik={formik} label='Ship Picture' />
+          <UploadImage name='proofOfIdentity' formik={formik} label='Capture Picture' />
           {/* <UploadImage name='proofOfIdentity' formik={formik} label='Proof of Identity' /> */}
           {/* <UploadImage name='proofOfFacility' formik={formik} label='Proof of Facility' /> */}
         </div>
@@ -570,7 +480,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             type='submit'
             className='btn btn-primary'
             data-kt-users-modal-action='submit'
-            style={{color: '#1034A6'}}
+            style={{color: '#043e66'}}
             disabled={isUserLoading || formik.isSubmitting || !formik.isValid || !formik.touched}
           >
             <span className='indicator-label'>Submit</span>

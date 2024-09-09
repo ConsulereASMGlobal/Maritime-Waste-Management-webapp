@@ -50,7 +50,7 @@ const UserCustomHeader: FC<Props> = ({className, title, tableProps}) => {
         className,
         isSelectedForSorting && order !== undefined && `table-sort-${order}`
       )}
-      style={{cursor: 'pointer', backgroundColor: '#1034A6'}}
+      style={{cursor: 'pointer', backgroundColor: '#043e66'}}
       onClick={sortColumn}
     >
       {title}

@@ -21,7 +21,7 @@ const AuthLayout = () => {
       {/* begin::Body */}
       <div
         className='d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1'
-        style={{background: '#1034A6'}}
+        style={{background: '#043e66'}}
       >
         {/* begin::Form */}
         <div className='d-flex  '>

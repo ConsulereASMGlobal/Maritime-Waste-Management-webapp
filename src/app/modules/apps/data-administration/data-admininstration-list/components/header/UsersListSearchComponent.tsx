@@ -148,7 +148,7 @@ const UsersListSearchComponent = ({
                 </button>
                 <button
                   type='button'
-                  style={{backgroundColor: '#1034A6'}}
+                  style={{backgroundColor: '#043e66'}}
                   onClick={handleSearchFilter}
                   className='btn btn-primary fw-bold px-6'
                   data-kt-menu-dismiss='true'

@@ -139,23 +139,28 @@ const DashboardPage: FC = () => {
   }, [productionTrend])
 
   const numberItems = [
-    {value: 'collected', name: 'Collected', icon: 'Collected', color: '#0F2F97'},
-    {value: 'processed', name: 'Processed', icon: 'Processed', color: '#1034A6'},
-    {value: 'supplied', name: 'Supplied', icon: 'Supplied', color: '#405DB8'},
-    {value: 'stock', name: 'Stock', icon: 'Stock', color: '#5F77C3'},
+    {value: 'collected', name: 'Items Loaded', icon: 'itemLoaded', color: '#ffff'},
+    {value: 'processed', name: 'Consumed', icon: 'consumed', color: '#ffff'},
+    {value: 'supplied', name: 'Waste Disposed', icon: 'wasteDisposed', color: '#ffff'},
+    {value: 'stock', name: 'Stock', icon: 'stockMaritime', color: '#ffff'},
     {
       value: 'collectionPoints',
-      name: 'Aggregators',
-      icon: 'Collection Point',
-      color: '#5F77C3',
+      name: 'Shipping Vessels',
+      icon: 'shippingVessels',
+      color: '#ffff',
     },
-    {value: 'wasteDiverters', name: 'Recyclers', icon: 'Waste Diverters', color: '#405DB8'},
-    {value: 'lifeImpacted', name: 'Collection Agents', icon: 'Life impacted', color: '#1034A6'},
+    {
+      value: 'wasteDiverters',
+      name: 'Waste Management Co.',
+      icon: 'wasteManagement',
+      color: '#ffff',
+    },
+    {value: 'lifeImpacted', name: 'Material Suppliers', icon: 'materialSupplier', color: '#ffff'},
     {
       value: 'co2Footprint',
       name: 'CO2 footprint avoided*',
-      icon: 'emission avoided',
-      color: '#0F2F97',
+      icon: 'co2saving',
+      color: '#ffff',
     },
   ]
 

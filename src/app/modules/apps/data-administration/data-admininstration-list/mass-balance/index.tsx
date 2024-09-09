@@ -46,7 +46,7 @@ const DashboardPage: FC = () => {
 
   const numberItems = [
     {value: 'collected', name: 'PET', icon: 'Collected', color: '#0F2F97'},
-    {value: 'processed', name: 'PP', icon: 'Processed', color: '#1034A6'},
+    {value: 'processed', name: 'PP', icon: 'Processed', color: '#043e66'},
     {value: 'supplied', name: 'HDPE', icon: 'Supplied', color: '#405DB8'},
     {value: 'stock', name: 'LDPE', icon: 'Stock', color: '#5F77C3'},
     {

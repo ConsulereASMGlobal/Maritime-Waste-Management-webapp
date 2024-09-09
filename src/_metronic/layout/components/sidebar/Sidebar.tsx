@@ -23,7 +23,7 @@ const Sidebar = () => {
         <div
           ref={sidebarRef}
           id='kt_app_sidebar'
-          // style={{backgroundColor: '#1034A6'}}
+          // style={{backgroundColor: '#043e66'}}
           className={clsx('app-sidebar', config.app?.sidebar?.default?.class)}
         >
           <SidebarLogo sidebarRef={sidebarRef} />
