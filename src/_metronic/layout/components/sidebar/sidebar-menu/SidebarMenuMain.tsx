@@ -44,26 +44,26 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/apps/depositer'
         icon='switch'
-        title='Collection Agents'
+        title='Material Supplier'
         fontIcon='bi-layers'
       />
       <SidebarMenuItem
         to='/apps/collection-point'
         icon='row-horizontal'
-        title='Aggregator'
+        title='Vessel'
         fontIcon='bi-layers'
       />
       <SidebarMenuItem
         to='/apps/recycler'
         icon='abstract-28'
-        title='Recycler'
+        title='Waste Mgmt Co'
         fontIcon='bi-layers'
       />
       {/* <SidebarMenuItem to='/apps/rider' icon='abstract-28' title='Rider' fontIcon='bi-layers' /> */}
       <SidebarMenuItem
         to='/apps/collect-orders'
         icon='element-11'
-        title='Collect Orders'
+        title='Material In'
         fontIcon='bi-layers'
       />
       <SidebarMenuItem
@@ -75,7 +75,7 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/apps/supply-orders'
         icon='maximize'
-        title='Supply Orders'
+        title='Material Out'
         fontIcon='bi-layers'
       />
       {!hideSideBar && (

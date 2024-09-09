@@ -11,7 +11,7 @@ import {roleColumns} from './_columns'
 const UsersList = () => {
   return (
     <KTCard>
-      <UsersListHeader placeholder='Search Recycler Code' label='Add Customer Code' />
+      <UsersListHeader placeholder='Search Waste Mgmt Co Code' label='Add Customer Code' />
       <UsersTable columnProps={roleColumns} />
       <UserEditModal formName='CustomerCodeModalForm' />
     </KTCard>

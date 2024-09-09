@@ -11,7 +11,7 @@ import {useEffect} from 'react'
 const UsersList = () => {
   return (
     <KTCard>
-      <UsersListHeader label='Add New' placeholder='Search Recycler' />
+      <UsersListHeader label='Add New' placeholder='Search Waste Mgmt Co' />
       <UsersTable columnProps={roleColumns} />
       <UserEditModal formName='CustomerEditCodeModalForm' />
     </KTCard>

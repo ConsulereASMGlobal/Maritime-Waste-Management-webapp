@@ -67,7 +67,7 @@ const UsersPage = () => {
           path='recycler'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Recycler</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Waste Mgmt Co</PageTitle>
               <CustomerListWrapper />
             </>
           }
@@ -76,7 +76,7 @@ const UsersPage = () => {
           path='depositer'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Collection Agents</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Material Supplier</PageTitle>
               <UserManagementWrapper />
             </>
           }
@@ -103,7 +103,7 @@ const UsersPage = () => {
           path='collection-point'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Aggregator</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Vessel</PageTitle>
               <ShellGasStationWrapper />
             </>
           }
@@ -131,7 +131,7 @@ const UsersPage = () => {
           path='supply-orders'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Supply Orders</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Material Out</PageTitle>
               <ReturnOrdersWrapper />
             </>
           }
@@ -140,7 +140,7 @@ const UsersPage = () => {
           path='collect-orders'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Collect Orders</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Material In</PageTitle>
               <CollectOrdersWrapper />
             </>
           }
