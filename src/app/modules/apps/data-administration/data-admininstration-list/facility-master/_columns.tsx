@@ -8,6 +8,10 @@ const header = [
     value: 'companyDetails[name]',
   },
   {
+    label: 'Representative',
+    value: 'personalDetails[name]',
+  },
+  {
     label: 'Contact',
     value: 'personalDetail',
   },
@@ -18,6 +22,10 @@ const header = [
   {
     label: 'City',
     value: 'address[city]',
+  },
+  {
+    label: 'Country',
+    value: 'address[country]',
   },
   // {
   //   label: 'City, Province',
@@ -32,22 +40,9 @@ const header = [
     value: 'address[zipCode]',
   },
   {
-    label: 'SSM',
+    label: 'KYC',
     value: 'bussinessImage',
   },
-  {
-    label: 'Bank',
-    value: 'bankDetails[bankName]',
-  },
-  {
-    label: 'Account No',
-    value: 'bankDetails[accountNo]',
-  },
-  {
-    label: 'A/C Holder',
-    value: 'bankDetails[accountName]',
-  },
-
   {
     action: ['edit', 'toggle'],
   },

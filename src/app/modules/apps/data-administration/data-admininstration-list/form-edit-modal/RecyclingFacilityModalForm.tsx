@@ -127,11 +127,13 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           zipCode,
           ISO9001,
           accountHolderName,
+          firstName,
+          countryCode,
         } = values
         const payload = {
           address: {
             city,
-            country,
+            country: countryCode,
             bankName,
             accountName,
             state,
@@ -150,7 +152,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             name: name,
           },
           email,
-          firstName: '',
+          firstName: firstName,
           password,
           lastName: '',
           mobile: phone,
@@ -253,6 +255,31 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Representative Name</label>
+          <input
+            placeholder='Enter Representative Name'
+            {...formik.getFieldProps('firstName')}
+            type='text'
+            name='firstName'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.firstName && formik.errors.firstName},
+              {
+                'is-valid': formik.touched.firstName && !formik.errors.firstName,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.name && formik.errors.name && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.name}</span>
+              </div>
+            </div>
+          )}
+        </div>
         {/* {(!isEdit && (
           <div className='fv-row mb-7'>
             <label className='required fw-bold fs-6 mb-2'>User Name</label>
@@ -282,10 +309,10 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         )) ||
           null} */}
 
-        <div className='fv-row mb-7'>
+        {/* <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Country Code</label>
           {makeSelectDropDown('countryCode', countryList)}
-        </div>
+        </div> */}
 
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Mobile No</label>
@@ -345,7 +372,11 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         {(!isEdit && (
           <>
-            <CountryDropDown name='country' formik={formik} showNameOnly />
+            {/* <CountryDropDown name='country' formik={formik} showNameOnly /> */}
+            <div className='fv-row mb-7'>
+              <label className='required fw-bold fs-6 mb-2'>Country</label>
+              {makeSelectDropDown('countryCode', countryList)}
+            </div>
           </>
         )) ||
           false}
@@ -366,6 +397,7 @@ const UserEditModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
+          <br />
           <div className='fv-row mb-7'>
             <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
             <input

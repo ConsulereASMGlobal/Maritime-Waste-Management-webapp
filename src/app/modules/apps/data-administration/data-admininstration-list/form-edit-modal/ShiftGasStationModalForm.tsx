@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {
   isNotEmpty,
-  countryList,
+  // countryList,
   stateList,
   cityList,
   toAbsoluteUrl,
@@ -23,6 +23,7 @@ import PasswordFormField from '../../../../accounts/components/settings/cards/Pa
 import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
 import {useAuth} from '../../../../auth'
 import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
+import {countryList} from '../../../../../../_metronic/helpers/allCOuntry'
 
 type Props = {
   isUserLoading: boolean
@@ -94,7 +95,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     centerId: user.franchiseId || '',
     zipCode: user.address?.zipCode || '',
     proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
-    proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
+    proofOfIdentity: user.kycDocument?.[1]?.docUrl || '',
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
   })
 
@@ -154,6 +155,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           city,
           address,
           proofEstablishment,
+          proofOfIdentity,
           centerId,
           PPRS,
           ISO9001,
@@ -171,11 +173,11 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           address: {
             street: address,
             city,
-            country: country,
+            country: countryCode,
             latitute: 37.785834,
             longitute: -122.406417,
             zipCode: zipCode,
-            countryCode: country,
+            countryCode: '',
           },
           bankDetails: {
             bankName,
@@ -193,6 +195,11 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               docUrl: proofEstablishment,
               docNumber: '',
               docType: 'POE',
+            },
+            {
+              docUrl: proofOfIdentity,
+              docNumber: '',
+              docType: 'POI',
             },
           ],
         }
@@ -264,7 +271,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Vessel No</label>
           <input
-            placeholder='Enter Collection Point Name'
+            placeholder='Enter Vessel No'
             {...formik.getFieldProps('name')}
             type='text'
             name='name'
@@ -273,6 +280,31 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               {'is-invalid': formik.touched.name && formik.errors.name},
               {
                 'is-valid': formik.touched.name && !formik.errors.name,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.name && formik.errors.name && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.name}</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Captain Name</label>
+          <input
+            placeholder='Enter Captain Name'
+            {...formik.getFieldProps('firstName')}
+            type='text'
+            name='firstName'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.firstName && formik.errors.firstName},
+              {
+                'is-valid': formik.touched.firstName && !formik.errors.firstName,
               }
             )}
             autoComplete='off'
@@ -315,10 +347,10 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         )) ||
           null} */}
 
-        <div className='fv-row mb-7'>
+        {/*     <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Country Code</label>
           {makeSelectDropDown('countryCode', countryList)}
-        </div>
+        </div> */}
 
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Mobile No</label>
@@ -378,12 +410,16 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         {(!isEdit && (
           <>
-            <CountryDropDown name='country' formik={formik} showNameOnly showState />
+            {/* <CountryDropDown name='country' formik={formik} showNameOnly showState /> */}
+            <div className='fv-row mb-7'>
+              <label className='required fw-bold fs-6 mb-2'>Country</label>
+              {makeSelectDropDown('countryCode', countryList)}
+            </div>
           </>
         )) ||
           false}
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Home Port</label>
+          <label className='required fw-bold fs-6 mb-2'>Home Port/ City</label>
           <input
             placeholder='Enter Home Port'
             {...formik.getFieldProps('city')}
@@ -460,7 +496,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div>
         <div className='flex flex-wrap'>
           <UploadImage name='proofEstablishment' formik={formik} label='Ship Picture' />
-          <UploadImage name='proofOfIdentity' formik={formik} label='Capture Picture' />
+          <UploadImage name='proofOfIdentity' formik={formik} label='Captain Picture' />
           {/* <UploadImage name='proofOfIdentity' formik={formik} label='Proof of Identity' /> */}
           {/* <UploadImage name='proofOfFacility' formik={formik} label='Proof of Facility' /> */}
         </div>

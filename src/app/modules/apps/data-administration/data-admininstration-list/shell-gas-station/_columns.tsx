@@ -4,8 +4,12 @@ import {columnGenerators} from '../../../../../../_metronic/helpers'
 const header = [
   {label: 'S.N', value: 'id'},
   {
-    label: 'Business Name',
+    label: 'Vessel Name',
     value: 'personalDetails[name]',
+  },
+  {
+    label: 'Captain Name',
+    value: 'personalDetails[firstName]',
   },
   {
     label: 'Contact',
@@ -18,6 +22,10 @@ const header = [
   {
     label: 'City',
     value: 'address[city]',
+  },
+  {
+    label: 'City',
+    value: 'address[country]',
   },
   // {
   //   label: 'City, Province',
@@ -32,22 +40,13 @@ const header = [
     value: 'address[zipCode]',
   },
   {
-    label: 'SSM',
+    label: 'KYC',
     value: 'bussinessImage',
   },
   {
-    label: 'Bank',
-    value: 'bankDetails[bankName]',
+    label: 'Profile',
+    value: 'personalImage',
   },
-  {
-    label: 'Account No',
-    value: 'bankDetails[accountNo]',
-  },
-  {
-    label: 'A/C Holder',
-    value: 'bankDetails[accountName]',
-  },
-
   {
     action: ['edit', 'toggle', 'qr'],
   },
