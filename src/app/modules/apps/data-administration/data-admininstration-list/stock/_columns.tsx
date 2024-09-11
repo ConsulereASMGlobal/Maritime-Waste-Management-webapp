@@ -45,7 +45,7 @@ const header = [
     value: 'id',
   },
   {
-    label: 'Facility Name',
+    label: 'Vessel No',
     value: 'pickupPointName',
   },
   {
@@ -53,11 +53,11 @@ const header = [
     value: 'pickupPointAddress[city]',
   },
   {
-    label: 'Collected',
+    label: 'Loaded',
     value: 'collected',
   },
   {
-    label: 'Received',
+    label: 'Collected',
     value: 'processed12',
   },
   {
@@ -65,7 +65,7 @@ const header = [
     value: 'processed',
   },
   {
-    label: 'Supplied',
+    label: 'Unloaded',
     value: 'supplied',
   },
   {label: 'Stock', value: 'stock'},

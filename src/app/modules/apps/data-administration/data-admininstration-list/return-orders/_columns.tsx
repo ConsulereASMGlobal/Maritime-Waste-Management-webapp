@@ -7,7 +7,7 @@ const header = [
     value: 'id',
   },
   {
-    label: 'Order Id',
+    label: 'TXN ID',
     value: 'id',
   },
   {
@@ -15,11 +15,11 @@ const header = [
     value: 'createdAt',
   },
   {
-    label: 'Delivery Date',
+    label: 'Shipping Co',
     value: 'pickupDate',
   },
   {
-    label: 'Aggregator',
+    label: 'Vessel No',
     value: 'pickupInfo[name]',
   },
   /*  {
@@ -35,7 +35,7 @@ const header = [
     value: 'pickup_quantity_item',
   },
   {
-    label: 'Icon',
+    label: 'Custody',
     value: 'categoryIcon',
   },
   {
@@ -55,9 +55,9 @@ const header = [
     value: 'status',
   },
 
-  {
-    label: 'certificate_view',
-  },
+  // {
+  //   label: 'certificate_view',
+  // },
   {
     action: ['qr'],
   },

@@ -8,11 +8,11 @@ const header = [
     value: 'createdAt',
   },
   {
-    label: 'Aggregator',
+    label: 'Vessel No',
     value: 'hubName',
   },
   {
-    label: 'Process Name',
+    label: 'Activity',
     value: 'processName',
   },
   {
@@ -35,14 +35,14 @@ const header = [
     label: 'Wastage',
     value: 'wastage',
   },
-  {
+  /*  {
     label: 'Team Size',
     value: 'teamSize',
   },
   {
     label: 'Working Hrs',
     value: 'operatingHours',
-  },
+  }, */
   /* {
     label: 'Receipt',
     value: 'qty',

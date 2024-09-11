@@ -105,6 +105,12 @@ const UserInfoCell: FC<Props> = ({
           <div className='symbol symbol-circle swymbol-50px overflow-hidden me-3'>
             <div className='symbol-label'>
               <img
+                onClick={() =>
+                  handleClick(
+                    user?.orderDetails?.[0]?.categoryIcon ||
+                      toAbsoluteUrl(`/media/avatars/blank.png`)
+                  )
+                }
                 src={`${user?.orderDetails?.[0]?.categoryIcon || ''}`}
                 alt={user.name}
                 className='w-100 bg-[#156467]'
