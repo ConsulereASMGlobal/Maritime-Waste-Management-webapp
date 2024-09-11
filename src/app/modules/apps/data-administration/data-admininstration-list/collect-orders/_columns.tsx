@@ -7,7 +7,7 @@ const header = [
     value: 'id',
   },
   {
-    label: 'Order Id',
+    label: 'Txn Id',
     value: 'id',
   },
   {
@@ -15,17 +15,21 @@ const header = [
     value: 'createdAt',
   },
   {
-    label: 'Aggregator',
+    label: 'Vessel No',
+    value: 'pickupInfo[name]',
+  },
+  {
+    label: 'Captain',
     value: 'centreInfo[name]',
   },
   {
-    label: 'Plastic',
+    label: 'Material',
     value: 'categoryName',
   },
-  {
-    label: 'Icon',
-    value: 'categoryIcon',
-  },
+  // {
+  //   label: 'Icon',
+  //   value: 'categoryIcon',
+  // },
   {
     label: 'Quantity',
     value: 'quantityDeposit',
@@ -35,21 +39,21 @@ const header = [
     value: 'paymentMode',
   }, */
   {
-    label: 'C. Agent',
+    label: 'Supplier',
     value: 'customerInfo[name]',
   },
   {
-    label: 'Contact',
-    value: 'customerInfo[mobile]',
+    label: 'Custody',
+    value: 'categoryIcon',
   },
   {
-    label: 'Amount',
+    label: 'Supplier',
     value: 'totalAmount',
   },
-  {
+  /*  {
     label: 'Mode',
     value: 'paymentMode',
-  },
+  }, */
   {
     label: 'Status',
     value: 'status',
