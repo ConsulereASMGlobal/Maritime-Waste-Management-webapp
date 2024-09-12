@@ -62,6 +62,23 @@ const UserInfoCell: FC<Props> = ({
   const returnData = () => {
     if (mapData.includes('[')) return clipText(accessNestedProperty(user, mapData), 30)
     switch (mapData) {
+      case 'images':
+        return (
+          (user?.images?.length && (
+            <div
+              onClick={() =>
+                setshowImageModal({
+                  show: true,
+                  clicked: mapData,
+                })
+              }
+            >
+              {/* {filterImage(user.images, mapData)?.length ? 'click to view' : '-'} */}
+              {user.images?.length ? 'click to view' : '-'}
+            </div>
+          )) ||
+          '-'
+        )
       case 'facilityType':
         return user?.facilityType?.toUpperCase()
       case 'categoryMap':

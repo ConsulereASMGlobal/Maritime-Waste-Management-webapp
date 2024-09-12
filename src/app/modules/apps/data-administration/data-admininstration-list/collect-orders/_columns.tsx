@@ -30,6 +30,7 @@ const header = [
   //   label: 'Icon',
   //   value: 'categoryIcon',
   // },
+
   {
     label: 'Quantity',
     value: 'quantityDeposit',
@@ -44,7 +45,7 @@ const header = [
   },
   {
     label: 'Custody',
-    value: 'categoryIcon',
+    value: 'images',
   },
   {
     label: 'Supplier',

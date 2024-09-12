@@ -27,13 +27,13 @@ const AuthLayout = () => {
         <div className='d-flex  '>
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
+            src={toAbsoluteUrl('/media/logos/main.png')}
             style={{
               height: '50px !important',
-              width: '200px',
+              width: '120px',
               // width: '50px',
-              marginLeft: '-35px',
-              marginTop: '-2px',
+              marginLeft: '-5px',
+              marginTop: '-30px',
             }}
             // className='h-100px'
           />
@@ -41,7 +41,7 @@ const AuthLayout = () => {
 
         <div className='d-flex flex-center flex-column flex-lg-row-fluid'>
           <div style={{fontSize: '42px', marginBottom: '42px', color: 'white'}}>
-            Gembira Dapat Berjumpa Awak
+            Good to see you again
           </div>{' '}
           {/* begin::Wrapper */}
           <div className='w-lg-500px p-10'>
