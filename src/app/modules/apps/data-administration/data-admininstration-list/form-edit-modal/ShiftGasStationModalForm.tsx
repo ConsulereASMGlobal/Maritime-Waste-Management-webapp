@@ -128,6 +128,13 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     }
   }, [response])
 
+  const vesselType = [
+    {label: 'Ship', value: 'Ship'},
+    {label: 'Fishing Vessel', value: 'Fishing Vessel'},
+    {label: 'Recreational Vessel', value: 'Recreational Vessel'},
+    {label: 'Yacht', value: 'Yacht'},
+  ]
+
   const {responseData} = useFetchCommon({api: 'banks', sameLabelId: true})
   console.log({responseData})
   const cancel = (withRefresh?: boolean) => {
@@ -162,14 +169,20 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           zipCode,
           accountHolderName,
           countryCode,
+          vehicleNumber,
+          firstName,
         } = values
         const payload = {
+          vehicleNumber,
           firstName: name,
           lastName: '',
           email: email,
           mobile: phone,
           userType: 'PICKUP_POINT',
           countryCode: country,
+          personalDetails: {
+            name: firstName,
+          },
           address: {
             street: address,
             city,
@@ -210,12 +223,12 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           await createUser(payload, 'user/register')
           successToast('Added')
         }
+        cancel(true)
       } catch (ex) {
         errorToast('Error')
         console.error(ex)
       } finally {
         setSubmitting(true)
-        cancel(true)
       }
     },
   })
@@ -272,26 +285,30 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           <label className='required fw-bold fs-6 mb-2'>Vessel No</label>
           <input
             placeholder='Enter Vessel No'
-            {...formik.getFieldProps('name')}
+            {...formik.getFieldProps('vehicleNumber')}
             type='text'
-            name='name'
+            name='vehicleNumber'
             className={clsx(
               'form-control form-control-solid mb-3 mb-lg-0',
-              {'is-invalid': formik.touched.name && formik.errors.name},
+              {'is-invalid': formik.touched.vehicleNumber && formik.errors.vehicleNumber},
               {
-                'is-valid': formik.touched.name && !formik.errors.name,
+                'is-valid': formik.touched.vehicleNumber && !formik.errors.vehicleNumber,
               }
             )}
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
-          {formik.touched.name && formik.errors.name && (
+          {formik.touched.vehicleNumber && formik.errors.vehicleNumber && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.name}</span>
+                <span role='alert'>{formik.errors.vehicleNumber}</span>
               </div>
             </div>
           )}
+        </div>
+        <div className='fv-row mb-7'>
+          <label className='fw-bold fs-6 mb-2'>Vessel Type</label>
+          {makeSelectDropDown('vehicleType', vesselType)}
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Captain Name</label>
