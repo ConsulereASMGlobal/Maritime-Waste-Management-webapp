@@ -176,15 +176,12 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         const payload = {
           vehicleNumber,
           vehicleType,
-          firstName: name,
           lastName: '',
           email: email,
           mobile: phone,
           userType: 'PICKUP_POINT',
           countryCode: country,
-          personalDetails: {
-            firstName: firstName,
-          },
+          firstName: firstName,
           address: {
             street: address,
             city,
