@@ -71,15 +71,15 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           </div>
         </div>
 
-        {(data.inputMaterialName && (
+        {(data?.inputMaterialName && (
           <div className='mt-3 px-[32px]'>
             <div className="grid grid-cols-2 rounded-t-md bg-[url('/media/books/table-bg.png')] bg-no-repeat bg-cover py-2.5 px-4">
               <p className='text-base font-bold text-white'>Input Material</p>
               <p className='text-base font-bold place-self-end text-white'>Quantity(kg)</p>
             </div>
             <div className='grid grid-cols-2 py-[10px] px-4 bg-[#F6F6F6]'>
-              <p className='font-bold text-base'>{data.inputMaterialName}</p>
-              <p className='font-bold text-base place-self-end'>{data.inputQuantity}</p>
+              <p className='font-bold text-base'>{data?.inputMaterialName}</p>
+              <p className='font-bold text-base place-self-end'>{data?.inputQuantity}</p>
             </div>
           </div>
         )) ||

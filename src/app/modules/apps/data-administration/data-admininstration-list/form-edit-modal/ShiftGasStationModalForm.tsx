@@ -183,7 +183,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           userType: 'PICKUP_POINT',
           countryCode: country,
           personalDetails: {
-            name: firstName,
+            firstName: firstName,
           },
           address: {
             street: address,
