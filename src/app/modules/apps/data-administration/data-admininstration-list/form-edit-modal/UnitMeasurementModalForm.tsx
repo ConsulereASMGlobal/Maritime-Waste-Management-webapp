@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {isNotEmpty, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
@@ -9,6 +9,9 @@ import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {createUser, updateUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import {errorToast, successToast} from '../../../../../../_metronic/helpers/components/Toaster'
+import {countryList} from '../../../../../../_metronic/helpers/allCOuntry'
+import UploadImage from '../../../../../../_metronic/helpers/components/ImageUpload'
+import {useFetchCommon} from '../../../../../../_metronic/helpers/crud-helper/useQuery'
 
 type Props = {
   isUserLoading: boolean
@@ -33,12 +36,31 @@ const editUserSchema = Yup.object().shape({
 const UnitMeasurementModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
+  const {responseData} = useFetchCommon({
+    api: 'users?page=1&size=10&type=FRANCHISE',
+    isDropDown: false,
+  })
+
+  console.log({responseData})
+  const [franchiseList, setFranchiseList] = useState([])
+
+  useEffect(() => {
+    if (responseData) {
+      let arrayList: any = []
+      responseData.map((x) => {
+        arrayList.push({label: x.companyDetails.name, value: x.id})
+      })
+      setFranchiseList(arrayList)
+    }
+  }, [responseData])
 
   const [userForEdit] = useState<any>({
     ...user,
     name: user.name || '',
     address: user.address || '',
     mobileNumber: user.mobileNumber || '',
+    proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
+    proofOfIdentity: user.kycDocument?.[1]?.docUrl || '',
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -61,16 +83,29 @@ const UnitMeasurementModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           lastName: '',
           userType: 'CUSTOMER',
           customerType: 'CORPORATE',
+          franchiseId: values.franchiseId,
           address: {
-            country: '',
+            country: values.country,
             state: '',
-            city: '',
-            zipCode: '',
+            city: values.city,
+            zipCode: values.zipCode,
             street: values.address,
             landMark: '',
             latitute: 0,
             longitute: 0,
           },
+          kycDocument: [
+            {
+              docUrl: values.proofEstablishment,
+              docNumber: '',
+              docType: 'POE',
+            },
+            {
+              docUrl: values.proofOfIdentity,
+              docNumber: '',
+              docType: 'POI',
+            },
+          ],
         }
         if (isNotEmpty(values.id)) {
           await updateUser(values)
@@ -88,9 +123,35 @@ const UnitMeasurementModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       }
     },
   })
+  const makeSelectDropDown = (name = '', options: any = []) => {
+    return (
+      <select
+        // className='form-select form-select-solid form-select-lg'
+        className={clsx(
+          'form-control form-control-solid mb-3 mb-lg-0',
+          {'is-invalid': formik.touched[name] && formik.errors[name]},
+          {
+            'is-valid': formik.touched[name] && !formik.errors[name],
+          }
+        )}
+        {...formik.getFieldProps(name)}
+      >
+        <option value=''>Select One...</option>
+        {options.map((eachOption, eachInd) => (
+          <option key={eachInd + 1 + ''} value={eachOption.value}>
+            {eachOption.label}
+          </option>
+        ))}
+      </select>
+    )
+  }
   return (
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Franchisee</label>
+          {makeSelectDropDown('franchiseId', franchiseList)}
+        </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Name</label>
           <input
@@ -166,6 +227,65 @@ const UnitMeasurementModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Country</label>
+          {makeSelectDropDown('country', countryList)}
+        </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>City</label>
+          <input
+            placeholder='Enter City'
+            {...formik.getFieldProps('city')}
+            type='text'
+            name='city'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.city && formik.errors.city},
+              {
+                'is-valid': formik.touched.city && !formik.errors.city,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.city && formik.errors.city && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.city}</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className='fv-row mb-7'>
+          <label className='required fw-bold fs-6 mb-2'>Zip Code</label>
+          <input
+            placeholder='Enter Zip Code'
+            {...formik.getFieldProps('zipCode')}
+            type='text'
+            name='zipCode'
+            className={clsx(
+              'form-control form-control-solid mb-3 mb-lg-0',
+              {'is-invalid': formik.touched.zipCode && formik.errors.zipCode},
+              {
+                'is-valid': formik.touched.zipCode && !formik.errors.zipCode,
+              }
+            )}
+            autoComplete='off'
+            disabled={formik.isSubmitting || isUserLoading}
+          />
+          {formik.touched.zipCode && formik.errors.zipCode && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>
+                <span role='alert'>{formik.errors.zipCode}</span>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className='grid grid-cols-2'>
+          <UploadImage name='proofEstablishment' formik={formik} label='Upload Logo' />
+          <UploadImage name='proofOfIdentity' formik={formik} label='Upload KYC' />
+        </div>
+
         <div className='text-center pt-15'>
           <button
             type='reset'

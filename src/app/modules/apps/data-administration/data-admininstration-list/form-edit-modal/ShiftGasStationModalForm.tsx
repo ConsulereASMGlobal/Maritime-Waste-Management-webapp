@@ -310,9 +310,9 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           {makeSelectDropDown('vehicleType', vesselType)}
         </div>
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Captain Name</label>
+          <label className='required fw-bold fs-6 mb-2'>Vessel Name</label>
           <input
-            placeholder='Enter Captain Name'
+            placeholder='Enter Vessel Name'
             {...formik.getFieldProps('firstName')}
             type='text'
             name='firstName'
@@ -326,10 +326,10 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             autoComplete='off'
             disabled={formik.isSubmitting || isUserLoading}
           />
-          {formik.touched.name && formik.errors.name && (
+          {formik.touched.firstName && formik.errors.firstName && (
             <div className='fv-plugins-message-container'>
               <div className='fv-help-block'>
-                <span role='alert'>{formik.errors.name}</span>
+                <span role='alert'>{formik.errors.firstName}</span>
               </div>
             </div>
           )}
@@ -369,7 +369,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
         </div> */}
 
         <div className='fv-row mb-7'>
-          <label className='required fw-bold fs-6 mb-2'>Mobile No</label>
+          <label className='required fw-bold fs-6 mb-2'>Vessel No</label>
           <small className=''> (will be used for App Login)</small>
           <input
             placeholder='Enter mobile number (9XX XXX XXXX)'
@@ -459,7 +459,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
             </div>
           )}
         </div>
-        <div className='fv-row mb-7'>
+        {/*  <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>{isEdit ? 'Street' : 'Street'} </label>
           <input
             placeholder='Enter Address'
@@ -509,7 +509,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
         <div className='flex flex-wrap'>
           <UploadImage name='proofEstablishment' formik={formik} label='Ship Picture' />
           <UploadImage name='proofOfIdentity' formik={formik} label='Captain Picture' />
