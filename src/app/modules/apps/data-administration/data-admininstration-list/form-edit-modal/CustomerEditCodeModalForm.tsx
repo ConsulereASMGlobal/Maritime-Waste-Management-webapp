@@ -89,7 +89,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     accountHolderName: user.bankDetails?.accountName || '',
     countryCode: 'Malaysia',
     zipCode: user.address?.zipCode || '',
-    centerId: user.centerId || '',
+    franchiseId: user.franchiseId || '',
     proofEstablishment: user.kycDocument?.[0]?.docUrl || '',
     proofOfIdentity: user.personalDetails?.proofOfIdentity || '',
     proofOfFacility: user.personalDetails?.proofOfFacility || '',
@@ -152,7 +152,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
           city,
           address,
           proofEstablishment,
-          centerId,
+          franchiseId,
           PPRS,
           ISO9001,
           accountHolderName,
@@ -192,7 +192,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               docNumber: '',
             },
           ],
-          centerId,
+          franchiseId,
           PPRS,
           ISO9001,
         }
@@ -256,7 +256,7 @@ const ShiftModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Franchise</label>
-          {makeSelectDropDown('centerId', assignHubPlastic)}
+          {makeSelectDropDown('franchiseId', assignHubPlastic)}
         </div>
         <div className='fv-row mb-7'>
           <label className='required fw-bold fs-6 mb-2'>Business Name</label>
