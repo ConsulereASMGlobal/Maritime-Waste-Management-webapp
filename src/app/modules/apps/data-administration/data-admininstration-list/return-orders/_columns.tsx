@@ -11,11 +11,11 @@ const header = [
     value: 'id',
   },
   {
-    label: 'Created On',
+    label: 'Date',
     value: 'createdAt',
   },
   {
-    label: 'Shipping Co',
+    label: 'Name',
     value: 'pickupDate',
   },
   {
@@ -31,13 +31,13 @@ const header = [
     value: 'categoryName',
   },
   {
-    label: 'Type',
+    label: 'SKU',
     value: 'pickup_quantity_item',
   },
-  {
+  /*   {
     label: 'Custody',
     value: 'categoryIcon',
-  },
+  }, */
   {
     label: 'Quantity',
     value: 'pickup_quantity',
@@ -45,10 +45,6 @@ const header = [
   {
     label: 'Recycler',
     value: 'centreInfo[name]',
-  },
-  {
-    label: 'Delivered On',
-    value: 'pickupDate',
   },
   {
     label: 'Status',
@@ -59,7 +55,8 @@ const header = [
   //   label: 'certificate_view',
   // },
   {
-    action: ['qr'],
+    // action: ['qr'],
+    action: ['view', 'id', 'qr'],
   },
 ]
 

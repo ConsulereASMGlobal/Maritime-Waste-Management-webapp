@@ -16,10 +16,10 @@ const header = [
   },
   {
     label: 'Vessel No',
-    value: 'pickupInfo[name]',
+    value: 'dropOffPointInfo[mobile]',
   },
   {
-    label: 'Captain',
+    label: 'Name',
     value: 'centreInfo[name]',
   },
   {
@@ -46,10 +46,6 @@ const header = [
   {
     label: 'Custody',
     value: 'images',
-  },
-  {
-    label: 'Supplier',
-    value: 'totalAmount',
   },
   /*  {
     label: 'Mode',

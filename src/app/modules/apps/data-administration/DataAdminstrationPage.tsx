@@ -121,7 +121,7 @@ const UsersPage = () => {
           path='processing-record'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Processing Record</PageTitle>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Consumption</PageTitle>
               <ProcessingRecordList />
             </>
           }

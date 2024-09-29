@@ -70,7 +70,7 @@ const ViewImageModal = ({close, images, name}: any) => {
                   <img
                     height={200}
                     width={200}
-                    src={eachImage.url || eachImage}
+                    src={eachImage.url || eachImage.docUrl || eachImage}
                     key={eachind + 1 + ''}
                     alt=''
                   />

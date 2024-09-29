@@ -27,11 +27,12 @@ const DropOffPointModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               Production Report
             </p>
             <img
-              width={'34%'}
+              width={120}
+              height={120}
               alt='images'
-              className='absolute z-[1] pl-6 mt-6'
+              className='absolute z-[1] pl-6 mt-1'
               // src='/media/logos/sidebar-logo.svg'
-              src='/media/logos/sidebar-logo.jpeg'
+              src='/media/logos/sidebar-logo.png'
             />
             <img
               alt='images'

@@ -69,7 +69,7 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/apps/processing-record'
         icon='element-11'
-        title='Processing Record'
+        title='Consumption'
         fontIcon='bi-layers'
       />
       <SidebarMenuItem

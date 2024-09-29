@@ -147,7 +147,8 @@ const UserInfoCell: FC<Props> = ({
       case 'pickup_quantity_item':
         return user?.orderDetails?.[0].items?.map((x: any, ind: number) => (
           <div key={ind + 1 + ''}>
-            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(2)} Kg
+            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(2)}
+            {/* {mapData === 'pickup_quantity' ? ' Kg' : ''} */}
           </div>
         ))
       case 'proofEstablishment':
@@ -223,6 +224,14 @@ const UserInfoCell: FC<Props> = ({
             {user?.[mapData] || user?.personalDetails?.[mapData]}
           </span>
         )
+      case 'inputMaterialName':
+      case 'inputQuantity':
+        return (
+          <>
+            {user?.inputMaterial?.map((x) => x?.[mapData] || '')}
+            {/* {mapData === 'inputQuantity' ? ' Kg' : ''} */}
+          </>
+        )
       case 'pickupointId':
         return (
           user?.pickupointId?.map((eachData, len) => (
@@ -271,7 +280,7 @@ const UserInfoCell: FC<Props> = ({
             return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
           // return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
           case 'created':
-            return <span className='badge badge-light-warning fs-7 fw-bold'>{statusData}</span>
+            return <span className='badge badge-light-success fs-7 fw-bold'>{statusData}</span>
           case 'rejected':
             return <span className='badge badge-light-danger fs-7 fw-bold'>{statusData}</span>
           case 'pickup assigned':

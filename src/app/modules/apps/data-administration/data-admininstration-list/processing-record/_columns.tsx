@@ -12,6 +12,10 @@ const header = [
     value: 'hubName',
   },
   {
+    label: 'Name',
+    value: 'name',
+  },
+  {
     label: 'Activity',
     value: 'processName',
   },
@@ -20,20 +24,12 @@ const header = [
     value: 'inputMaterialName',
   },
   {
-    label: 'Quantity (KG)',
+    label: 'Quantity',
     value: 'inputQuantity',
   },
   {
-    label: 'Output',
-    value: 'productionItemDetails',
-  },
-  {
-    label: 'Quantity (KG)',
-    value: 'productionItemDetailsQuantity',
-  },
-  {
-    label: 'Wastage',
-    value: 'wastage',
+    label: 'Custody',
+    value: 'images',
   },
   /*  {
     label: 'Team Size',

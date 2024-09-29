@@ -63,16 +63,16 @@ const CertificateComponent = ({data, passRef}) => {
   }
 
   const depositerName = [
-    {label: 'Depositor Name', value: displayData?.customerInfo?.name},
+    {label: 'Name', value: displayData?.customerInfo?.name},
     {label: 'Mobile Number', value: displayData?.customerInfo?.mobile},
     {
-      label: 'Source',
+      label: 'Port',
       value: isCollectOrdersPage
         ? displayData?.orderDetails?.[0]?.items?.[0]?.remark
         : displayData?.source,
     },
     {
-      label: 'Collection Date',
+      label: 'Loading Date',
       value: new Date(displayData.collectionDate || new Date()).toLocaleDateString() || '',
     },
     {label: 'Status', value: displayData?.status},
@@ -199,15 +199,15 @@ const CertificateComponent = ({data, passRef}) => {
   ]
   const collectorDetails = [
     {
-      label: 'Business Name',
+      label: 'Name',
       value: displayData?.dropOffPointInfo?.name || '',
     },
     {
-      label: 'Address',
+      label: 'Registration Number',
       value: addressArray.join(' , ') || '',
     },
     {
-      label: 'Payment Mode',
+      label: 'Home Port',
       value: displayData.paymentMode || '',
     },
     // {label: 'Payment Mode', value: displayData.paymentMode},
@@ -258,10 +258,10 @@ const CertificateComponent = ({data, passRef}) => {
           </div>
           <div className='col-3' style={{marginTop: '10px'}}>
             <img
-              width={180}
+              width={100}
               height={100}
-              style={{backgroundColor: '#FFFFFF'}}
-              src={toAbsoluteUrl('/media/logos/sidebar-logo.jpeg')}
+              style={{backgroundColor: '#FFFFFF', marginLeft: '17px'}}
+              src={toAbsoluteUrl('/media/logos/sidebar-logo.png')}
               alt='main-logo'
             />
           </div>
@@ -277,7 +277,7 @@ const CertificateComponent = ({data, passRef}) => {
           }}
           className='text-center'
         >
-          {!isReturnOrdersPage ? 'Collection Receipt' : 'Dispatch Receipt'}
+          {!isReturnOrdersPage ? 'Loading Receipt' : 'Dispatch Receipt'}
         </div>
         <br />
         <div style={{fontFamily: 'GT Walsheim Pro', padding: '10px 20px'}}>
@@ -293,7 +293,7 @@ const CertificateComponent = ({data, passRef}) => {
               // padding: '10px',
             }}
           >
-            {isReturnOrdersPage ? 'Suppliers Details' : ' Collection Agent'}
+            {isReturnOrdersPage ? 'Suppliers Details' : ' Supplier Agent'}
           </div>
           <div className='row'>
             <div className='col-9'>
@@ -339,18 +339,8 @@ const CertificateComponent = ({data, passRef}) => {
                   <tr className='fw-bold text-gray-800 border-bottom-2 border-gray-200 text-center'>
                     <th style={{color: '#FFFFFF', maxWidth: '1px'}}>S.N</th>
                     <th style={{color: '#FFFFFF'}}>Category</th>
-                    <th style={{color: '#FFFFFF'}}>Type</th>
-                    {isCollectOrdersPage && <th style={{color: '#FFFFFF'}}>Unit Price</th>}
-                    {!isReturnOrdersPage && <th style={{color: '#FFFFFF'}}>Weight</th>}
-                    <th style={{color: '#FFFFFF'}}>
-                      {isCollectOrdersPage ? 'Order Value' : 'Quantity'}
-                    </th>
-                    {/* {!isReturnOrdersPage && (
-                      <>
-                        <th style={{color: '#FFFFFF'}}>Unit Rate</th>
-                        <th style={{color: '#FFFFFF'}}>Total Value</th>
-                      </>
-                    )} */}
+                    <th style={{color: '#FFFFFF'}}>SKU</th>
+                    {!isReturnOrdersPage && <th style={{color: '#FFFFFF'}}>Nos</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -359,22 +349,7 @@ const CertificateComponent = ({data, passRef}) => {
                       <td>{eachInd + 1 + ''}</td>
                       <td>{displayData?.orderDetails?.[0]?.categoryName}</td>
                       <td>{eachData.itemName}</td>
-                      {isCollectOrdersPage && <td>{eachData.price?.toFixed(2)}</td>}
                       {!isReturnOrdersPage && <td>{eachData.quantity || ''}</td>}
-                      <td>
-                        {(isCollectOrdersPage && 'RM') || ''}{' '}
-                        {(eachData.quantity * eachData.price)?.toFixed(2)}{' '}
-                        {(!isCollectOrdersPage && eachData.unit) || ''}
-                      </td>
-
-                      {/* {!isReturnOrdersPage && (
-                        <>
-                          <td>
-                            {eachData.price?.toFixed(2)} {eachData.currency}
-                          </td>
-                          <td>{(eachData.quantity * eachData.price)?.toFixed(2)}</td>
-                        </>
-                      )} */}
                     </tr>
                   ))}
                 </tbody>
@@ -512,7 +487,7 @@ const CertificateComponent = ({data, passRef}) => {
                     }}
                   >
                     {' '}
-                    Aggregator Details
+                    Vessel Details
                   </div>
                   <div className='row'>
                     <div className='col-11'>
