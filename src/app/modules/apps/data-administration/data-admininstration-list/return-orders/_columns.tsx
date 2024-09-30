@@ -16,11 +16,11 @@ const header = [
   },
   {
     label: 'Name',
-    value: 'pickupDate',
+    value: 'pickupInfo[name]',
   },
   {
     label: 'Vessel No',
-    value: 'pickupInfo[name]',
+    value: 'pickupInfo[agentMobile]',
   },
   /*  {
     label: 'Address',
@@ -44,7 +44,7 @@ const header = [
   },
   {
     label: 'Recycler',
-    value: 'centreInfo[name]',
+    value: 'pickupInfo[centreName]',
   },
   {
     label: 'Status',

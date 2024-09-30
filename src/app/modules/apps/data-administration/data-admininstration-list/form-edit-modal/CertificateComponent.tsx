@@ -83,10 +83,11 @@ const CertificateComponent = ({data, passRef}) => {
   ]
 
   const collectionData = [
-    {label: 'Supplier Name', value: displayData?.pickupInfo?.name},
-    {label: 'Material Name', value: displayData?.orderDetails?.[0]?.categoryName || ''},
+    {label: 'Name', value: displayData?.pickupInfo?.name},
+    {label: 'Registration No', value: displayData?.orderDetails?.[0]?.categoryName || ''},
+    {label: 'Home Port', value: displayData?.orderDetails?.[0]?.categoryName || ''},
     {
-      label: 'Order Date',
+      label: 'Disposal Date',
       value: new Date(displayData.createdAt || new Date()).toLocaleDateString() || '',
     },
     // {
@@ -136,28 +137,28 @@ const CertificateComponent = ({data, passRef}) => {
   const deliveryDetails = [
     {
       label: 'Recycler Name',
-      value: displayData?.centreInfo?.name,
+      value: displayData?.pickupInfo?.centreName || '',
     },
     // {label: 'Address', value: ''},
-    {
-      label: 'Recycler Address',
-      value:
-        displayData?.centreInfo?.address?.street ||
-        '' ||
-        '' + '' + (displayData?.centreInfo?.address?.city || '') ||
-        '' + '' + (displayData?.centreInfo?.address?.state || '') ||
-        '',
-    },
-    {
-      label: isReturnOrdersPage ? 'Received date' : 'Receiving Date',
-      value: isReturnOrdersPage
-        ? displayData.completedAt
-          ? formatDate(new Date(displayData.completedAt))
-          : ''
-        : (displayData?.pickupInfo?.pickupCompletedAt &&
-            formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
-          '',
-    },
+    // {
+    //   label: 'Recycler Address',
+    //   value:
+    //     displayData?.centreInfo?.address?.street ||
+    //     '' ||
+    //     '' + '' + (displayData?.centreInfo?.address?.city || '') ||
+    //     '' + '' + (displayData?.centreInfo?.address?.state || '') ||
+    //     '',
+    // },
+    // {
+    //   label: isReturnOrdersPage ? 'Received date' : 'Receiving Date',
+    //   value: isReturnOrdersPage
+    //     ? displayData.completedAt
+    //       ? formatDate(new Date(displayData.completedAt))
+    //       : ''
+    //     : (displayData?.pickupInfo?.pickupCompletedAt &&
+    //         formatDate(new Date(parseInt(displayData.pickupInfo.pickupCompletedAt)))) ||
+    //       '',
+    // },
     {label: 'Chain of Custody', value: ''},
   ]
 
@@ -204,11 +205,12 @@ const CertificateComponent = ({data, passRef}) => {
     },
     {
       label: 'Registration Number',
-      value: addressArray.join(' , ') || '',
+      value: displayData.dropOffPointInfo?.mobile || '',
     },
     {
       label: 'Home Port',
-      value: displayData.paymentMode || '',
+      // value: displayData.paymentMode || '',
+      value: displayData.dropOffPointInfo?.address?.city || '',
     },
     // {label: 'Payment Mode', value: displayData.paymentMode},
     // {
@@ -293,7 +295,7 @@ const CertificateComponent = ({data, passRef}) => {
               // padding: '10px',
             }}
           >
-            {isReturnOrdersPage ? 'Suppliers Details' : ' Supplier Agent'}
+            {isReturnOrdersPage ? 'Vessel Information' : ' Supplier Agent'}
           </div>
           <div className='row'>
             <div className='col-9'>
@@ -353,10 +355,13 @@ const CertificateComponent = ({data, passRef}) => {
                     </tr>
                   ))}
                 </tbody>
-                {!isCollectOrdersPage && (
+                {/* {!isCollectOrdersPage && (
                   <tfoot>
                     <tr>
-                      <td colSpan={3} className='align-end fs-3 fw-bold text-end'>
+                      <td
+                        colSpan={isReturnOrdersPage ? 2 : 3}
+                        className='align-end fs-3 fw-bold text-end'
+                      >
                         Certified Weight
                       </td>
                       <td className='text-center fw-bold fs-1'>
@@ -367,7 +372,7 @@ const CertificateComponent = ({data, passRef}) => {
                       </td>
                     </tr>
                   </tfoot>
-                )}
+                )} */}
               </table>
             )}
             {(isReturnOrdersPage && (
@@ -387,7 +392,7 @@ const CertificateComponent = ({data, passRef}) => {
                         }}
                       >
                         {' '}
-                        Recycling Details
+                        Disposal Details
                       </div>
                       <div className='row'>
                         <div className='col-9'>
@@ -458,7 +463,7 @@ const CertificateComponent = ({data, passRef}) => {
                         {displayData?.images.map((eachImages, eachInd) => (
                           <div key={eachInd + 1 + ''} className='image-input '>
                             <div
-                              onClick={() => handleClick(eachImages)}
+                              onClick={() => handleClick(eachImages.docUrl || eachImages)}
                               className='image-input-wrapper'
                               style={{
                                 width: 163,
@@ -466,7 +471,7 @@ const CertificateComponent = ({data, passRef}) => {
                                 // backgroundSize: '400px',
                                 marginRight: '15px',
                                 // backgroundImage: `url(${eachImages})`,
-                                backgroundImage: `url(${eachImages})`,
+                                backgroundImage: `url(${eachImages.docUrl || eachImages})`,
                               }}
                             ></div>
                           </div>
@@ -546,7 +551,7 @@ const CertificateComponent = ({data, passRef}) => {
                       {displayData?.images.map((eachImages, eachInd) => (
                         <div key={eachInd + 1 + ''} className='image-input '>
                           <div
-                            onClick={() => handleClick(eachImages)}
+                            onClick={() => handleClick(eachImages.docUrl || eachImages)}
                             className='image-input-wrapper'
                             style={{
                               width: 163,
@@ -554,7 +559,7 @@ const CertificateComponent = ({data, passRef}) => {
                               // backgroundSize: '400px',
                               marginRight: '15px',
                               // backgroundImage: `url(${eachImages})`,
-                              backgroundImage: `url(${eachImages})`,
+                              backgroundImage: `url(${eachImages.docUrl || eachImages})`,
                             }}
                           ></div>
                         </div>

@@ -147,8 +147,8 @@ const UserInfoCell: FC<Props> = ({
       case 'pickup_quantity_item':
         return user?.orderDetails?.[0].items?.map((x: any, ind: number) => (
           <div key={ind + 1 + ''}>
-            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(2)}
-            {/* {mapData === 'pickup_quantity' ? ' Kg' : ''} */}
+            {mapData === 'pickup_quantity_item' ? x.itemName : x.quantity?.toFixed(0)}
+            {mapData === 'pickup_quantity' ? ' No' : ''}
           </div>
         ))
       case 'proofEstablishment':
@@ -227,10 +227,14 @@ const UserInfoCell: FC<Props> = ({
       case 'inputMaterialName':
       case 'inputQuantity':
         return (
-          <>
+          <span
+            className={`${
+              mapData === 'inputQuantity' ? 'badge badge-light-primary fs-7 fw-bold' : ''
+            }`}
+          >
             {user?.inputMaterial?.map((x) => x?.[mapData] || '')}
-            {/* {mapData === 'inputQuantity' ? ' Kg' : ''} */}
-          </>
+            {mapData === 'inputQuantity' ? ' No' : ''}
+          </span>
         )
       case 'pickupointId':
         return (

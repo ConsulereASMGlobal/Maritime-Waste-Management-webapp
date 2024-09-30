@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {useListView} from '../../core/ListViewProvider'
 import {UserEditModalHeader} from '../../form-edit-modal/UserEditModalHeader'
 import {KTSVG} from '../../../../../../../_metronic/helpers'
+import {useLocation} from 'react-router-dom'
 
 interface ModalProps {
   formName?: string
@@ -18,11 +19,8 @@ const ViewImageModal = ({close, images, name}: any) => {
     SLIP: 'Slip',
   }
   const filterImage = images.filter((x) => x.imageType === name) || []
-  console.log(
-    {name, filterImage, images},
 
-    filterImage?.length ? filterImage : images
-  )
+  const {pathname} = useLocation()
   return (
     <>
       <div
@@ -42,7 +40,9 @@ const ViewImageModal = ({close, images, name}: any) => {
           <div className='modal-content'>
             {/* <UserEditModalHeader headerName={'Confirmation'} /> */}
             <div className='modal-header'>
-              <h5 className='modal-title'>{configName[name]}</h5>
+              <h5 className='modal-title'>
+                {pathname === '/apps/collect-orders' ? 'Chain of Custody' : configName[name]}
+              </h5>
               <div
                 className='btn btn-icon btn-sm btn-active-light-primary ms-2'
                 data-bs-dismiss='modal'

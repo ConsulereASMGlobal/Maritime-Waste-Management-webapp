@@ -178,14 +178,13 @@ const DashboardPage: FC = () => {
               // title={eachitems.value}
               title={`
              ${
-               data[eachitems.value]?.toFixed(
-                 ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
-                   ? 0
-                   : 2
-               ) || ''
+               data[eachitems.value]?.toFixed(['co2Footprint'].includes(eachitems.value) ? 2 : 0) ||
+               ''
              }
              ${
-               ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
+               ['collected', 'processed', 'supplied', 'stock'].includes(eachitems.value)
+                 ? 'No'
+                 : ['collectionPoints', 'wasteDiverters', 'lifeImpacted'].includes(eachitems.value)
                  ? ''
                  : ' kg'
              }

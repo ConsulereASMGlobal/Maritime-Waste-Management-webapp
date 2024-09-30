@@ -8,6 +8,10 @@ const header = [
     value: 'createdAt',
   },
   {
+    label: 'Txn ID',
+    value: 'id',
+  },
+  {
     label: 'Vessel No',
     value: 'hubName',
   },
@@ -20,7 +24,7 @@ const header = [
     value: 'processName',
   },
   {
-    label: 'Input',
+    label: 'SKU',
     value: 'inputMaterialName',
   },
   {
