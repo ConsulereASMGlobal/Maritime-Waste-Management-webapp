@@ -9,7 +9,7 @@ const header = [
   },
   {
     label: 'Txn ID',
-    value: 'id',
+    value: 'productionId',
   },
   {
     label: 'Vessel No',
