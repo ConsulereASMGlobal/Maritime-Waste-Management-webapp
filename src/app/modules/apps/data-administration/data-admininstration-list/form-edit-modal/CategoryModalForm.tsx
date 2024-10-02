@@ -38,6 +38,7 @@ const ProcessNameModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
     displayName: user.name || '',
     imageIcon: user.icon || '',
     status: 'ACTIVE',
+    categoryType: '',
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -87,6 +88,39 @@ const ProcessNameModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
       formik.setFieldValue('imageIcon', response.data.data.name)
     }
   }
+  const makeSelectDropDown = (name = '', options: any = []) => {
+    return (
+      <select
+        className={clsx(
+          'form-control form-control-solid mb-3 mb-lg-0',
+          {'is-invalid': formik.touched[name] && formik.errors[name]},
+          {
+            'is-valid': formik.touched[name] && !formik.errors[name],
+          }
+        )}
+        {...formik.getFieldProps(name)}
+      >
+        <option value=''>Select One...</option>
+        {options.map((eachOption, eachInd) => (
+          <option key={eachInd + 1 + ''} value={eachOption.value || eachOption.id}>
+            {eachOption.label || eachOption.name}
+          </option>
+        ))}
+      </select>
+    )
+  }
+
+  const arrayDropdown = [
+    {
+      label: 'Avoided',
+      value: 'AVOIDED',
+    },
+    {
+      label: 'Collected',
+      value: 'COLLECTED',
+    },
+  ]
+
   return (
     <>
       <form id='kt_modal_add_user_form' className='form' onSubmit={formik.handleSubmit} noValidate>
@@ -146,6 +180,17 @@ const ProcessNameModalForm: FC<Props> = ({user = {}, isUserLoading}) => {
               <div className='fv-plugins-message-container'>
                 <div className='fv-help-block'>
                   <span role='alert'>{formik.errors.displayName}</span>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className='fv-row mb-7'>
+            <label className='required fw-bold fs-6 mb-2'>Category</label>
+            {makeSelectDropDown('categoryType', arrayDropdown)}
+            {formik.touched.categoryType && formik.errors.categoryType && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block'>
+                  <span role='alert'>{formik.errors.categoryType}</span>
                 </div>
               </div>
             )}

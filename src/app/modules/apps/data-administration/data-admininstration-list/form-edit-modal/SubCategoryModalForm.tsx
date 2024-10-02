@@ -42,6 +42,8 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
     displayName: user.name || '',
     categoryId: user.categoryId || '',
     icon: user.icon || '',
+    imageIcon: user.icon || '',
+    showOnDashboard: user.displayOnDashboard || 'YES',
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -59,17 +61,19 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       try {
+        const payload = {
+          ...values,
+          showOnDashboard: values.showOnDashboard,
+        }
         if (isNotEmpty(values.id)) {
-          await updateUser(values, `items/${values.id}/update`)
+          await updateUser(payload, `items/${payload.id}/update`)
           successToast('Modified')
         } else {
-          console.log({values})
-          await createUser(values, 'item')
+          await createUser(payload, 'item')
           successToast('Added')
         }
       } catch (ex) {
         errorToast('Something Went Wrong')
-
         console.error(ex)
       } finally {
         setSubmitting(true)
@@ -188,6 +192,45 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
               </div>
             )}
           </div>
+          <div className='mb-7 row'>
+            <label className='fw-bold fs-6 mb-2'>Show on Dashboard</label>
+            <div className='d-flex col-6 gap-4'>
+              <div className='form-check form-check-custom form-check-solid'>
+                <input
+                  className='form-check-input me-3'
+                  {...formik.getFieldProps('showOnDashboard')}
+                  name='showOnDashboard'
+                  type='radio'
+                  value='YES'
+                  id='kt_modal_update_role_option_yes'
+                  checked={formik.values.showOnDashboard === 'YES'} // Automatically handle checked status
+                  disabled={formik.isSubmitting || isUserLoading}
+                />
+                <label className='form-check-label' htmlFor='kt_modal_update_role_option_yes'>
+                  <div className='fw-bolder text-gray-800'>YES</div>
+                </label>
+                <div className='separator separator-dashed my-5'></div>
+              </div>
+
+              <div className='form-check form-check-custom form-check-solid'>
+                <input
+                  className='form-check-input me-3'
+                  {...formik.getFieldProps('showOnDashboard')}
+                  name='showOnDashboard'
+                  type='radio'
+                  value='NO'
+                  id='kt_modal_update_role_option_no'
+                  checked={formik.values.showOnDashboard === 'NO'} // Automatically handle checked status
+                  disabled={formik.isSubmitting || isUserLoading}
+                />
+                <label className='form-check-label' htmlFor='kt_modal_update_role_option_no'>
+                  <div className='fw-bolder text-gray-800'>NO</div>
+                </label>
+                <div className='separator separator-dashed my-5'></div>
+              </div>
+            </div>
+          </div>
+
           <div className='fv-row mb-7'>
             {/* begin::Label */}
             <label className='d-block fw-bold fs-6 mb-5'>Logo</label>
