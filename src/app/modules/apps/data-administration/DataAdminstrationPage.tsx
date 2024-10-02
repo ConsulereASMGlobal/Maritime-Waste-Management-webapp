@@ -22,6 +22,7 @@ import {CustomerListWrapper} from './data-admininstration-list/customer/customer
 import {MassBalanceWrapper} from './data-admininstration-list/mass-balance'
 import {StockWrapper} from './data-admininstration-list/stock/sstockList'
 import {IncentiveList} from './data-admininstration-list/incentive/incentiveList'
+import {BadgesWrapper} from './data-admininstration-list/badges/badgesManagementList'
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
@@ -187,6 +188,15 @@ const UsersPage = () => {
             <>
               <PageTitle breadcrumbs={usersBreadcrumbs}>Incentive</PageTitle>
               <IncentiveList />
+            </>
+          }
+        />
+         <Route
+          path='settings/badges'
+          element={
+            <>
+              <PageTitle breadcrumbs={usersBreadcrumbs}>Badges</PageTitle>
+              <BadgesWrapper />
             </>
           }
         />

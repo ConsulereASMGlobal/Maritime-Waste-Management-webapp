@@ -95,6 +95,7 @@ const SidebarMenuMain = () => {
             title='Processing Routes'
             hasBullet={true}
           />
+          <SidebarMenuItem to='/apps/settings/badges' title='Badges' hasBullet={true} />
         </SidebarMenuItemWithSub>
       )}
       {/* <div className='menu-item'>
