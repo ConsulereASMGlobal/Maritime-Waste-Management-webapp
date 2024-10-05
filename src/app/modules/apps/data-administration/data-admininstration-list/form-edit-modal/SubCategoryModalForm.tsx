@@ -43,7 +43,8 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
     categoryId: user.categoryId || '',
     icon: user.icon || '',
     imageIcon: user.icon || '',
-    showOnDashboard: user.displayOnDashboard || 'YES',
+    displayOnDashboard:
+      (user?.displayOnDashboard && user.displayOnDashboard === true ? 'YES' : 'NO') || 'YES',
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -63,8 +64,9 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
       try {
         const payload = {
           ...values,
-          showOnDashboard: values.showOnDashboard,
+          displayOnDashboard: values.displayOnDashboard === 'YES',
         }
+        console.log({payload})
         if (isNotEmpty(values.id)) {
           await updateUser(payload, `items/${payload.id}/update`)
           successToast('Modified')
@@ -193,17 +195,17 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
             )}
           </div>
           <div className='mb-7 row'>
-            <label className='fw-bold fs-6 mb-2'>Show on Dashboard</label>
+            <label className='fw-bold fs-6 mb-2'>Display on Dashboard</label>
             <div className='d-flex col-6 gap-4'>
               <div className='form-check form-check-custom form-check-solid'>
                 <input
                   className='form-check-input me-3'
-                  {...formik.getFieldProps('showOnDashboard')}
-                  name='showOnDashboard'
+                  {...formik.getFieldProps('displayOnDashboard')}
+                  name='displayOnDashboard'
                   type='radio'
                   value='YES'
                   id='kt_modal_update_role_option_yes'
-                  checked={formik.values.showOnDashboard === 'YES'} // Automatically handle checked status
+                  checked={formik.values.displayOnDashboard === 'YES'} // Automatically handle checked status
                   disabled={formik.isSubmitting || isUserLoading}
                 />
                 <label className='form-check-label' htmlFor='kt_modal_update_role_option_yes'>
@@ -215,12 +217,12 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
               <div className='form-check form-check-custom form-check-solid'>
                 <input
                   className='form-check-input me-3'
-                  {...formik.getFieldProps('showOnDashboard')}
-                  name='showOnDashboard'
+                  {...formik.getFieldProps('displayOnDashboard')}
+                  name='displayOnDashboard'
                   type='radio'
                   value='NO'
                   id='kt_modal_update_role_option_no'
-                  checked={formik.values.showOnDashboard === 'NO'} // Automatically handle checked status
+                  checked={formik.values.displayOnDashboard === 'NO'} // Automatically handle checked status
                   disabled={formik.isSubmitting || isUserLoading}
                 />
                 <label className='form-check-label' htmlFor='kt_modal_update_role_option_no'>

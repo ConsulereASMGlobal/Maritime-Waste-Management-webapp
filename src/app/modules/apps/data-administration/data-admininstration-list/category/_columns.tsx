@@ -11,6 +11,10 @@ const header = [
     value: 'name',
   },
   {
+    label: 'Type',
+    value: 'categoryType',
+  },
+  {
     label: 'Logo',
     value: 'avatar',
   },
