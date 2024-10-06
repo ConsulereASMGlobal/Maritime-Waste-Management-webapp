@@ -8,23 +8,23 @@ const header = [
     value: 'personalDetails[name]',
   },
   {
-    label: 'Captain Name',
+    label: 'Name',
     value: 'personalDetails[firstName]',
   },
   {
-    label: 'Contact',
-    value: 'personalDetail',
+    label: 'Company',
+    value: 'franchiseName',
   },
-  {
+  /* {
     label: 'Street',
     value: 'street',
-  },
+  }, */
   {
-    label: 'City',
+    label: 'Home Port',
     value: 'address[city]',
   },
   {
-    label: 'City',
+    label: 'Country',
     value: 'address[country]',
   },
   // {
@@ -40,11 +40,11 @@ const header = [
     value: 'address[zipCode]',
   },
   {
-    label: 'KYC',
+    label: 'Vessel',
     value: 'bussinessImage',
   },
   {
-    label: 'Profile',
+    label: 'User',
     value: 'personalImage',
   },
   {

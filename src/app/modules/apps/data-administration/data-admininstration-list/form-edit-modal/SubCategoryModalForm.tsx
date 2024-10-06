@@ -43,8 +43,7 @@ const FinishedGoodModalForm: FC<Props> = ({user = {}, isUserLoading, arrayDropdo
     categoryId: user.categoryId || '',
     icon: user.icon || '',
     imageIcon: user.icon || '',
-    displayOnDashboard:
-      (user?.displayOnDashboard && user.displayOnDashboard === true ? 'YES' : 'NO') || 'YES',
+    displayOnDashboard: user.displayOnDashboard === true ? 'YES' : 'NO',
   })
 
   const cancel = (withRefresh?: boolean) => {

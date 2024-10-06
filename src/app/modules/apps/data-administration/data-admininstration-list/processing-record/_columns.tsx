@@ -17,7 +17,7 @@ const header = [
   },
   {
     label: 'Name',
-    value: 'name',
+    value: 'franchiseName',
   },
   {
     label: 'Activity',
