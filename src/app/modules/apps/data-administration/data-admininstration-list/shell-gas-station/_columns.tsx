@@ -1,15 +1,15 @@
-import {Column} from 'react-table'
-import {columnGenerators} from '../../../../../../_metronic/helpers'
+import { Column } from 'react-table'
+import { columnGenerators } from '../../../../../../_metronic/helpers'
 
 const header = [
-  {label: 'S.N', value: 'id'},
+  { label: 'S.N', value: 'id' },
   {
     label: 'Vessel No',
-    value: 'personalDetails[name]',
+    value: 'personalDetails[mobile]',
   },
   {
     label: 'Name',
-    value: 'personalDetails[firstName]',
+    value: 'personalDetails[name]',
   },
   {
     label: 'Company',
@@ -54,4 +54,4 @@ const header = [
 
 const roleColumns: ReadonlyArray<Column<any>> = columnGenerators(header)
 
-export {roleColumns}
+export { roleColumns }

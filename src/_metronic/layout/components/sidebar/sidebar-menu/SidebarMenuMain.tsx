@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
-import {useIntl} from 'react-intl'
-import {KTIcon} from '../../../../helpers'
-import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
-import {SidebarMenuItem} from './SidebarMenuItem'
-import {useAuth} from '../../../../../app/modules/auth'
+import { useIntl } from 'react-intl'
+import { KTIcon } from '../../../../helpers'
+import { SidebarMenuItemWithSub } from './SidebarMenuItemWithSub'
+import { SidebarMenuItem } from './SidebarMenuItem'
+import { useAuth } from '../../../../../app/modules/auth'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()
-  const {auth} = useAuth()
+  const { auth } = useAuth()
   const hideSideBar = auth?.data?.userType === 'FRANCHISE' || false
 
   return (
@@ -16,7 +16,7 @@ const SidebarMenuMain = () => {
       <SidebarMenuItem
         to='/dashboard'
         icon='element-11'
-        title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
+        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
         fontIcon='bi-app-indicator'
       />
       <SidebarMenuItem to='/apps/stock' icon='parcel' title='Lifecycle' fontIcon='bi-layers' />
@@ -87,12 +87,12 @@ const SidebarMenuMain = () => {
         >
           <SidebarMenuItem to='/apps/settings/content' title='Content' hasBullet={true} />
           <SidebarMenuItem to='/apps/settings/category' title='Category' hasBullet={true} />
-          <SidebarMenuItem to='/apps/settings/sub-category' title='Sub Category' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/sub-category' title='Item' hasBullet={true} />
           <SidebarMenuItem to='/apps/settings/pricing' title='Pricing' hasBullet={true} />
-          <SidebarMenuItem to='/apps/settings/incentive' title='Incentive' hasBullet={true} />
+          <SidebarMenuItem to='/apps/settings/incentive' title='Hide' hasBullet={true} />
           <SidebarMenuItem
             to='/apps/settings/processing-routes'
-            title='Processing Routes'
+            title='Consumption'
             hasBullet={true}
           />
           <SidebarMenuItem to='/apps/settings/badges' title='Badges' hasBullet={true} />
@@ -114,4 +114,4 @@ const SidebarMenuMain = () => {
   )
 }
 
-export {SidebarMenuMain}
+export { SidebarMenuMain }
